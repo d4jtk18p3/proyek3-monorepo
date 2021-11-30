@@ -129,12 +129,12 @@ const routes = [
   },
   {
     path: "/absensi",
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
     component: () => import("../views/absensi/AbsensiMain"),
     children: [
       {
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
           title: "Absensi Mahasiswa"
         },
         path: "/absensi/mahasiswa/absensi",
@@ -146,13 +146,13 @@ const routes = [
       },
       {
         path: "/absensi/dosen/dosenwali",
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: false },
         name: "NilaiMahasiswa",
         component: () => import(/* webpackChunkName: "absensimahasiswa" */ "../views/absensi/pages/dosen/AbsensiDosenWali")
       },
       {
         path: "/absensi/mahasiswa/upload",
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: false },
         name: "UploadBukti",
         component: () =>
           import(
@@ -161,7 +161,7 @@ const routes = [
       },
       {
         path: "/absensi/dosen/absensi",
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: false },
         name: "AbsensiDosen",
         component: () =>
           import(

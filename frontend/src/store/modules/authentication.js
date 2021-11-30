@@ -19,9 +19,16 @@ const authentication = {
 
   getters: {
     identity: state => {
-      return state.identity
+      console.log(state.identity)
+      return {
+        realm_access: {
+          roles: ["dosen"]
+        },
+        preferred_username: "197201061999031000"
+      }
     }
   },
+
 
   actions: {
     async authenticate ({ commit }, forceLogin = false) {

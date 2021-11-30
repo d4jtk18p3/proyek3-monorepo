@@ -9,27 +9,29 @@
       <v-col cols="2">
         <p class="text-h4 font-weight-bold">Dashboard</p>
       </v-col>
-      <v-col cols="10">
-        <v-divider
-        class="mt-5 ml-15"
-        ></v-divider>
-      </v-col>
     </v-row>
-    <v-row no-gutters>
-      <v-col cols="5">
-          <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
+    <v-row no-gutters justify="center">
+      <v-col cols="auto" >
+        <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="auto" offset-md="2" :class="$vuetify.breakpoint.mobile? 'ma-8': ''">
         <PersentaseMengajar :persentaseMengajar="persentaseMengajar"></PersentaseMengajar>
+      </v-col>
+      <v-col cols="auto" offset-md="2" v-if="isWali">
+        <h2 align="center" class="text-h5 font-weight-bold">Validasi Ketidakhadiran</h2>
+        <DaftarHadir :ketidakhadiran="ketidakhadiran">
+        </DaftarHadir>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="4.2">
+      <v-col >
         <p class="text-h4 font-weight-bold mr-6">Absensi Perkuliahan</p>
       </v-col>
     </v-row>
-    <v-row>
-      <AbsenCardDosen :jadwalDsn="jadwalDsn" :username="username"></AbsenCardDosen>
+    <v-row justify="center">
+      <v-col cols="auto">
+        <AbsenCardDosen :jadwalDsn="jadwalDsn" :username="username"></AbsenCardDosen>
+      </v-col>
     </v-row>
     <v-overlay :value="isLoading">
     <v-progress-circular
@@ -69,9 +71,10 @@ export default {
       var current = new Date()
       this.currentDay = current.getDay()
       this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
-      setTimeout(() => {
-        this.getJadwalDsn()
-      }, 3000)
+      this.getJadwalDsn()
+      // setTimeout(() => {
+      //   this.getJadwalDsn()
+      // }, 3000)
       this.getPersentaseMengajar()
       setInterval(() => {
         this.currentDay = current.getDay()
@@ -95,7 +98,8 @@ export default {
       persentaseMengajar: [],
       currentDay: null,
       isLoading: true,
-      username: ""
+      username: "",
+      isWali: false
     }
   },
   computed: {
@@ -125,9 +129,9 @@ export default {
             element.id_studi_kedua = 0
           })
           this.jadwalDsn = response.data.jadwal
-          setTimeout(() => {
-            this.cekMatkulSama()
-          }, 3000)
+          // setTimeout(() => {
+          //   this.cekMatkulSama()
+          // }, 3000)
           this.isLoading = false
         })
         .catch(e => {
