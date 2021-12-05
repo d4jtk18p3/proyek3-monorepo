@@ -11,7 +11,6 @@ import kategoriNilaiRouter from './routes/Kategori_Nilai'
 import penilaianRouter from './routes/Penilaian'
 import kelasRouter from './routes/Kelas'
 
-
 const app = express()
 app.use(cors())
 // Non aktifkan dulu keycloak agar tidak ada validasi token
@@ -25,7 +24,6 @@ app.use('/user', userRouter)
 app.use('/kategori-nilai', kategoriNilaiRouter)
 app.use('/penilaian', penilaianRouter)
 app.use('/kelas', kelasRouter)
-
 
 // error handling
 app.use((error, req, res, next) => {
