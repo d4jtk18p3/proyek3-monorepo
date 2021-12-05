@@ -1,16 +1,16 @@
 <template>
   <v-row :style="{color: currentTheme.onBackground}">
     <v-col cols="12">
-      <p class="text-h4 font-weight-bold">Dashboard Mata Kuliah</p>
+      <p :class="isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`">Dashboard Nilai Mata Kuliah</p>
     </v-col>
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems"/>
     </v-col>
     <v-col cols="4">
-      <p class="text-h6 font-weight-bold">Informasi Mata Kuliah</p>
+      <p :class="isMobile ? `text-h7 font-weight-bold` : `text-h6 font-weight-bold`">Informasi Mata Kuliah</p>
       <v-card color="#FB8C00">
        <v-card-title>Nama Pengajar</v-card-title>
-       <v-card-text >
+       <v-card-text>
          <p class="text-h7 font-weight-bold">Pengajar 1</p>
          <p class="text-h7 font-weight-bold">Pengajar 2</p>
        </v-card-text>
