@@ -38,3 +38,28 @@ export const getKelasAjarByDosen = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getListTahun = async (req, res) => {
+  try {
+    const kelas = await KelasDAO.findAllKelas()
+    const listTahun = []
+    let i
+    for (i = 0; i < kelas.length; i++) {
+      const tahun = kelas[i].tahun
+      listTahun.push(tahun)
+    }
+
+    const listTahunUnique = listTahun.filter((c, index) => {
+      return listTahun.indexOf(c) === index
+    }).sort()
+
+    res.status(200).json({
+      message: 'get list tahun from tabel kelas sukses',
+      data: {
+        listTahunUnique
+      }
+    })
+  } catch (error) {
+    res.status(error.status).json({ error })
+  }
+}
