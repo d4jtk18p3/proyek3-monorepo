@@ -38,3 +38,28 @@ export const getMatkulAjarByDosen = async (req, res) => {
         res.status(error.status).json({ error })
     }
 }
+
+export const getListSemester = async (req, res) => {
+    try {
+      const matkul = await MatkulDAO.findAllMatkul()
+      const listSemester = []
+      let i
+      for (i = 0; i < matkul.length; i++) {
+        const semester = matkul[i].semester
+        listSemester.push(semester)
+      }
+  
+      const listSemesterUnique = listSemester.filter((c, index) => {
+        return listSemester.indexOf(c) === index
+      }).sort()
+  
+      res.status(200).json({
+        message: 'get list semester from tabel semester sukses',
+        data: {
+          listSemesterUnique
+        }
+      })
+    } catch (error) {
+      res.status(error.status).json({ error })
+    }
+  }
