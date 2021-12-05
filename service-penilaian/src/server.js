@@ -9,6 +9,7 @@ import mahasiswaRouter from './routes/Mahasiswa'
 import userRouter from './routes/User'
 import kategoriNilaiRouter from './routes/Kategori_Nilai'
 import penilaianRouter from './routes/Penilaian'
+import kelasRouter from './routes/Kelas'
 
 
 const app = express()
@@ -23,6 +24,7 @@ app.use('/mahasiswa', mahasiswaRouter)
 app.use('/user', userRouter)
 app.use('/kategori-nilai', kategoriNilaiRouter)
 app.use('/penilaian', penilaianRouter)
+app.use('/kelas', kelasRouter)
 
 
 // error handling
