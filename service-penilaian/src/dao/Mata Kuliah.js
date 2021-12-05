@@ -13,3 +13,12 @@ export const findMatkulById = async (id) => {
       return Promise.reject(new Error('Find Pengajar by NIP gagal'))
     }
   }
+
+export const findAllMatkul = async () => {
+    try {
+      const matkul = await MataKuliah.findAll()
+      return matkul
+    } catch (error) {
+      return Promise.reject(new Error('Find all mata kuliah gagal'))
+    }
+  }
