@@ -1,13 +1,13 @@
 <template>
-  <v-container>
-    <v-row :style="{ color: currentTheme.onBackground }">
+  <v-container :style="{ color: currentTheme.onBackground }">
+    <v-row>
       <v-col>
-        <p class="text-h4 font-weight-bold">Halaman Dosen</p>
+        <p class="text-h4 font-weight-bold mb-1">Dashboard Presensi</p>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="2">
-        <p class="text-h4 font-weight-bold">Dashboard</p>
+    <v-row class="mb-4">
+      <v-col cols="12" class="pa-0">
+        <breadcumbs :breadcrumb-items="breadcrumbItems"/>
       </v-col>
     </v-row>
     <v-row no-gutters justify="center">
@@ -30,11 +30,6 @@
         <DaftarHadir :ketidakhadiran="ketidakhadiran"> </DaftarHadir>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <p class="text-h4 font-weight-bold mr-6">Absensi Perkuliahan</p>
-      </v-col>
-    </v-row>
     <v-row justify="center">
       <v-col cols="auto">
         <AbsenCardDosen
@@ -55,12 +50,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen";
-import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen";
-import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar";
-import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
-import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
+import { mapGetters } from "vuex"
+import Breadcumbs from "@/views/shared/navigation/Breadcumbs"
+import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen"
+import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen"
+import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar"
+import JadwalDosen from "@/datasource/network/absensi/jadwalDosen"
+import DashboardDosen from "@/datasource/network/absensi/dashboardDosen"
 
 // const schedule = require("node-schedule")
 const INTERVAL = 1000 * 60 * 60;
@@ -70,7 +66,8 @@ export default {
   components: {
     AbsenCardDosen,
     LogAktivitas,
-    PersentaseMengajar
+    PersentaseMengajar,
+    Breadcumbs
   },
   created() {
     const tasks = [];
@@ -103,6 +100,11 @@ export default {
   data() {
     return {
       breadcrumbItems: [
+        {
+          text: "Home",
+          disabled: false,
+          href: "/home"
+        },
         {
           text: "Dashboard",
           disabled: true,

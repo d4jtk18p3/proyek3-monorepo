@@ -25,7 +25,7 @@ const authentication = {
           roles: ["dosen"]
         },
         preferred_username: "198906102019032000"
-      };
+      }
     }
   },
 

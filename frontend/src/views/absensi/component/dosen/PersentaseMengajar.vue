@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <v-card width="541" class="d-flex pa-0" height="530">
+    <v-card class="d-flex pa-0" height="530">
       <div class="flex-column">
         <div id="card-title">
           <h3 class="white--text">

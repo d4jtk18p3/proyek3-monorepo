@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="mx-auto" max-width="1000">
+  <v-sheet class="mx-auto" max-width="1000" :style="{background: currentTheme.background}">
     <v-slide-group
       class="d-flex align-center"
       value="3"
@@ -11,34 +11,26 @@
       >
         <v-col>
           <v-card
-            class="text-center justify-center rounded-xl d-flex flex-column active"
-            width="255"
+            class="text-center justify-center rounded-md d-flex flex-column active"
+            width="325"
             height="300"
-            :style="!item.active? 'background: #272343' : 'background: white'"
+            :style="{
+              background: (!item.active? currentTheme.surface: currentTheme.surface),
+              color: currentTheme.onSurface,
+            }"
           >
-            <v-card-text
-              class="pb-0"
-              :style="item.active? 'color: #272343' : 'color: white'"
-            > #{{item.id_studi}}</v-card-text>
             <h3
-              class="pt-0 text-center"
-              :style="item.active? 'color: #272343' : 'color: white'"
-            > {{item.mata_kuliah.nama_mata_kuliah}}
-              <br/>
-              {{item.jenis}}
+              class="mt-4 text-center"
+            > Presensi Dosen Pengampu
             </h3>
+            <v-card-text
+              :style="{color: currentTheme.onSurface}"
+            >{{item.mata_kuliah.nama_mata_kuliah}} {{item.jenis}}</v-card-text>
             <v-spacer></v-spacer>
             <v-row justify="center">
               <v-col class="pb-0 ml-4 mr-4">
-                <p
-                  class="float-left"
-                  :style="item.active? 'color: #272343' : 'color: white'">
-                  {{item.waktu_mulai.slice(0,5)}}
-                </p>
-                <p
-                  class="float-right"
-                  :style="item.active? 'color: #272343' : 'color: white'">
-                  {{item.waktu_selesai.slice(0,5)}}
+                <p>
+                  {{ currentDay }}, {{item.waktu_mulai.slice(0,5)}} - {{item.waktu_selesai.slice(0,5)}} WIB
                 </p>
               </v-col>
                 <v-progress-linear
@@ -51,9 +43,10 @@
             </v-row>
               <v-card-actions class="justify-center">
                 <v-btn
+                  id="custom-disabled"
                   :disabled="item.absen || true"
                   elevation="2"
-                  rounded
+                  rounded-md
                   class="mt-5 ml-5 mr-5"
                   color="#4CAF50"
                   width="120"
@@ -64,11 +57,11 @@
                 <v-btn
                   :to="{ name: 'Perkuliahan', params: { item } }"
                   elevation="2"
-                  rounded
-                  class="mb-2 ml-8 mr-8 justify-center"
-                  width="150"
-                  color="#FB8C00"
-                > Perkuliahan</v-btn>
+                  rounded-md
+                  class="mb-2 ml-8 mr-8 justify-center white--text"
+                  width="200"
+                  color="#2196F3"
+                > Kehadiran Mahasiswa</v-btn>
               </v-card-actions>
           </v-card>
         </v-col>
@@ -107,6 +100,7 @@ export default {
     this.currentHour = current.getHours()
     this.currentMinute = current.getMinutes()
     this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
+    this.currentDay = moment(current).format("dddd")
     this.presensiSchedule()
     setInterval(() => {
       current = new Date()
@@ -122,6 +116,7 @@ export default {
       currentMinute: "",
       currentTime: "",
       currentDate: "",
+      currentDay: "",
       currentJadwal: null,
       currentKehadiran: null,
       interval: 0,
@@ -260,5 +255,10 @@ export default {
 .active {
   background: #272343;
   color: white;
+}
+
+#custom-disabled.v-btn--disabled {
+    background-color: #FB8C00 !important;
+    color: white !important;
 }
 </style>
