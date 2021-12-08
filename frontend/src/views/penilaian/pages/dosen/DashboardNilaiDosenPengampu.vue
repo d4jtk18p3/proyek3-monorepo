@@ -6,26 +6,30 @@
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems"/>
     </v-col>
-    <v-col cols="4">
-      <p :class="isMobile ? `text-h7 font-weight-bold` : `text-h6 font-weight-bold`">Informasi Mata Kuliah</p>
-      <v-card color="#FB8C00">
-       <v-card-title>Nama Pengajar</v-card-title>
-       <v-card-text>
-         <p class="text-h7 font-weight-bold">Pengajar 1</p>
-         <p class="text-h7 font-weight-bold">Pengajar 2</p>
-       </v-card-text>
-      </v-card>
-      <v-card :color="currentTheme.colorSecondaryVariant">
-       <v-card-title class="mt-5">Perolehan Nilai</v-card-title>
-       <v-card-text >
-         <p class="text-h7 font-weight-bold" >Tertinggi : {{ tertinggi() }}</p>
-         <p class="text-h7 font-weight-bold">Terendah : {{ terendah() }}</p>
-       </v-card-text>
-      </v-card>
-    </v-col>
-    <v-col cols="8">
-      <nilai-rata-rata-card :nilai-list="nilaiList"/>
-    </v-col>
+    <div
+      :style="isMobile ? `flex-direction: row` : `display: flex;`"
+    >
+      <div style="flex: 1; margin: 8px">
+        <p :class="isMobile ? `text-h7 font-weight-bold` : `text-h6 font-weight-bold`">Informasi Mata Kuliah</p>
+        <v-card color="#FB8C00">
+        <v-card-title>Nama Pengajar</v-card-title>
+        <v-card-text>
+          <p class="text-h7 font-weight-bold">Pengajar 1</p>
+          <p class="text-h7 font-weight-bold">Pengajar 2</p>
+        </v-card-text>
+        </v-card>
+        <v-card :color="currentTheme.colorSecondaryVariant">
+        <v-card-title class="mt-5">Perolehan Nilai</v-card-title>
+        <v-card-text >
+          <p class="text-h7 font-weight-bold" >Tertinggi : {{ tertinggi() }}</p>
+          <p class="text-h7 font-weight-bold">Terendah : {{ terendah() }}</p>
+        </v-card-text>
+        </v-card>
+      </div>
+      <div style="flex: 3; margin: 8px">
+        <nilai-rata-rata-card :nilai-list="nilaiList"/>
+      </div>
+    </div>
     <v-col cols="6">
       <v-card>
        <v-card-title class="mt-5">Mahasiswa dengan nilai total dibawah 60</v-card-title>
