@@ -18,6 +18,9 @@ const authentication = {
   },
 
   getters: {
+    // identity: state => {
+    //   return state.identity
+    // }
     identity: state => {
       console.log(state.identity);
       return {
@@ -27,6 +30,7 @@ const authentication = {
         preferred_username: "198906102019032000"
       }
     }
+
   },
 
   actions: {
