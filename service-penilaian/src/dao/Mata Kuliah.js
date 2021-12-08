@@ -45,3 +45,33 @@ export const findAllMatkul = async () => {
     return Promise.reject(new Error('Find all mata kuliah gagal'))
   }
 }
+
+export const updateDataMatkul = async (
+  id,
+  semester,
+  namaMataKuliah,
+  sksTeori,
+  sksPraktik,
+  kodeProgramStudi
+) => {
+  try {
+    const matkul = await MataKuliah.update(
+      {
+        semester: semester,
+        nama_mata_kuliah: namaMataKuliah,
+        sks_teori: sksTeori,
+        sks_praktek: sksPraktik,
+        kode_program_studi: kodeProgramStudi
+      },
+      {
+        where: {
+          id
+        },
+        silent: true
+      }
+    )
+    return matkul[0]
+  } catch (error) {
+    console.error(error)
+  }
+}

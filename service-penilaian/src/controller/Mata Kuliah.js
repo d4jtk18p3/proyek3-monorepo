@@ -111,3 +111,40 @@ export const getOneMatkulById = async (req, res, next) => {
         next(error)
     }
 }
+
+export const updateDataMatkulById = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const {
+            semester,
+            namaMataKuliah,
+            sksTeori,
+            sksPraktik,
+            kodeProgramStudi
+        } = req.body
+        const updateMatkul = await MatkulDAO.updateDataMatkul(
+            id,
+            semester,
+            namaMataKuliah,
+            sksTeori,
+            sksPraktik,
+            kodeProgramStudi
+        )
+        if (updateMatkul === 1) {
+            const matkul = await MatkulDAO.findMatkulById(id)
+            res.status(200).json({
+                message: 'Update data Matkul berhasil',
+                data: {
+                    matkul
+                }
+            })
+        } else {
+            const error = new Error('Update data Matkul gagal')
+            error.statusCode = 500
+            error.cause = 'Update data Matkul gagal'
+            throw error
+        }
+    } catch (error) {
+        next(error)
+    }
+}

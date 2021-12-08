@@ -7,5 +7,7 @@ const router = express.Router()
 router.post('/new-matkul', ValidatorSanitizer.postNewMatkul, MataKuliahController.postNewMatkul)
 router.get('/all-matkul', MataKuliahController.getAllMatkul)
 router.get('/get-one/:id', MataKuliahController.getOneMatkulById)
+router.put('/update-matkul-by-id/:id', MataKuliahController.updateDataMatkulById)
+
 
 export default router
