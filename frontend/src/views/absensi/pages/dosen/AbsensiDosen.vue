@@ -7,14 +7,14 @@
     </v-row>
     <v-row class="mb-4">
       <v-col cols="12" class="pa-0">
-        <breadcumbs :breadcrumb-items="breadcrumbItems"/>
+        <breadcumbs :breadcrumb-items="breadcrumbItems" />
       </v-col>
     </v-row>
     <v-row no-gutters justify="center">
       <v-col
         cols="auto"
         offset-md="2"
-        :class="$vuetify.breakpoint.mobile ? 'ma-8' : 'ml-0 mr-8'"
+        :class="$vuetify.breakpoint.xs ? 'ma-8' : 'ml-0 mr-8'"
       >
         <PersentaseMengajar
           :persentaseMengajar="persentaseMengajar"
@@ -50,13 +50,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-import Breadcumbs from "@/views/shared/navigation/Breadcumbs"
-import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen"
-import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen"
-import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar"
-import JadwalDosen from "@/datasource/network/absensi/jadwalDosen"
-import DashboardDosen from "@/datasource/network/absensi/dashboardDosen"
+import { mapGetters } from "vuex";
+import Breadcumbs from "@/views/shared/navigation/Breadcumbs";
+import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen";
+import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen";
+import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar";
+import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
+import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
 
 // const schedule = require("node-schedule")
 const INTERVAL = 1000 * 60 * 60;
