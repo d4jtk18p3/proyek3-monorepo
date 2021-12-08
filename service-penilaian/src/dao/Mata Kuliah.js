@@ -36,3 +36,12 @@ export const insertOneMatkul = async (
     console.error(error)
   }
 }
+
+export const findAllMatkul = async () => {
+  try {
+    const matkul = await MataKuliah.findAll()
+    return matkul
+  } catch (error) {
+    return Promise.reject(new Error('Find all mata kuliah gagal'))
+  }
+}
