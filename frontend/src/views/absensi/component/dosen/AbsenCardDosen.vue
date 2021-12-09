@@ -36,22 +36,23 @@
                 <v-progress-linear
                   background-color="#bfbfbf"
                   :color="item.hadir? 'success' : 'error'"
-                  :value="item.progress"
+                  :value="item.hadir? 100 : item.progress"
                   height="5"
                   class="ml-8 mr-8 justify-center"
                 ></v-progress-linear>
             </v-row>
               <v-card-actions class="justify-center">
                 <v-btn
-                  id="custom-disabled"
-                  :disabled="item.absen || true"
+                  :id="item.hadir? 'custom-disabled-safe' : item.progress === 100 ? 'custom-disabled-danger' : 'custom-disabled-warn'"
+                  :disabled="item.progress === 0 || item.progress === 100 || item.hadir"
+                  style="color: white;"
                   elevation="2"
                   rounded-md
                   class="mt-5 ml-5 mr-5"
-                  color="#4CAF50"
+                  color="#2196f3"
                   width="120"
                   @click="presensi(index, item.id_studi, item.id_jadwal)"
-                > Hadir</v-btn>
+                > {{item.hadir ? 'Hadir': item.progress === 100 ? 'Tidak Hadir' : 'Presensi'}}</v-btn>
               </v-card-actions>
               <v-card-actions class="justify-center">
                 <v-btn
@@ -73,6 +74,7 @@
 <script>
 import { mapGetters } from "vuex"
 import PresensiDosen from "@/datasource/network/absensi/PresensiDosen"
+import DateTime from "@/utils/dateTime.js"
 
 const INTERVAL = 1000
 const moment = require("moment")
@@ -100,7 +102,7 @@ export default {
     this.currentHour = current.getHours()
     this.currentMinute = current.getMinutes()
     this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
-    this.currentDay = moment(current).format("dddd")
+    this.currentDay = DateTime.getDay(current.getDay())
     this.presensiSchedule()
     setInterval(() => {
       current = new Date()
@@ -257,8 +259,18 @@ export default {
   color: white;
 }
 
-#custom-disabled.v-btn--disabled {
+#custom-disabled-safe.v-btn--disabled {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+#custom-disabled-warn.v-btn--disabled {
     background-color: #FB8C00 !important;
+    color: white !important;
+}
+
+#custom-disabled-danger.v-btn--disabled {
+    background-color: #FF5252 !important;
     color: white !important;
 }
 </style>
