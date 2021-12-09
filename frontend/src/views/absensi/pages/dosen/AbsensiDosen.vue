@@ -10,11 +10,12 @@
         <breadcumbs :breadcrumb-items="breadcrumbItems" />
       </v-col>
     </v-row>
-    <v-row no-gutters justify="center">
+    <!-- :justify="$vuetify.breakpoint.sm ? 'left' : 'center'" -->
+    <v-row no-gutters :justify="left">
       <v-col
         cols="auto"
         offset-md="2"
-        :class="$vuetify.breakpoint.xs ? 'ma-8' : 'ml-0 mr-8'"
+        :class="$vuetify.breakpoint.mobile ? 'ma-8 ml-0' : 'ml-0 mr-8'"
       >
         <PersentaseMengajar
           :persentaseMengajar="persentaseMengajar"

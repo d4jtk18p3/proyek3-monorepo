@@ -1,9 +1,9 @@
 <template>
   <v-flex>
     <v-card
-      class="d-flex pa-0"
-      :height="$vuetify.breakpoint.sm ? '300' : '450'"
-      :width="$vuetify.breakpoint.sm ? '324' : '541'"
+      class="d-flex pa-0 justify-left"
+      :height="$vuetify.breakpoint.sm ? '450' : '450'"
+      :width="$vuetify.breakpoint.sm ? '500' : '541'"
     >
       <div class="flex-column w-100">
         <div id="card-title">
@@ -22,10 +22,11 @@
                   class="mr-3 pa-0"
                   id="rounded-bar"
                   :height="25"
-                  :value="persentaseMengajar.persentaseJamMengajarDosen"
+                  :value="60"
                   color="#59DCDC"
                   background-color="#DADADA"
                 >
+                  <!-- :value="persentaseMengajar.persentaseJamMengajarDosen" -->
                 </v-progress-linear>
               </v-col>
               <v-col cols="4">
