@@ -44,21 +44,37 @@ services:
       - default
     depends_on:
       - db
-  front-end:
-    image: front-end
+#  front-end:
+#    image: front-end
+#    build:
+#      context: ./frontend
+#      target: production
+#      dockerfile: prod.Dockerfile
+#    ports:
+#      - "14415:14415"
+#    volumes:
+#      - ./frontend:/usr/src/app
+#      - /usr/src/app/node_modules
+#    networks:
+#      - default
+#    depends_on:
+#      - service-penilaian
+#      - service-absensi
+  akun-api:
+    image: service-absensi
     build:
-      context: ./frontend
+      context: ./backend
       target: production
       dockerfile: prod.Dockerfile
-    ports:
-      - "14415:14415"
     volumes:
-      - ./frontend:/usr/src/app
+      - ./akun-api:/usr/src/app
       - /usr/src/app/node_modules
+    ports:
+      - "5000:5000"
     networks:
       - default
     depends_on:
-      - service-penilaian
+      - db
   # keycloak:
   #   image: quay.io/keycloak/keycloak:15.0.2
   #   environment:
