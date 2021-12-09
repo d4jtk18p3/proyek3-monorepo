@@ -30,7 +30,6 @@ const authentication = {
         preferred_username: "196111091993032000"
       }
     }
-
   },
 
   actions: {
