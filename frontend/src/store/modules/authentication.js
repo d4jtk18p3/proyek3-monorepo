@@ -17,10 +17,8 @@ const authentication = {
     }
   },
 
-  getters: {
-    // identity: state => {
-    //   return state.identity
-    // }
+  
+getters: {
     identity: state => {
       console.log(state.identity)
       return {
@@ -32,6 +30,8 @@ const authentication = {
     }
 
   },
+
+
 
   actions: {
     async authenticate ({ commit }, forceLogin = false) {
