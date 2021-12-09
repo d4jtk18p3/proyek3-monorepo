@@ -1,7 +1,8 @@
 <template>
   <v-row :style="{color: currentTheme.onBackground}">
+  <v-col>
     <v-col cols="12">
-      <p class="text-h4 font-weight-bold">Input Nilai Mahasiswa</p>
+      <p class="text-h4 font-weight-bold deep-purple--text">Daftar Nilai Mahasiswa</p>
     </v-col>
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems"/>
@@ -17,9 +18,84 @@
             <KelasItem :kelas="item.kode_kelas" @click.native="getMatkulbyKelas(item) + toggle()" :bgcolor="active ? '#FB8C00' : currentTheme.surface"/>
           </v-item>
         </v-card>
-        </v-item-group>
+        </v-item-group> -->
     </v-col>
-    <v-divider v-if="!isMobile" vertical class="mx-5"></v-divider>
+
+    <v-row>
+      <v-col cols="3">
+          <v-select
+          v-model="MataKuliahFilterValue"
+          :items="ListMataKuliah"
+          filled
+          label="Semua Mata Kuliah"
+          @change="filterMataKuliah"
+          ></v-select>
+      </v-col>
+      <v-col cols="3">
+          <v-select
+          v-model="KelasFilterValue"
+          :items="ListKelas"
+          filled
+          label="Semua Kelas"
+          @change="filterKelas"
+          ></v-select>
+      </v-col>
+      <v-col cols="3">
+          <v-select
+          v-model="SemesterFilterValue"
+          :items="ListSemester"
+          filled
+          label="Semua Semester"
+          @change="filterSemester"
+          ></v-select>
+      </v-col>
+      <v-col cols="3">
+          <v-select
+          v-model="TahunFilterValue"
+          :items="ListTahun"
+          filled
+          label="Semua tahun"
+          @change="filterTahun"
+          ></v-select>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+       <h1 style="font-size:30px" class="font-weight-black">
+          List Rekap Nilai
+      </h1>
+       </v-col>
+         <v-col cols="14" class="text-right">
+          <v-btn
+            class="ma-2 white--text"
+            :loading="loading"
+            :disabled="loading"
+            color="blue"
+            @click="loader = 'loading'"
+          >
+            Download
+          </v-btn>
+          </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+          <template>
+            <v-data-table
+              dense
+              :headers="headers"
+              :items="itemsWithIndex"
+              item-key="name"
+              class="elevation-1"
+              :search="filters"
+            >
+            </v-data-table>
+          </template>
+      </v-col>
+    </v-row>
+
+    <!-- <v-divider v-if="!isMobile" vertical class="mx-5"></v-divider>
     <v-col sm="8">
     <p
     class="text-left font-weight-bold text-h5"
@@ -151,7 +227,7 @@
             Teori</th>
             <th colspan="2" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
-            Praktek</th>
+            Praktik</th>
             <th colspan="1" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
             Lain-Lain Tugas</th>
@@ -222,7 +298,7 @@
             Teori</th>
             <th colspan="2" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
-            Praktek</th>
+            Praktik</th>
             <th colspan="1" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
             Lain-Lain Tugas</th>
@@ -260,6 +336,11 @@
     </v-col>
   </v-row>
 </template>
+<style scoped>
+v-data-table >>> div > table {
+  border-spacing: 0 6rem;
+}
+</style>
 
 <script>
 import { mapGetters } from "vuex"
@@ -378,7 +459,7 @@ export default {
           bobot: 0
         },
         {
-          label: "Praktek",
+          label: "Praktik",
           colspan: 2,
           key: "parent2",
           bobot: 0
@@ -730,6 +811,14 @@ export default {
     },
     identity: function () {
       return this.$store.getters.identity
+    },
+    itemsWithIndex () {
+      return this.desserts.map(
+        (desserts, index) => ({
+          ...desserts,
+          index: index + 1
+        })
+      )
     }
   },
   methods: {
@@ -761,4 +850,5 @@ export default {
     this.listKelas = kelas.uniqueClass
   }
 }
+
 </script>
