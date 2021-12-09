@@ -1,15 +1,15 @@
 <template>
   <v-row :style="{color: currentTheme.onBackground}">
     <v-col cols="12">
-      <p class="text-h4 font-weight-bold">Input Nilai Mahasiswa</p>
+      <p :class="isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`">Input Nilai Mahasiswa</p>
     </v-col>
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems"/>
     </v-col>
     <v-col cols="12">
-      <p class="text-h4 font-weight-bold">{{ namaMatkul }}</p>
+      <p :class="isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`">{{ namaMatkul }}</p>
     </v-col>
-    <v-col cols="2">
+    <div class="ml-3 mb-4">
       <v-file-input
           id="fileInput"
           accept=".xlsx"
@@ -24,8 +24,8 @@
               mdi-file-upload
         </v-icon>
         Import From XLSX</v-btn>
-    </v-col>
-    <v-col cols="3" class="pl-10">
+    </div>
+    <div class="ml-3 mb-4">
       <v-btn :color="currentTheme.colorPrimary" elevation="2" outlined depressed @click="downloadTemplate()">
         <v-icon left
                 :color="currentTheme.onBackground"
@@ -34,17 +34,15 @@
         </v-icon>
         Download Template
         </v-btn>
-    </v-col>
-    <v-col cols="6">
-    </v-col>
-    <v-col cols="3" class="pt-0">
+    </div>
+    <v-col cols="12" class="pt-0">
       <v-btn :color="currentTheme.colorPrimary" elevation="2" outlined depressed @click="resetTable()">Reset Tabel</v-btn>
     </v-col>
-    <v-col cols="10" v-if="headerParentNilaiETS">
+    <v-col cols="12" v-if="headerParentNilaiETS">
       <p class="text-h4 font-weight-bold">ETS</p>
     </v-col>
-    <v-col cols="2" class="pt-10">
-      <v-btn v-if="headerParentNilaiETS" :color="currentTheme.colorPrimary" :style="{width: '100%'}" elevation="2" outlined depressed @click="tambahKategori('ETS')">
+    <v-col cols="12">
+      <v-btn v-if="headerParentNilaiETS" :color="currentTheme.colorPrimary" style="float: right" elevation="2" outlined depressed @click="tambahKategori('ETS')" class="pt-0">
         Tambah Kategori
         </v-btn>
     </v-col>
