@@ -12,11 +12,13 @@
         :style="{color: currentTheme.onBackground}"
         >Kelas</p>
         <v-item-group>
-        <v-card link class="mb-3" v-for="item in listKelas" :key="item.Kelas">
+        <v-hover v-slot="{ hover }" >
+        <v-card link :elevation="hover ? 12 : 2" class="mb-3" v-for="item in listKelas" :key="item.Kelas">
           <v-item v-slot="{ active, toggle }">
             <KelasItem :kelas="item.kode_kelas" @click.native="getMatkulbyKelas(item) + toggle()" :bgcolor="active ? '#FB8C00' : currentTheme.surface"/>
           </v-item>
         </v-card>
+        </v-hover>
         </v-item-group>
     </v-col>
     <v-divider v-if="!isMobile" vertical class="mx-5"></v-divider>
