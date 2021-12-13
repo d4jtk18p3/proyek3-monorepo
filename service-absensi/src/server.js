@@ -18,11 +18,11 @@ app.use(cors())
 // app.use(keycloak.protect())
 app.use(bodyParser.json())
 app.use(morgan('dev'))
-app.use('/api/keterangan', keteranganRoutes)
-app.use('/api/jadwal-perkuliahan', jadwalRoutes)
-app.use('/api/daftar-hadir-mahasiswa', daftarHadirMahasiswaRoutes)
-app.use('/api/daftar-hadir-dosen', daftarHadirDosenRoutes)
-app.use('/api/bap', bapRoutes)
+app.use('/api/absensi/api/keterangan', keteranganRoutes)
+app.use('/api/absensi/api/jadwal-perkuliahan', jadwalRoutes)
+app.use('/api/absensi/api/daftar-hadir-mahasiswa', daftarHadirMahasiswaRoutes)
+app.use('/api/absensi/api/daftar-hadir-dosen', daftarHadirDosenRoutes)
+app.use('/api/absensi/api/bap', bapRoutes)
 
 // error handling
 app.use((error, req, res, next) => {

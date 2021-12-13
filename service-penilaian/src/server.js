@@ -18,11 +18,11 @@ app.use(cors())
 // app.use(keycloak.protect())
 app.use(bodyParser.json())
 app.use(morgan('dev'))
-app.use('/dosen', dosenRouter)
-app.use('/mahasiswa', mahasiswaRouter)
-app.use('/user', userRouter)
-app.use('/kategori-nilai', kategoriNilaiRouter)
-app.use('/penilaian', penilaianRouter)
+app.use('/api/penilaian/dosen', dosenRouter)
+app.use('/api/penilaian/mahasiswa', mahasiswaRouter)
+app.use('/api/penilaian/user', userRouter)
+app.use('/api/penilaian/kategori-nilai', kategoriNilaiRouter)
+app.use('/api/penilaian/penilaian', penilaianRouter)
 
 
 // error handling
