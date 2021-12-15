@@ -9,7 +9,7 @@ import mahasiswaRouter from './routes/Mahasiswa'
 import userRouter from './routes/User'
 import kategoriNilaiRouter from './routes/Kategori_Nilai'
 import penilaianRouter from './routes/Penilaian'
-import matkulRouter from './routes/MataKuliah'
+import matkulRouter from './routes/Mata Kuliah'
 
 const app = express()
 app.use(cors())
