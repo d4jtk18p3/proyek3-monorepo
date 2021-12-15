@@ -4,7 +4,7 @@
     class="pa-3"
   >
     <div
-      class="text-center text-h6"
+      :class="isMobile ? `text-center text-body-1` : `text-center text-h6`"
       :style="{color: currentTheme.onSurface}"
     >{{ kelas }}</div>
   </v-card>
@@ -19,7 +19,10 @@ export default {
   computed: {
     ...mapGetters({
       currentTheme: "theme/getCurrentColor"
-    })
+    }),
+    isMobile () {
+      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
+    }
   }
 }
 </script>

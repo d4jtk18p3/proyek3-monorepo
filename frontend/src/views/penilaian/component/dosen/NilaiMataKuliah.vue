@@ -9,13 +9,13 @@
     <v-row class="pa-3 ma-0" :style="{background :'#2196F3' }">
       <v-col cols="12" align-self="center" class="pa-0 ma-0">
         <div
-          class="text-center text-uppercase font-weight-bold"
+          :class="isMobile ? `text-center text-uppercase font-weight-bold text-body-1` : `text-center text-uppercase font-weight-bold text-h6`"
           :style="{color: currentTheme.surface}"
         >{{ mataKuliah }}</div>
       </v-col>
       <v-col cols="12" align-self="center" class="pa-0 ma-0">
         <div
-          class="text-h8 text-center"
+          :class="isMobile ? `text-body-2 text-center` : `text-body-1 text-center`"
           :style="{color: currentTheme.surface}"
         >{{ kelas }}</div>
       </v-col>
@@ -77,7 +77,10 @@ export default {
   computed: {
     ...mapGetters({
       currentTheme: "theme/getCurrentColor"
-    })
+    }),
+    isMobile () {
+      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
+    }
   },
   methods: {
     routeNilaiMatkul (id) {
