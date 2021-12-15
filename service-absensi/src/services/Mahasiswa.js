@@ -5,9 +5,7 @@ import * as JadwalDAO from '../dao/Jadwal'
 import * as KeteranganDAO from '../dao/Keterangan'
 import * as DaftarHadirMahasiswaDAO from '../dao/DaftarHadirMahasiswa'
 import schedule from 'node-schedule'
-// import { DateTime } from 'luxon'
-import luxon from 'luxon';
-const { DateTime } = luxon;
+import { DateTime } from 'luxon'
 import holiday from '../const/Liburan'
 
 export const generateDaftarHadirMahasiswa = async () => {
