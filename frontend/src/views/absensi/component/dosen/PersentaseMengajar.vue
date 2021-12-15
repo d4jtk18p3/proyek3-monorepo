@@ -1,13 +1,13 @@
 <template>
   <v-flex>
-    <v-card class="d-flex pa-0" :height="450" :width="541">
+    <v-card class="d-flex pa-0" :height="455" :width="541">
       <div class="flex-column w-100">
         <div id="card-title">
-          <h3 class="white--text">
+          <h3 class="white--text mt-2">
             Rekap Presensi Dosen
           </h3>
         </div>
-        <div class="flex-column mx-2">
+        <div class="flex-column mx-2 mt-2">
           <v-card-actions>
             <v-row no-gutters>
               <v-col cols="8">
@@ -72,6 +72,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding-top: 2px;
+  height: 63.5px;
 }
 
 #card-title h3 {
