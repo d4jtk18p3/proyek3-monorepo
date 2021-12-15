@@ -1,10 +1,6 @@
 <template>
   <v-flex>
-    <v-card
-      class="d-flex pa-0 justify-left"
-      :height="$vuetify.breakpoint.sm ? '450' : '450'"
-      :width="$vuetify.breakpoint.sm ? '500' : '541'"
-    >
+    <v-card class="d-flex pa-0" :height="450" :width="541">
       <div class="flex-column w-100">
         <div id="card-title">
           <h3 class="white--text">
@@ -15,7 +11,7 @@
           <v-card-actions>
             <v-row no-gutters>
               <v-col cols="8">
-                <v-card-text class="ma-0 ml-1 mb-2 pa-0"
+                <v-card-text class="responsive ma-0 ml-1 mb-2 pa-0"
                   >Nama Mata Kuliah</v-card-text
                 >
                 <v-progress-linear
@@ -31,11 +27,13 @@
               </v-col>
               <v-col cols="4">
                 <v-card-text
-                  class="ml-3 mt-3 ma-0 pa-0 font-weight-bold text-center"
+                  class="responsive ml-3 mt-3 ma-0 pa-0 font-weight-bold text-center"
                   id="dark-blue"
                   >60%</v-card-text
                 >
-                <v-card-text class="ml-3 ma-0 pa-0 text-center" id="dark-blue"
+                <v-card-text
+                  class="responsive ml-3 ma-0 pa-0 text-center"
+                  id="dark-blue"
                   >Total Jam Mengajar</v-card-text
                 >
               </v-col>
@@ -47,8 +45,22 @@
   </v-flex>
 </template>
 <style scoped>
-p {
-  font-size: 16px;
+@media screen and (max-width: 768px) {
+  .responsive {
+    font-size: 12px;
+  }
+  h3 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .responsive {
+    font-size: 16px;
+  }
+  h3 {
+    font-size: 18px;
+  }
 }
 
 .w-100 {
