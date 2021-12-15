@@ -1,71 +1,100 @@
 <template>
   <v-flex>
-    <v-card width="300" class=" pa-3" height="530">
-      <p class="text-h5 text-center font-weight-bold">Persentase Mengajar</p>
-      <v-card-text class=" text-center ma-0 pa-0">*total mengajar selama perkuliahan 1 semester</v-card-text>
-      <v-card-actions class="justify-center">
-        <v-progress-circular
-        class="mt-5"
-          :rotate="-90"
-          :size="150"
-          :width="20"
-          :value= persentaseMengajar.persentaseJamMengajarDosen
-          color="#59DCDC"
-          background-color="#4CAF50">
-        </v-progress-circular>
-      </v-card-actions>
-      <v-row>
-        <v-col cols="1">
-          <v-progress-circular
-            class="ma-5"
-            :size="20"
-            :value= 100
-            color="#59DCDC">
-          </v-progress-circular>
-        </v-col>
-        <v-col>
-          <v-card-text class="mt-1 ml-3 text-left">Mengajar</v-card-text>
-        </v-col>
-        <v-col>
-          <v-card-text class="mt-1 mr-2 text-right">{{persentaseMengajar.totalJamMengajar}}</v-card-text>
-        </v-col>
-      </v-row>
-      <v-row
-      class="mt-0 pt-0">
-        <v-col cols="1">
-          <v-progress-circular
-            class="ma-5"
-            :size="20"
-            :value= 0>
-          </v-progress-circular>
-        </v-col>
-        <v-col cols="7">
-          <v-card-text class="mt-1 ml-3 mr-0 text-left">Tidak Mengajar</v-card-text>
-        </v-col>
-        <v-col cols="4">
-          <v-card-text class="mt-1 mr-2 ml-0 text-right">{{persentaseMengajar.totalJamTidakMengajar}}</v-card-text>
-        </v-col>
-      </v-row>
+    <v-card
+      class="d-flex pa-0 justify-left"
+      :height="$vuetify.breakpoint.sm ? '450' : '450'"
+      :width="$vuetify.breakpoint.sm ? '500' : '541'"
+    >
+      <div class="flex-column w-100">
+        <div id="card-title">
+          <h3 class="white--text">
+            Rekap Presensi Dosen
+          </h3>
+        </div>
+        <div class="flex-column mx-2">
+          <v-card-actions>
+            <v-row no-gutters>
+              <v-col cols="8">
+                <v-card-text class="ma-0 ml-1 mb-2 pa-0"
+                  >Nama Mata Kuliah</v-card-text
+                >
+                <v-progress-linear
+                  class="mr-3 pa-0"
+                  id="rounded-bar"
+                  :height="25"
+                  :value="60"
+                  color="#59DCDC"
+                  background-color="#DADADA"
+                >
+                  <!-- :value="persentaseMengajar.persentaseJamMengajarDosen" -->
+                </v-progress-linear>
+              </v-col>
+              <v-col cols="4">
+                <v-card-text
+                  class="ml-3 mt-3 ma-0 pa-0 font-weight-bold text-center"
+                  id="dark-blue"
+                  >60%</v-card-text
+                >
+                <v-card-text class="ml-3 ma-0 pa-0 text-center" id="dark-blue"
+                  >Total Jam Mengajar</v-card-text
+                >
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </div>
+      </div>
     </v-card>
   </v-flex>
 </template>
+<style scoped>
+p {
+  font-size: 16px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+#card-title {
+  background: #272343;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top: 2px;
+}
+
+#card-title h3 {
+  margin: 3px;
+  padding: 10px 10px;
+}
+
+#dark-blue {
+  color: #272343;
+}
+
+#rounded-bar {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+}
+</style>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters } from "vuex";
 
 export default {
   name: "PersentaseMengajar",
 
-  data () {
+  data() {
     return {
       persenTidakMengajar: 0
-    }
+    };
   },
   props: {
     persentaseMengajar: {
       type: Object,
-      default () {
-        return {}
+      default() {
+        return {};
       }
     }
   },
@@ -75,6 +104,5 @@ export default {
       currentTheme: "theme/getCurrentColor"
     })
   }
-}
-
+};
 </script>
