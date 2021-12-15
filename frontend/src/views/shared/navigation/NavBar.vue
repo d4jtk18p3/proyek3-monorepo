@@ -18,7 +18,7 @@
       <v-spacer></v-spacer>
       <v-text-field
         hide-details
-        label="Cari disini"
+        label="Cari di sini"
         append-icon="mdi-magnify"
         class="shrink"
         style="width:300px"
@@ -86,16 +86,16 @@
       style="margin-top: 48px"
       v-if="$vuetify.breakpoint.mobile"
     >
-          <!-- <v-text-field
+          <v-text-field
             hide-details
-            label="Cari disini"
+            label="Cari di sini"
             append-icon="mdi-magnify"
             class="mx-5 mt-5"
             single-line
             outlined
             dense
             @click:append="search()"
-          ></v-text-field> -->
+          ></v-text-field>
           <v-list
           >
             <v-list-item class="profile mx-3" two-line>

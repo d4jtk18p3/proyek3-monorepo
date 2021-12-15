@@ -1,6 +1,8 @@
 <template>
+  <v-hover v-slot="{ hover }" >
   <v-card
     link
+    :elevation="hover ? 12 : 2"
     class="rounded-card mr-3 mb-3"
     @click="onMatkulClicked(idPerkuliahan, mataKuliah)"
   >
@@ -31,6 +33,7 @@
     </v-row>
     </div>
   </v-card>
+  </v-hover>
 </template>
 
 <script>
