@@ -11,11 +11,11 @@
       </v-col>
     </v-row>
     <v-row no-gutters justify="center">
-      <v-col cols="auto" >
-        <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
-      </v-col>
       <v-col cols="auto" offset-md="2" :class="$vuetify.breakpoint.mobile? 'ma-8': ''">
         <PersentaseMengajar :persentaseMengajar="persentaseMengajar"></PersentaseMengajar>
+      </v-col>
+      <v-col cols="auto" >
+        <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
       </v-col>
       <v-col cols="auto" offset-md="2" v-if="isWali">
         <h2 align="center" class="text-h5 font-weight-bold">Validasi Ketidakhadiran</h2>

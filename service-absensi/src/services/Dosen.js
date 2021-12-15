@@ -9,7 +9,9 @@ import * as DaftarHadirMahasiswaDAO from '../dao/DaftarHadirMahasiswa'
 import * as BapDAO from '../dao/Bap'
 import * as KeteranganDAO from '../dao/Keterangan'
 import schedule from 'node-schedule'
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
+import luxon from 'luxon';
+const { DateTime } = luxon;
 
 export const generateDaftarHadirDosen = async () => {
   try {
