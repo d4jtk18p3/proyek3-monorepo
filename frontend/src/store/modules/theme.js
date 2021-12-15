@@ -21,7 +21,7 @@ const Dark = {
   colorSecondaryVariant: "#E3F6F5",
   colorOnPrimary: "#FFFFFF",
   colorOnSecondary: "#272343",
-  background: "#181A1D",
+  background: "#000000",
   surface: "#262626",
   onBackground: "#FFFFFF",
   onSurface: "#FFFFFF",
