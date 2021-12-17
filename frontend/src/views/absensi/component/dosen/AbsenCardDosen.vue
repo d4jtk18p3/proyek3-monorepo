@@ -1,7 +1,8 @@
 <template>
-  <v-sheet class="mx-auto" max-width="1000" :style="{background: currentTheme.background}">
+  <v-sheet class="mx-auto" max-width="1000">
     <v-slide-group
-      class="d-flex align-center"
+      class="d-flex align-center pr-15"
+      show-arrows
       value="3"
     >
       <v-slide-item
@@ -11,58 +12,64 @@
       >
         <v-col>
           <v-card
-            class="text-center justify-center rounded-md d-flex flex-column active"
-            width="325"
+            class="text-center justify-center rounded-xl d-flex flex-column active"
+            width="255"
             height="300"
-            :style="{
-              background: (!item.active? currentTheme.surface: currentTheme.surface),
-              color: currentTheme.onSurface,
-            }"
+            :style="!item.active? 'background: #272343' : 'background: white'"
           >
-            <h3
-              class="mt-4 text-center"
-            > Presensi Dosen Pengampu
-            </h3>
             <v-card-text
-              :style="{color: currentTheme.onSurface}"
-            >{{item.mata_kuliah.nama_mata_kuliah}} {{item.jenis}}</v-card-text>
+              class="pb-0"
+              :style="item.active? 'color: #272343' : 'color: white'"
+            > #{{item.id_studi}}</v-card-text>
+            <h3
+              class="pt-0 text-center"
+              :style="item.active? 'color: #272343' : 'color: white'"
+            > {{item.mata_kuliah.nama_mata_kuliah}}
+              <br/>
+              {{item.jenis}}
+            </h3>
             <v-spacer></v-spacer>
             <v-row justify="center">
               <v-col class="pb-0 ml-4 mr-4">
-                <p>
-                  {{ currentDay }}, {{item.waktu_mulai.slice(0,5)}} - {{item.waktu_selesai.slice(0,5)}} WIB
+                <p
+                  class="float-left"
+                  :style="item.active? 'color: #272343' : 'color: white'">
+                  {{item.waktu_mulai.slice(0,5)}}
+                </p>
+                <p
+                  class="float-right"
+                  :style="item.active? 'color: #272343' : 'color: white'">
+                  {{item.waktu_selesai.slice(0,5)}}
                 </p>
               </v-col>
                 <v-progress-linear
                   background-color="#bfbfbf"
                   :color="item.hadir? 'success' : 'error'"
-                  :value="item.hadir? 100 : item.progress"
+                  :value="item.progress"
                   height="5"
                   class="ml-8 mr-8 justify-center"
                 ></v-progress-linear>
             </v-row>
               <v-card-actions class="justify-center">
                 <v-btn
-                  :id="item.hadir? 'custom-disabled-safe' : item.progress === 100 ? 'custom-disabled-danger' : 'custom-disabled-warn'"
-                  :disabled="item.progress === 0 || item.progress === 100 || item.hadir"
-                  style="color: white;"
+                  :disabled="item.absen"
                   elevation="2"
-                  rounded-md
+                  rounded
                   class="mt-5 ml-5 mr-5"
-                  color="#2196f3"
+                  color="#4CAF50"
                   width="120"
                   @click="presensi(index, item.id_studi, item.id_jadwal)"
-                > {{item.hadir ? 'Hadir': item.progress === 100 ? 'Tidak Hadir' : 'Presensi'}}</v-btn>
+                > Hadir</v-btn>
               </v-card-actions>
               <v-card-actions class="justify-center">
                 <v-btn
                   :to="{ name: 'Perkuliahan', params: { item } }"
                   elevation="2"
-                  rounded-md
-                  class="mb-2 ml-8 mr-8 justify-center white--text"
-                  width="200"
-                  color="#2196F3"
-                > Kehadiran Mahasiswa</v-btn>
+                  rounded
+                  class="mb-2 ml-8 mr-8 justify-center"
+                  width="150"
+                  color="#FB8C00"
+                > Perkuliahan</v-btn>
               </v-card-actions>
           </v-card>
         </v-col>
@@ -74,7 +81,6 @@
 <script>
 import { mapGetters } from "vuex"
 import PresensiDosen from "@/datasource/network/absensi/PresensiDosen"
-import DateTime from "@/utils/dateTime.js"
 
 const INTERVAL = 1000
 const moment = require("moment")
@@ -102,7 +108,6 @@ export default {
     this.currentHour = current.getHours()
     this.currentMinute = current.getMinutes()
     this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
-    this.currentDay = DateTime.getDay(current.getDay())
     this.presensiSchedule()
     setInterval(() => {
       current = new Date()
@@ -118,7 +123,6 @@ export default {
       currentMinute: "",
       currentTime: "",
       currentDate: "",
-      currentDay: "",
       currentJadwal: null,
       currentKehadiran: null,
       interval: 0,
@@ -159,7 +163,6 @@ export default {
         })
     },
     statusKehadiranDosen (idJadwal) {
-      console.log(this.jadwalDsn);
       PresensiDosen.getStatusKehadiran(this.username, idJadwal, this.currentDate)
         .then(response => {
           this.currentKehadiran = response.data
@@ -257,20 +260,5 @@ export default {
 .active {
   background: #272343;
   color: white;
-}
-
-#custom-disabled-safe.v-btn--disabled {
-    background-color: #4CAF50 !important;
-    color: white !important;
-}
-
-#custom-disabled-warn.v-btn--disabled {
-    background-color: #FB8C00 !important;
-    color: white !important;
-}
-
-#custom-disabled-danger.v-btn--disabled {
-    background-color: #FF5252 !important;
-    color: white !important;
 }
 </style>

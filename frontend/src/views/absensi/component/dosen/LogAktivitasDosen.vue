@@ -1,56 +1,17 @@
 <template>
-  <v-card  width="425" class="ml-5">
-    <v-app-bar :style="{ background: currentTheme.onBackground }">
-      <v-toolbar-title class="font-weight-bold" style="color: white">Jadwal</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
-    <v-card height="470" width="425" class="px-5 rounded-md">
-      <p class="text-h6 font-weight-bold ml-5 text-left pt-4 my=0" :style="{ color: currentTheme.onBackground }">{{ getDay }}</p>
-      <p class="text-h7 font-weight-bold ml-7 text-left py-0" :style="{ color: currentTheme.onBackground }">{{ currentHour }}:{{ currentMinute }}</p>
-      <v-timeline dense>
-        <v-timeline-item
-          class="text-h8 pr-0 pl-0 small"
-          small
+  <v-card height="530" width="350" class="rounded-lg">
+    <p class="text-h4 font-weight-bold mr-10 text-right pt-3">{{ getDay }}</p>
+    <p class="text-h5 font-weight-bold mr-10 text-right">{{ currentHour }}:{{ currentMinute }}</p>
+    <v-timeline dense>
+      <v-timeline-item
+      class="pr-2"
+        small
           v-for="(item,index) in jadwalDsn"
           :key="index">
-            <v-container class="grey lighten-5 py-0">
-              <v-row
-                class="mb-2"
-                no-gutters
-                align="center"
-              >
-                <v-col
-                  sm="5"
-                  md="7"
-                >
-                  <v-card
-                    class="pa-2 pl-0 font-weight-bold"
-                    outlined color="transparent"
-                    tile
-                    :style="{ color: currentTheme.onBackground }"
-                  >
-                    {{ item.mata_kuliah.nama_mata_kuliah }}
-                  </v-card>
-                </v-col>
-                <v-col
-                  sm="5"
-                  offset-sm="0"
-                  md="5"
-                  offset-md="0"
-                >
-                  <v-card
-                    class="pa-2 px-0 font-weight-bolder"
-                    outlined color="transparent"
-                    tile
-                  >
-                    {{ item.waktu_mulai.slice(0,5) }} - {{ item.waktu_selesai.slice(0,5) }}
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-container>
-        </v-timeline-item>
-      </v-timeline>
-    </v-card>
+        {{ item.mata_kuliah.nama_mata_kuliah }}<br>
+          Absen: {{ item.waktu_mulai.slice(0,5) }}
+      </v-timeline-item>
+    </v-timeline>
   </v-card>
 </template>
 
