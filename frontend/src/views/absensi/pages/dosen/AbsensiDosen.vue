@@ -1,10 +1,8 @@
 <template>
-  <v-container fulid :style="{ color: currentTheme.onBackground }">
+  <v-container :style="{ color: currentTheme.onBackground }">
     <v-row>
       <v-col>
-        <p class="responsive font-weight-bold mb-1">
-          Dashboard Presensi
-        </p>
+        <p class="text-h4 font-weight-bold mb-1">Dashboard Presensi</p>
       </v-col>
     </v-row>
     <v-row class="mb-4">
@@ -51,25 +49,6 @@
     </v-overlay>
   </v-container>
 </template>
-<style scoped>
-@media screen and (max-width: 768px) {
-  .responsive {
-    font-size: 32px;
-    line-height: 38px;
-    letter-spacing: 0.117px;
-    font-family: sans-serif;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .responsive {
-    font-size: 34px;
-    line-height: 40px;
-    letter-spacing: 0.117px;
-    font-family: sans-serif;
-  }
-}
-</style>
 
 <script>
 import { mapGetters } from "vuex";
