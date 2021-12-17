@@ -11,9 +11,9 @@
           <v-card-actions>
             <v-row no-gutters>
               <v-col cols="8">
-                <PersentaseMengajarModal
-                  :matakuliah="'PCD TE'"
-                />
+                <v-card-text class="responsive ma-0 ml-1 mb-2 pa-0"
+                  >Nama Mata Kuliah</v-card-text
+                >
                 <v-progress-linear
                   class="mr-3 pa-0"
                   id="rounded-bar"
@@ -94,13 +94,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import PersentaseMengajarModal from "./PersentaseMengajarModal.vue";
 
 export default {
   name: "PersentaseMengajar",
-  components: {
-    PersentaseMengajarModal
-  },
+
   data() {
     return {
       persenTidakMengajar: 0
