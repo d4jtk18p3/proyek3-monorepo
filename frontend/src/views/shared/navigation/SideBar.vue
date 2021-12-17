@@ -186,16 +186,14 @@ export default {
     user: {
       nama: "User",
       nomorInduk: "",
-
-      image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     },
     isActive: false,
     refreshTrigger: false,
-    darkmode: false
+    darkmode: false,
   }),
   created () {
-    this.user.nomorInduk = this.identity.preferred_username
-
+    this.user.nomorInduk = this.identity.preferred_username;
   },
   computed: {
     ...mapGetters({
@@ -233,7 +231,6 @@ export default {
     ...mapActions({
       toogleTheme: "theme/toogleDark"
     }),
-
   },
   watch: {
     darkmode (value) {

@@ -133,19 +133,4 @@ export const destroyNilaiByMahasiswa = async (NIM) => {
   }
 }
 
-export const getNilaiByKelasMKSemester = async (kelas, matkul, semester) => {
-  try {
-    const sql_query =
-    `SELECT "Nilai".id, "Nilai".nim, "Nilai".nilai, "Kategori_Nilai".kode_kategori,
-    "Perkuliahan".id, "id_mata_kuliah", "kode_kelas", "semester" FROM "Perkuliahan"
-    INNER JOIN "Mata_Kuliah" ON "Perkuliahan".id_mata_kuliah = "Mata_Kuliah".id
-    INNER JOIN "Kategori_Nilai" ON "Perkuliahan".id = "Kategori_Nilai".id_perkuliahan
-    INNER JOIN "Nilai" ON "Kategori_Nilai".kode_kategori = "Nilai".kode_kategori
-    WHERE "kode_kelas" = ${kelas} AND "id_mata_kuliah" = ${matkul} AND "semester" = ${semester};`;
 
-    return await sequelize.query(sql_query, { type: sequelize.QueryTypes.SELECT });
-
-  } catch (error) {
-    return Promise.reject(new Error('Get Nilai by Kelas, Mata Kuliah, and Semester gagal'))
-  }
-}

@@ -1,4 +1,4 @@
-import Dosen from '../../../postgres-database/src/models/Dosen'
+import Dosen from '@proyek3/postgres-database/models/Dosen'
 // import sequelize from '@proyek3/postgres-database/db'
 
 /*

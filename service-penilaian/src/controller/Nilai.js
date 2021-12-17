@@ -178,20 +178,4 @@ export const getOneNilaibyMahasiswa = async (req, res, next) => {
   }
 }
 
-export const getNilaiByKelasMatkulSemester = async (req, res, next) => {
-  try {
-    const kode_kelas = req.query.kelas;
-    const mata_kuliah = req.query.matakuliah;
-    const semester = req.query.semester;
 
-    const nilai = await NilaiDAO.getNilaiByKelasMKSemester(kode_kelas, mata_kuliah, semester)
-    res.status(200).json({
-      message: 'Get Nilai by Kelas, Mata Kuliah, and Semester success',
-      data: {
-        nilai
-      }
-    })
-  } catch (error) {
-    next(error)
-  }
-}
