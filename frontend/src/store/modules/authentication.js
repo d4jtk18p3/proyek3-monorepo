@@ -1,10 +1,10 @@
-import * as Keycloak from "keycloak-js"
+import * as Keycloak from "keycloak-js";
 
 const keycloak = Keycloak({
   url: process.env.VUE_APP_KEYCLOAK_BASE_URL,
   realm: process.env.VUE_APP_KEYCLOAK_REALM,
   clientId: process.env.VUE_APP_KEYCLOAK_CLIENT_ID
-})
+});
 
 const authentication = {
   state: () => ({
@@ -12,19 +12,15 @@ const authentication = {
   }),
 
   mutations: {
-    SET_IDENTITY (state, identity) {
-      state.identity = identity
+    SET_IDENTITY(state, identity) {
+      state.identity = identity;
     }
   },
 
-<<<<<<< HEAD
   
 getters: {
-=======
-  getters: {
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
     identity: state => {
-      console.log(state.identity)
+      console.log(state.identity);
       return {
         realm_access: {
           roles: ["dosen"]
@@ -35,36 +31,33 @@ getters: {
   },
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
   actions: {
-    async authenticate ({ commit }, forceLogin = false) {
-      const auth = await keycloak.init({ onLoad: "login-required" })
+    async authenticate({ commit }, forceLogin = false) {
+      const auth = await keycloak.init({ onLoad: "login-required" });
 
-      commit("SET_IDENTITY", keycloak.tokenParsed)
+      commit("SET_IDENTITY", keycloak.tokenParsed);
 
       if (!auth) {
-        window.location.reload()
+        window.location.reload();
       } else {
         setInterval(async () => {
           try {
-            await keycloak.updateToken(70)
+            await keycloak.updateToken(70);
           } catch (err) {
-            console.error(err)
+            console.error(err);
           } finally {
-            commit("SET_IDENTITY", keycloak.tokenParsed)
+            commit("SET_IDENTITY", keycloak.tokenParsed);
           }
-        }, 6000)
+        }, 6000);
       }
     },
 
-    async logout ({ state }, router) {
-      await router.push("/home")
-      keycloak.logout()
+    async logout({ state }, router) {
+      await router.push("/home");
+      keycloak.logout();
     }
   }
-}
+};
 
-export default authentication
+export default authentication;

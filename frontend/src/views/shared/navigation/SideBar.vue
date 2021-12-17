@@ -1,6 +1,32 @@
 <template>
   <v-navigation-drawer clipped app permanent id="sidebar"  @transitionend="collapseSubItems">
     <v-list>
+      <v-list-item-content dense class="pl-3">
+        <v-row justify="start" align="center">
+          <v-col cols="2">
+            <v-avatar>
+              <img
+                :src="user.image"
+                alt="John"
+              >
+            </v-avatar>
+          </v-col>
+          <v-col style="color:white" offset="1" justify="center">
+            <p class="ma-0">{{ user.nama }}</p>
+            <p class="ma-0 mt-2">{{ user.nomorInduk }}</p>
+          </v-col>
+        </v-row>
+      </v-list-item-content>
+      <v-list-item-content class="pl-3 pr-3 pb-0">
+        <v-divider style="border-color: #FFFFFF; opacity: 0.5;"></v-divider>
+      </v-list-item-content>
+      <v-list-item-content dense class="pl-3">
+        <v-switch
+          v-model="darkmode"
+          :label="`Dark mode`"
+          dark
+        ></v-switch>
+      </v-list-item-content>
       <div
         v-for="(item, i) in navItem"
         :key="i"
@@ -116,7 +142,7 @@
 
 </style>
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 export default {
   name: "sideBar",
   props: {
@@ -157,7 +183,6 @@ export default {
     }
   },
   data: () => ({
-<<<<<<< HEAD
     user: {
       nama: "User",
       nomorInduk: "",
@@ -172,14 +197,10 @@ export default {
     this.user.nomorInduk = this.identity.preferred_username
 
   },
-=======
-    isActive: false,
-    refreshTrigger: false
-  }),
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
   computed: {
     ...mapGetters({
-      currentTheme: "theme/getCurrentColor"
+      currentTheme: "theme/getCurrentColor",
+      isDark: "theme/getIsDark"
     }),
     navItem () {
       return this.items.map((item) => {
@@ -192,6 +213,9 @@ export default {
         }
         return item
       })
+    },
+    identity: function () {
+      return this.$store.getters.identity
     }
   },
   methods: {
@@ -205,7 +229,6 @@ export default {
       if (this.$router.currentRoute.path !== to) {
         await this.$router.push({ path: to })
       }
-<<<<<<< HEAD
     },
     ...mapActions({
       toogleTheme: "theme/toogleDark"
@@ -216,8 +239,6 @@ export default {
     darkmode (value) {
       if (value === this.isDark) return
       this.toogleTheme("alek")
-=======
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
     }
   }
 }

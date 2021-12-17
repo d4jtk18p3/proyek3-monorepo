@@ -1,18 +1,10 @@
 <template>
-<<<<<<< HEAD
   <v-sheet
     class="mx-auto"
     max-width="1000"
     :style="{ background: currentTheme.background }"
   >
     <v-slide-group class="d-flex align-center" value="3">
-=======
-  <v-sheet class="mx-auto" max-width="1000">
-    <v-slide-group
-      class="d-flex align-center"
-      value="3"
-    >
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
       <v-slide-item
         v-for="(item, index) in jadwalDsn"
         :key="index"
@@ -20,10 +12,9 @@
       >
         <v-col>
           <v-card
-            class="text-center justify-center rounded-xl d-flex flex-column active"
-            width="255"
+            class="text-center justify-center rounded-md d-flex flex-column active"
+            width="325"
             height="300"
-<<<<<<< HEAD
             :style="{
               background: !item.active
                 ? currentTheme.surface
@@ -93,64 +84,6 @@
                 Kehadiran Mahasiswa</v-btn
               >
             </v-card-actions>
-=======
-            :style="!item.active? 'background: #272343' : 'background: white'"
-          >
-            <v-card-text
-              class="pb-0"
-              :style="item.active? 'color: #272343' : 'color: white'"
-            > #{{item.id_studi}}</v-card-text>
-            <h3
-              class="pt-0 text-center"
-              :style="item.active? 'color: #272343' : 'color: white'"
-            > {{item.mata_kuliah.nama_mata_kuliah}}
-              <br/>
-              {{item.jenis}}
-            </h3>
-            <v-spacer></v-spacer>
-            <v-row justify="center">
-              <v-col class="pb-0 ml-4 mr-4">
-                <p
-                  class="float-left"
-                  :style="item.active? 'color: #272343' : 'color: white'">
-                  {{item.waktu_mulai.slice(0,5)}}
-                </p>
-                <p
-                  class="float-right"
-                  :style="item.active? 'color: #272343' : 'color: white'">
-                  {{item.waktu_selesai.slice(0,5)}}
-                </p>
-              </v-col>
-                <v-progress-linear
-                  background-color="#bfbfbf"
-                  :color="item.hadir? 'success' : 'error'"
-                  :value="item.progress"
-                  height="5"
-                  class="ml-8 mr-8 justify-center"
-                ></v-progress-linear>
-            </v-row>
-              <v-card-actions class="justify-center">
-                <v-btn
-                  :disabled="item.absen || true"
-                  elevation="2"
-                  rounded
-                  class="mt-5 ml-5 mr-5"
-                  color="#4CAF50"
-                  width="120"
-                  @click="presensi(index, item.id_studi, item.id_jadwal)"
-                > Hadir</v-btn>
-              </v-card-actions>
-              <v-card-actions class="justify-center">
-                <v-btn
-                  :to="{ name: 'Perkuliahan', params: { item } }"
-                  elevation="2"
-                  rounded
-                  class="mb-2 ml-8 mr-8 justify-center"
-                  width="150"
-                  color="#FB8C00"
-                > Perkuliahan</v-btn>
-              </v-card-actions>
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
           </v-card>
         </v-col>
       </v-slide-item>
@@ -172,14 +105,9 @@
 </style>
 
 <script>
-<<<<<<< HEAD
 import { mapGetters } from "vuex";
 import PresensiDosen from "@/datasource/network/absensi/PresensiDosen";
 import DateTime from "@/utils/dateTime.js";
-=======
-import { mapGetters } from "vuex"
-import PresensiDosen from "@/datasource/network/absensi/PresensiDosen"
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
 
 const INTERVAL = 1000;
 const moment = require("moment");
@@ -203,7 +131,6 @@ export default {
   },
   created() {
     // this.testProgressBar()
-<<<<<<< HEAD
     var current = new Date();
     this.currentHour = current.getHours();
     this.currentMinute = current.getMinutes();
@@ -215,13 +142,6 @@ export default {
       current.getDate();
     this.currentDay = DateTime.getDay(current.getDay());
     this.presensiSchedule();
-=======
-    var current = new Date()
-    this.currentHour = current.getHours()
-    this.currentMinute = current.getMinutes()
-    this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
-    this.presensiSchedule()
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
     setInterval(() => {
       current = new Date();
       this.currentHour = current.getHours();
@@ -241,6 +161,7 @@ export default {
       currentMinute: "",
       currentTime: "",
       currentDate: "",
+      currentDay: "",
       currentJadwal: null,
       currentKehadiran: null,
       interval: 0,
@@ -428,7 +349,6 @@ export default {
   background: #272343;
   color: white;
 }
-<<<<<<< HEAD
 
 #custom-disabled-safe.v-btn--disabled {
   background-color: #4caf50 !important;
@@ -444,6 +364,4 @@ export default {
   background-color: #ff5252 !important;
   color: white !important;
 }
-=======
->>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
 </style>
