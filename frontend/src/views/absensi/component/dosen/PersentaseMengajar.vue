@@ -1,6 +1,10 @@
 <template>
   <v-flex>
-    <v-card class="d-flex pa-0" :height="450" :width="541">
+    <v-card
+      class="d-flex pa-0 justify-left"
+      :height="$vuetify.breakpoint.sm ? '450' : '450'"
+      :width="$vuetify.breakpoint.sm ? '500' : '541'"
+    >
       <div class="flex-column w-100">
         <div id="card-title">
           <h3 class="white--text">
