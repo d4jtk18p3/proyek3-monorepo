@@ -1,53 +1,52 @@
 <template>
+<<<<<<< HEAD
   <v-container fulid :style="{ color: currentTheme.onBackground }">
     <v-row>
       <v-col>
         <p class="responsive font-weight-bold mb-1">
           Dashboard Presensi
         </p>
+=======
+  <v-container>
+    <v-row :style="{ color: currentTheme.onBackground }">
+      <v-col>
+        <p class="text-h4 font-weight-bold">Halaman Dosen</p>
+>>>>>>> parent of 102c2d4 (Merge branch 'Absensi/FE1101' of https://github.com/PengembanganWeb-D4-B-JTK-2019/proyek3-monorepo into Absensi/FE1101)
       </v-col>
     </v-row>
-    <v-row class="mb-4">
-      <v-col cols="12" class="pa-0">
-        <breadcumbs :breadcrumb-items="breadcrumbItems" />
+    <v-row>
+      <v-col cols="2">
+        <p class="text-h4 font-weight-bold">Dashboard</p>
       </v-col>
     </v-row>
-    <!-- :justify="$vuetify.breakpoint.sm ? 'left' : 'center'" -->
-    <v-row no-gutters :justify="left">
-      <v-col
-        cols="auto"
-        offset-md="2"
-        :class="$vuetify.breakpoint.mobile ? 'ma-8 ml-0' : 'ml-0 mr-8'"
-      >
-        <PersentaseMengajar
-          :persentaseMengajar="persentaseMengajar"
-        ></PersentaseMengajar>
+    <v-row no-gutters justify="center">
+      <v-col cols="auto" offset-md="2" :class="$vuetify.breakpoint.mobile? 'ma-8': ''">
+        <PersentaseMengajar :persentaseMengajar="persentaseMengajar"></PersentaseMengajar>
       </v-col>
-      <v-col cols="auto">
+      <v-col cols="auto" >
         <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
       </v-col>
       <v-col cols="auto" offset-md="2" v-if="isWali">
-        <h2 align="center" class="text-h5 font-weight-bold">
-          Validasi Ketidakhadiran
-        </h2>
-        <DaftarHadir :ketidakhadiran="ketidakhadiran"> </DaftarHadir>
+        <h2 align="center" class="text-h5 font-weight-bold">Validasi Ketidakhadiran</h2>
+        <DaftarHadir :ketidakhadiran="ketidakhadiran">
+        </DaftarHadir>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col >
+        <p class="text-h4 font-weight-bold mr-6">Absensi Perkuliahan</p>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="auto">
-        <AbsenCardDosen
-          :jadwalDsn="jadwalDsn"
-          :username="username"
-        ></AbsenCardDosen>
+        <AbsenCardDosen :jadwalDsn="jadwalDsn" :username="username"></AbsenCardDosen>
       </v-col>
     </v-row>
     <v-overlay :value="isLoading">
-      <v-progress-circular
-        indeterminate
-        size="32"
-        :color="currentTheme.colorSecondary"
-      >
-      </v-progress-circular>
+    <v-progress-circular
+      indeterminate size="32"
+     :color="currentTheme.colorSecondary">
+    </v-progress-circular>
     </v-overlay>
   </v-container>
 </template>
@@ -72,61 +71,49 @@
 </style>
 
 <script>
-import { mapGetters } from "vuex";
-import Breadcumbs from "@/views/shared/navigation/Breadcumbs";
-import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen";
-import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen";
-import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar";
-import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
-import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
+import { mapGetters } from "vuex"
+import AbsenCardDosen from "@/views/absensi/component/dosen/AbsenCardDosen"
+import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen"
+import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar"
+import JadwalDosen from "@/datasource/network/absensi/jadwalDosen"
+import DashboardDosen from "@/datasource/network/absensi/dashboardDosen"
 
 // const schedule = require("node-schedule")
-const INTERVAL = 1000 * 60 * 60;
+const INTERVAL = 1000 * 60 * 60
 
 export default {
   name: "AbsensiDosen",
   components: {
     AbsenCardDosen,
     LogAktivitas,
-    PersentaseMengajar,
-    Breadcumbs
+    PersentaseMengajar
   },
-  created() {
-    const tasks = [];
+  created () {
+    const tasks = []
     if (this.$route.meta.requiresAuth) {
-      tasks.push(this.waitAuthenticated());
+      tasks.push(this.waitAuthenticated())
     }
     Promise.all(tasks).then(result => {
-      this.username = this.identity.preferred_username;
-      this.isLoading = false;
-      var current = new Date();
-      this.currentDay = current.getDay();
-      this.currentDate =
-        current.getFullYear() +
-        "-" +
-        (current.getMonth() + 1) +
-        "-" +
-        current.getDate();
-      this.getJadwalDsn();
+      this.username = this.identity.preferred_username
+      this.isLoading = false
+      var current = new Date()
+      this.currentDay = current.getDay()
+      this.currentDate = current.getFullYear() + "-" + (current.getMonth() + 1) + "-" + current.getDate()
+      this.getJadwalDsn()
       // setTimeout(() => {
       //   this.getJadwalDsn()
       // }, 3000)
-      this.getPersentaseMengajar();
+      this.getPersentaseMengajar()
       setInterval(() => {
-        this.currentDay = current.getDay();
-        this.getJadwalDsn();
-        this.getPersentaseMengajar();
-      }, INTERVAL);
-    });
+        this.currentDay = current.getDay()
+        this.getJadwalDsn()
+        this.getPersentaseMengajar()
+      }, INTERVAL)
+    })
   },
-  data() {
+  data () {
     return {
       breadcrumbItems: [
-        {
-          text: "Home",
-          disabled: false,
-          href: "/home"
-        },
         {
           text: "Dashboard",
           disabled: true,
@@ -141,95 +128,86 @@ export default {
       isLoading: true,
       username: "",
       isWali: false
-    };
+    }
   },
   computed: {
     ...mapGetters({
       currentTheme: "theme/getCurrentColor",
       isDark: "theme/getIsDark"
     }),
-    isMobile() {
-      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs;
+    isMobile () {
+      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
     },
-    identity: function() {
-      return this.$store.getters.identity;
+    identity: function () {
+      return this.$store.getters.identity
     }
   },
   methods: {
-    getJadwalDsn() {
-      JadwalDosen.getJadwalDosen(
-        this.currentDay,
-        this.identity.preferred_username
-      )
+    getJadwalDsn () {
+      JadwalDosen.getJadwalDosen(this.currentDay, this.identity.preferred_username)
         .then(response => {
-          response.data.jadwal.forEach(function(element) {
-            element.absen = false;
-            element.active = true;
-            element.hadir = false;
-            element.duration = 0;
-            element.currentDuration = 0;
-            element.progress = 0;
-            element.id_jadwal_kedua = 0;
-            element.id_studi_kedua = 0;
-          });
-          this.jadwalDsn = response.data.jadwal;
+          response.data.jadwal.forEach(function (element) {
+            element.absen = false
+            element.active = true
+            element.hadir = false
+            element.duration = 0
+            element.currentDuration = 0
+            element.progress = 0
+            element.id_jadwal_kedua = 0
+            element.id_studi_kedua = 0
+          })
+          this.jadwalDsn = response.data.jadwal
           // setTimeout(() => {
           //   this.cekMatkulSama()
           // }, 3000)
-          this.isLoading = false;
+          this.isLoading = false
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    getPersentaseMengajar() {
+    getPersentaseMengajar () {
       DashboardDosen.persentaseMengajar(this.identity.preferred_username)
         .then(response => {
-          this.persentaseMengajar = response.data;
+          this.persentaseMengajar = response.data
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-    cekMatkulSama() {
-      var i = 0;
+    cekMatkulSama () {
+      var i = 0
 
       while (i < this.jadwalDsn.length - 1) {
-        if (
-          this.jadwalDsn[i].mata_kuliah.nama_mata_kuliah ===
-          this.jadwalDsn[i + 1].mata_kuliah.nama_mata_kuliah
-        ) {
-          this.jadwalDsn[i].id_jadwal_kedua = this.jadwalDsn[i + 1].id_jadwal;
-          this.jadwalDsn[i].id_studi_kedua = this.jadwalDsn[i + 1].id_studi;
-          this.jadwalDsn[i].waktu_selesai = this.jadwalDsn[i + 1].waktu_selesai;
-          this.jadwalDsn[i].jenis = "TE-PR";
-          this.jadwalDsn.splice(i + 1, 1);
+        if (this.jadwalDsn[i].mata_kuliah.nama_mata_kuliah === this.jadwalDsn[i + 1].mata_kuliah.nama_mata_kuliah) {
+          this.jadwalDsn[i].id_jadwal_kedua = this.jadwalDsn[i + 1].id_jadwal
+          this.jadwalDsn[i].id_studi_kedua = this.jadwalDsn[i + 1].id_studi
+          this.jadwalDsn[i].waktu_selesai = this.jadwalDsn[i + 1].waktu_selesai
+          this.jadwalDsn[i].jenis = "TE-PR"
+          this.jadwalDsn.splice((i + 1), 1)
         }
-        i++;
+        i++
       }
     },
-    async waitAuthenticated() {
-      return new Promise(resolve => {
-        const unwatch = this.$store.watch(
-          state => {
-            return this.$store.getters.identity;
-          },
-          value => {
-            if (!value) {
-              return;
-            }
-            // if (!value.isActive) {
-            //   this.$router.replace({ path: "/reset-password" })
-            // }
-            unwatch();
-            resolve();
-          },
-          {
-            immediate: true
+    async waitAuthenticated () {
+      return new Promise((resolve) => {
+        const unwatch = this.$store.watch(state => {
+          return this.$store.getters.identity
+        }, value => {
+          if (!value) {
+            return
           }
-        );
-      });
+          // if (!value.isActive) {
+          //   this.$router.replace({ path: "/reset-password" })
+          // }
+          unwatch()
+          resolve()
+        }, {
+          immediate: true
+        })
+      })
     }
   }
-};
+}
+
 </script>

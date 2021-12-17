@@ -4,7 +4,10 @@
     "backend",
     "postgres-database",
     "service-penilaian",
+    "service-monitoring",
     "service-absensi",
+    "service-logbook",
+    "notification",
     "akun-keycloak-proxy",
     "frontend"
   ]

@@ -1,8 +1,9 @@
 module.exports = {
   devServer: {
-    port: 14415,
+    port: 8080,
     allowedHosts: [
       "akun.localhost",
+      "absensi.localhost",
       "frontend.localhost"
     ]
   },
