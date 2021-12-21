@@ -151,7 +151,7 @@
             Teori</th>
             <th colspan="2" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
-            Praktik</th>
+            Praktek</th>
             <th colspan="1" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
             Lain-Lain Tugas</th>
@@ -222,7 +222,7 @@
             Teori</th>
             <th colspan="2" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
-            Praktik</th>
+            Praktek</th>
             <th colspan="1" class="text-center" :style="{background: currentTheme.onBackground,
             color: currentTheme.background, 'border': '1px solid' + currentTheme.background}">
             Lain-Lain Tugas</th>
@@ -378,7 +378,7 @@ export default {
           bobot: 0
         },
         {
-          label: "Praktik",
+          label: "Praktek",
           colspan: 2,
           key: "parent2",
           bobot: 0
