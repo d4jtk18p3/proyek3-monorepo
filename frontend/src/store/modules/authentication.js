@@ -18,6 +18,9 @@ const authentication = {
   },
 
   getters: {
+    // identity: state => {
+    //   return state.identity
+    // }
     identity: state => {
       console.log(state.identity)
       return {
