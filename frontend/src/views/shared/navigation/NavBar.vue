@@ -81,7 +81,7 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      absolute
+      fixed
       width="100%"
       style="margin-top: 48px"
       v-if="$vuetify.breakpoint.mobile"

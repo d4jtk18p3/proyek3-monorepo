@@ -1,8 +1,7 @@
 <template>
   <v-sheet class="mx-auto" max-width="1000">
     <v-slide-group
-      class="d-flex align-center pr-15"
-      show-arrows
+      class="d-flex align-center"
       value="3"
     >
       <v-slide-item
@@ -52,7 +51,7 @@
             </v-row>
               <v-card-actions class="justify-center">
                 <v-btn
-                  :disabled="item.absen"
+                 :disabled="item.absen || true"
                   elevation="2"
                   rounded
                   class="mt-5 ml-5 mr-5"
