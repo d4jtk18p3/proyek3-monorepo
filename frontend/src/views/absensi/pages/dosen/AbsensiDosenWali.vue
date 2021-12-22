@@ -22,10 +22,10 @@
     </v-row>
     <v-row no-gutters>
       <v-col cols="4">
-          <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
+        <PersentaseMengajar :persentaseMengajar="persentaseMengajar"></PersentaseMengajar>
       </v-col>
       <v-col cols="4">
-        <PersentaseMengajar :persentaseMengajar="persentaseMengajar"></PersentaseMengajar>
+          <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
       </v-col>
       <v-col cols="4">
        <h2 align="center" class="text-h5 font-weight-bold">Validasi Ketidakhadiran</h2>
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     getJadwalDsn () {
-      JadwalDosen.getJadwalDosen(this.currentDay, 196610181995121000)
+      JadwalDosen.getJadwalDosen(this.currentDay, this.identity.preferred_username)
         .then(response => {
           response.data.jadwal.forEach(function (element) {
             element.absen = "false"
