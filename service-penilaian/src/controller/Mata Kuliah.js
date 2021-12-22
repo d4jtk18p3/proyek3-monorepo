@@ -33,6 +33,9 @@ export const getMatkulAjarByDosen = async (req, res) => {
             }
         })
     }
+    catch(e){
+        console.log(e)
+    }
     for (i = 0; i < listIdPerkuliahan.length; i++) {
       const perkuliahan = await PerkuliahaDAO.findPerkuliahanById(listIdPerkuliahan[i])
       if (perkuliahan.kode_kelas === idKelas) {
