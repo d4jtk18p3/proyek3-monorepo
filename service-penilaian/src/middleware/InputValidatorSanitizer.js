@@ -2,7 +2,7 @@ import expressValidator from 'express-validator';
 const { body, param } = expressValidator;
 import * as DosenDAO from '../dao/Dosen'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
-
+import * as KelasDAO from '../dao/Kelas'
 
 // CATATAN : File ini berisi middleware untuk memvalidasi dan sanitasi inputan yang dikirim oleh user
 
@@ -93,4 +93,18 @@ export const deleteDosenByNIP = [
       }
     })
   })
+]
+
+export const postNewKelas = [
+  body('kodeKelas', 'kodeKelas wajib diisi').exists().bail(),
+  body('kodeKelas').custom((value) => {
+    return KelasDAO.findKelasByKodeKelas(value).then((kelas) => {
+      if (kelas) {
+        return Promise.reject(new Error('Kode kelas sudah terdaftar'))
+      }
+    })
+  }),
+  body('kodeProgramStudi', 'kode program studi wajib diisi').exists(),
+  body('NIP', 'nip wajib diisi').exists(),
+  body('Tahun', 'tahun wajib diisi').exists()
 ]
