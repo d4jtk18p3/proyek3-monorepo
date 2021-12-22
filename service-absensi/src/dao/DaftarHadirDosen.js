@@ -3,33 +3,6 @@ import * as DosenDAO from './Dosen'
 import * as JadwalDAO from './Jadwal'
 import db from '../db'
 
-// new Method From 19
-export const getRekapPresensiDosenTertentu = async (NIP) => {
-  try {
-    const result = await db.query(`
-    SELECT "nip","isHadir","tanggal" FROM "daftar_hadir_dosen" 
-    WHERE "nip" = '${NIP}'
-;
-    `)
-    return result[0]
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-
-export const updatePresensiDosenTertentu = async (NIP, idStudi, idJadwal) => {
-  try {
-    const result = await db.query(`
-    UPDATE "daftar_hadir_dosen"
-    SET "isHadir" = true
-    WHERE "nip" = '${NIP}' AND "tanggal" = CURRENT_DATE AND "id_studi" = ${idStudi} AND "idJadwal" = ${idJadwal};
-    `)
-    return result[0]
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-//
 export const insertOne = async (nip, idStudi, tanggal, isHadir, idJadwal) => {
   // Belum dicoba karena membutuhkan data dari db common
   try {

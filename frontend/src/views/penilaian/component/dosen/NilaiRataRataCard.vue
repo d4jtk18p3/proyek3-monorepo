@@ -3,11 +3,9 @@
     :style="{background: currentTheme.surface}"
     class="pa-3"
   >
-    <v-row> <!---->
+    <v-row>
       <v-col cols="12">
-        <p :class="isMobile ? `text-h7 font-weight-bold ml-2` : `text-h6 font-weight-bold ml-3`"
-        :style="{color: currentTheme.onSurface}">
-        Rata-Rata Perolehan Nilai Mahasiswa</p>
+        <div class="text-h6 font-weight-bold ml-3" :style="{color: currentTheme.onSurface}">Rata-Rata Perolehan Nilai Mahasiswa</div>
       </v-col>
       <v-col cols="12">
         <apexchart type="bar" height="300" width="100%" :options="data.chartOptions" :series="data.series"/>
@@ -36,9 +34,6 @@ export default {
     ...mapGetters({
       currentTheme: "theme/getCurrentColor"
     }),
-    isMobile () {
-      return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
-    },
     data () {
       return {
         series: [{

@@ -11,7 +11,6 @@ router.post('/import-nilai/perkuliahan/:id_perkuliahan', NilaiController.importN
 router.get('/get-nilai/perkuliahan/:id_perkuliahan', NilaiController.getNilaiByPerkuliahan)
 router.put('/update-nilai-akhir/perkuliahan/:id_perkuliahan', NilaiAkhirController.updateNilaiAkhir)
 router.get('/get-nilai-akhir/perkuliahan/:id_perkuliahan', NilaiAkhirController.getNilaiAkhirByPerkuliahanDosen)
-router.get('/nilai-perkuliahan', NilaiController.getNilaiByKelasMatkulSemester)
 
 //Mahasiswa
 router.get('/get-all-nilai-akhir/mahasiswa/:nim', NilaiAkhirController.getNilaiAkhirByMahasiswa)

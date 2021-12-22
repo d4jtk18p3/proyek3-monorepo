@@ -16,9 +16,9 @@
         </v-row>
       </v-card>
       <v-spacer></v-spacer>
-      <v-text-field
+      <!-- <v-text-field
         hide-details
-        label="Cari di sini"
+        label="Cari disini"
         append-icon="mdi-magnify"
         class="shrink"
         style="width:300px"
@@ -26,8 +26,8 @@
         outlined
         dense
         @click:append="notification_click"
-      ></v-text-field> 
-      <v-btn class="ml-2" icon @click="notification_click()">
+      ></v-text-field> -->
+      <!-- <v-btn class="ml-2" icon @click="notification_click()">
         <v-badge
           :content="usernotif"
           :value="usernotif"
@@ -36,8 +36,8 @@
         >
           <v-icon :style="{color: currentTheme.colorPrimary}">mdi-bell-outline</v-icon>
         </v-badge>
-      </v-btn>
-      <!-- <v-btn depressed :style="{background : currentTheme}" right class="ml-1" height="50px">
+      </v-btn> -->
+      <v-btn depressed :style="{background : currentTheme}" right class="ml-1" height="50px">
         <div :style="{background: currentTheme.colorPrimary, 'border-radius': '100%', padding: '2px'}">
           <v-avatar size="27">
             <img
@@ -54,7 +54,7 @@
           </v-overlay>
         </v-toolbar-title>
         <v-icon :style="{color: currentTheme.colorPrimary}">mdi-menu-down</v-icon>
-      </v-btn> -->
+      </v-btn>
     </v-app-bar>
     <v-app-bar
       app
@@ -81,21 +81,21 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      fixed
+      absolute
       width="100%"
       style="margin-top: 48px"
       v-if="$vuetify.breakpoint.mobile"
     >
-          <v-text-field
+          <!-- <v-text-field
             hide-details
-            label="Cari di sini"
+            label="Cari disini"
             append-icon="mdi-magnify"
             class="mx-5 mt-5"
             single-line
             outlined
             dense
             @click:append="search()"
-          ></v-text-field>
+          ></v-text-field> -->
           <v-list
           >
             <v-list-item class="profile mx-3" two-line>
