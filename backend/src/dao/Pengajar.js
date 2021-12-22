@@ -1,5 +1,5 @@
-import Pengajar from '@proyek3/postgres-database/models/Pengajar'
-import sequelize from '@proyek3/postgres-database/db'
+import Pengajar from '../../../postgres-database/src/models/Pengajar'
+import sequelize from '../../../postgres-database/src/db'
 
 export const getPengajarByNipDosen = async (nip) => {
   try {
