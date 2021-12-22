@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <v-card class="d-flex pa-0" :height="455" :width="541">
+    <v-card class="d-flex pa-0" :height="455" :width="'100%'">
       <div class="flex-column w-100">
         <div id="card-title">
           <h3 class="white--text mt-2">
@@ -9,7 +9,7 @@
         </div>
         <div class="flex-column mx-2 mt-2">
           <v-card-actions>
-            <v-row no-gutters>
+            <v-row no-gutters align="center">
               <v-col cols="8">
                 <PersentaseMengajarModal
                   :matakuliah="'PCD TE'"

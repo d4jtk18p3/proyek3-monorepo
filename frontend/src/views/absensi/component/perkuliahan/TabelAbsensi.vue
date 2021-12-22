@@ -98,6 +98,7 @@ export default {
           this.mahasiswa = this.data.mahasiswa
         })
         .catch(e => {
+          console.log(this.perkuliahan);
           console.log(e)
         })
     },

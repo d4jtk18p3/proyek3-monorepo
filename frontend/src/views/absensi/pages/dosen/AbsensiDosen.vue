@@ -13,22 +13,22 @@
       </v-col>
     </v-row>
     <!-- :justify="$vuetify.breakpoint.sm ? 'left' : 'center'" -->
-    <v-row no-gutters :justify="left">
+    <v-row no-gutters class="absensi-container">
       <v-col
-        cols="auto"
-        offset-md="2"
-        :class="$vuetify.breakpoint.mobile ? 'ma-8 ml-0' : 'ml-0 mr-8'"
+        :md="isWali ? 4 : 7"
+        :sm="12"
+        :class="$vuetify.breakpoint.sm ? 'ma-0 mb-4' : 'ml-0 mr-2'"
       >
         <PersentaseMengajar
           :persentaseMengajar="persentaseMengajar"
         ></PersentaseMengajar>
       </v-col>
-      <v-col cols="auto">
+      <v-col md="4" :sm="12">
         <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
       </v-col>
-      <v-col cols="auto" offset-md="2" v-if="isWali">
+      <v-col cols="auto" v-if="isWali">
         <h2 align="center" class="text-h5 font-weight-bold">
-          Validasi Ketidakhadiran
+          Validasi Ketidakhadiran {{$vuetify.breakpoint.mobile}}
         </h2>
         <DaftarHadir :ketidakhadiran="ketidakhadiran"> </DaftarHadir>
       </v-col>
@@ -58,6 +58,9 @@
     line-height: 38px;
     letter-spacing: 0.117px;
     font-family: sans-serif;
+  }
+  .absensi-container {
+    flex-direction: column;
   }
 }
 

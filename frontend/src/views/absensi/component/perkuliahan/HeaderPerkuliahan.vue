@@ -3,7 +3,7 @@
    <v-row no-gutters class="header">
       <v-col>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
-          <v-col cols="4">
+          <v-col cols="2">
             <h2>Mata Kuliah</h2>
           </v-col>
           <v-col>
@@ -11,7 +11,7 @@
           </v-col>
         </v-row>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
-          <v-col cols="4">
+          <v-col cols="2">
             <h2>Kelas</h2>
           </v-col>
           <v-col>
@@ -19,7 +19,15 @@
           </v-col>
         </v-row >
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
-          <v-col cols="4">
+          <v-col cols="2">
+            <h2>Jumlah Mhs</h2>
+          </v-col>
+          <v-col>
+            <h2>  : {{jumlahMahasiswa}} </h2>
+          </v-col>
+        </v-row>
+        <v-row no-gutters :style="{ color: currentTheme.onBackground }">
+          <v-col cols="2">
             <h2>Tanggal</h2>
           </v-col>
           <v-col>
@@ -27,7 +35,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col
+      <!-- <v-col
         justify="end"
         cols = "2">
         <v-card
@@ -43,7 +51,7 @@
            <p>Mahasiswa</p>
         </v-form>
         </v-card>
-      </v-col>
+      </v-col> -->
     </v-row>
   </v-container>
 

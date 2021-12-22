@@ -152,7 +152,7 @@ export default {
         this.currentMinute +
         ":" +
         current.getSeconds();
-      this.presensiSchedule();
+      //this.presensiSchedule();
     }, INTERVAL);
   },
   data() {

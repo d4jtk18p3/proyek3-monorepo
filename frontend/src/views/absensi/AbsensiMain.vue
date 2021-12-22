@@ -61,8 +61,7 @@ export default {
         { text: "Absensi Mahasiswa", icon: "mdi-email-outline", to: "/absensi/mahasiswa/absensi" }
       ],
       sideBarItemsDsn: [
-        { text: "Absensi Dosen Pengampu", icon: "mdi-email-outline", to: "/absensi/dosen/absensi" },
-        { text: "Absensi Dosen Wali", icon: "mdi-email-outline", to: "/absensi/dosen/dosenwali" }
+        { text: "Absensi Dosen", icon: "mdi-email-outline", to: "/absensi/dosen/absensi" },
       ],
       isUserDosen: false
     }

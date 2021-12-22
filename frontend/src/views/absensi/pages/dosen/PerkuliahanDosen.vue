@@ -18,8 +18,8 @@
     <v-col>
       <p class="text-h4 font-weight-bold">Daftar Kehadiran Mahasiswa</p>
     </v-col>
-    <v-col justify="end"
-    cols = "2">
+    <v-col
+    cols = "2" class="d-flex justify-end">
       <UploadBAP></UploadBAP>
     </v-col>
   </v-row>

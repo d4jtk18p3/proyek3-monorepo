@@ -1,12 +1,12 @@
 <template>
-  <v-card width="422" class="ml-5">
+  <v-card width="auto" :class="$vuetify.breakpoint.mobile ? 'ml-0' : 'ml-4'">
     <v-app-bar :style="{ background: currentTheme.onBackground }">
       <v-toolbar-title class="responsive font-weight-bold" style="color: white"
         ><h3>Jadwal</h3></v-toolbar-title
       >
       <v-spacer></v-spacer>
     </v-app-bar>
-    <v-card height="393" width="422" class="px-5 rounded-md">
+    <v-card height="393" width="auto" class="px-5 rounded-md">
       <p
         class="responsive text-h6 font-weight-bold ml-5 text-left pt-4 my=0"
         :style="{ color: currentTheme.onBackground }"
