@@ -24,7 +24,7 @@ import NavBar from "@/views/shared/navigation/NavBar"
 import { mapGetters, mapActions } from "vuex"
 
 /*
-  Token Access interval adalah 5 jam maka
+  Token Access interval adalah 5 jam, maka
   dilakukan perhitungan sebagai berikut :
   1000 (1 seconds) * 60 (1 minute) & 60 (1 hour) * 5
  */
@@ -59,7 +59,7 @@ export default {
         if (this.identity.realm_access.roles[i] === "dosen") {
           this.sideBarItems = [
             { text: "Dashboard Nilai Dosen Pengampu", icon: "mdi-school-outline", to: "/penilaian/dashboard-nilai-dosen-pengampu" },
-            { text: "Input Nilai Mahasiswa", icon: "mdi-file-document-outline", to: "/penilaian/input-nilai" }
+            { text: "Daftar Nilai Mahasiswa", icon: "mdi-file-document-outline", to: "/penilaian/input-nilai" }
           ]
         }
       }

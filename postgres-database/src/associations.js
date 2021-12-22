@@ -3,7 +3,6 @@ import programStudi from './models/Program_Studi'
 import mahasiswa from './models/Mahasiswa'
 import kelas from './models/Kelas'
 import perkuliahan from './models/Perkuliahan'
-import jadwal from './models/Jadwal'
 import dosen from './models/Dosen'
 import jabatan from './models/Jabatan'
 import jurusan from './models/Jurusan'
@@ -71,9 +70,6 @@ const setAssociations = async () => {
   grup.belongsToMany(user, {
     through: 'User_Group',
     foreignKey: 'nama_grup'
-  })
-  perkuliahan.hasMany(jadwal, {
-    foreignKey: 'id_perkuliahan'
   })
 }
 export default setAssociations

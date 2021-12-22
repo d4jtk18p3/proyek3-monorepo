@@ -5,6 +5,7 @@ tmp/
 
 *.tern-port
 node_modules/
+package-lock.json
 .vscode
 npm-debug.log*
 yarn-debug.log*

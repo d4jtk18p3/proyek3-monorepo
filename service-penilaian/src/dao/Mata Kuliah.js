@@ -1,5 +1,5 @@
 import MataKuliah from '../models/Mata_Kuliah'
-import sequelize from '../db.js'
+// import sequelize from '../db.js'
 
 export const findMatkulById = async (id) => {
   try {
@@ -65,11 +65,26 @@ export const updateDataMatkul = async (
       },
       {
         where: {
-          id: id
-        }
-      })
-      return matkul[0]
-    } catch (error) {
-      return Promise.reject(new Error('Find Pengajar by NIP gagal'))
-    }
+          id
+        },
+        silent: true
+      }
+    )
+    return matkul[0]
+  } catch (error) {
+    console.error(error)
   }
+}
+
+export const deleteMatkulbyId = async (Id) => {
+  try {
+    const result = await MataKuliah.destroy({
+      where: {
+        id: Id
+      }
+    })
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}

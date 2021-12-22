@@ -1,6 +1,21 @@
 import * as DosenDAO from '../dao/Dosen'
 import { validationResult } from 'express-validator/check'
 
+// New Method From 19
+export const getPresensiDosenTertentuWithMatkul = async (req, res) => {
+  const { NIP } = req.params
+  try {
+    const result = await DosenDAO.getPresensiDosenTertentuWithMatkul(NIP)
+    res.status(200).send({
+      message: `Data Presensi Dosen  ${NIP} Dengan Matkul Yang Diajar `,
+      data: {
+        presensi: result
+      }
+    })
+  } catch (error) {
+    res.status(error.status).json({ error })
+  }
+}
 /*
   Catatan:
   1.Jangan lupa gunakan format yang telah disepakati saat mengirimkan

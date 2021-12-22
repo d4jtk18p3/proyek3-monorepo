@@ -1,7 +1,11 @@
 {
   "name": "@proyek3",
   "workspaces": [
+    "backend",
     "postgres-database",
-    "backend"
+    "service-penilaian",
+    "service-absensi",
+    "akun-keycloak-proxy",
+    "frontend"
   ]
 }

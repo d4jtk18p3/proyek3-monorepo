@@ -1,10 +1,10 @@
-import * as Keycloak from "keycloak-js"
+import * as Keycloak from "keycloak-js";
 
 const keycloak = Keycloak({
   url: process.env.VUE_APP_KEYCLOAK_BASE_URL,
   realm: process.env.VUE_APP_KEYCLOAK_REALM,
   clientId: process.env.VUE_APP_KEYCLOAK_CLIENT_ID
-})
+});
 
 const authentication = {
   state: () => ({
@@ -12,15 +12,13 @@ const authentication = {
   }),
 
   mutations: {
-    SET_IDENTITY (state, identity) {
-      state.identity = identity
+    SET_IDENTITY(state, identity) {
+      state.identity = identity;
     }
   },
 
-  getters: {
-    // identity: state => {
-    //   return state.identity
-    // }
+  
+getters: {
     identity: state => {
       // return state.identity
       console.log(state.identity)
@@ -28,37 +26,39 @@ const authentication = {
         realm_access: {
           roles: ["dosen"]
         },
-        preferred_username: "196009281994031000"
+        preferred_username: "196111091993032000"
       }
     }
   },
 
-  actions: {
-    async authenticate ({ commit }, forceLogin = false) {
-      const auth = await keycloak.init({ onLoad: "login-required" })
 
-      commit("SET_IDENTITY", keycloak.tokenParsed)
+
+  actions: {
+    async authenticate({ commit }, forceLogin = false) {
+      const auth = await keycloak.init({ onLoad: "login-required" });
+
+      commit("SET_IDENTITY", keycloak.tokenParsed);
 
       if (!auth) {
-        window.location.reload()
+        window.location.reload();
       } else {
         setInterval(async () => {
           try {
-            await keycloak.updateToken(70)
+            await keycloak.updateToken(70);
           } catch (err) {
-            console.error(err)
+            console.error(err);
           } finally {
-            commit("SET_IDENTITY", keycloak.tokenParsed)
+            commit("SET_IDENTITY", keycloak.tokenParsed);
           }
-        }, 6000)
+        }, 6000);
       }
     },
 
-    async logout ({ state }, router) {
-      await router.push("/home")
-      keycloak.logout()
+    async logout({ state }, router) {
+      await router.push("/home");
+      keycloak.logout();
     }
   }
-}
+};
 
-export default authentication
+export default authentication;

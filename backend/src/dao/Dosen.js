@@ -1,6 +1,4 @@
-import Dosen from '@proyek3/postgres-database/models/Dosen'
-import Jabatan from '@proyek3/postgres-database/models/Jabatan'
-import Menjabat from '@proyek3/postgres-database/models/Menjabat'
+import Dosen from '../../../postgres-database/src/models/Dosen'
 // import sequelize from '@proyek3/postgres-database/db'
 
 /*
@@ -83,26 +81,5 @@ export const destroyDosenByNip = async (nip) => {
     return dosen
   } catch (error) {
     return Promise.reject(new Error('Delete dosen by NIP gagal'))
-  }
-}
-
-export const findJabatanByNIP = async (NIP) => {
-  try {
-    const dosen = await Dosen.findOne({ 
-      include: [{
-        model: Jabatan,
-        as: 'jabatan',
-        required: false,
-        attributes: ['nama_jabatan'],
-        through: { attributes: [] }
-      }],
-      where: {
-        nip: NIP
-      },
-      attributes: ['nip']
-    });
-    return dosen
-  } catch (error) {
-    console.log(error)
   }
 }
