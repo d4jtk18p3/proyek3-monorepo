@@ -1,19 +1,13 @@
 <template>
   <v-row :style="{ color: currentTheme.onBackground }">
     <v-col cols="12">
-      <p
-        :class="
-          isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`
-        "
-      >
-        Daftar Nilai Mahasiswa
-      </p>
+      <p :class="isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`">Input Nilai Mahasiswa</p>
     </v-col>
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems" />
     </v-col>
-    <!-- <v-col :cols="isMobile ? `12` : `3` " :offset="isMobile ? `0` : `0`">
-         <p
+    <v-col :cols="isMobile ? `12` : `3` " :offset="isMobile ? `0` : `0`">
+        <p
         :class="isMobile ? `text-left font-weight-bold text-h6` : `text-left font-weight-bold text-h5`"
         :style="{color: currentTheme.onBackground}"
         >Kelas</p>
