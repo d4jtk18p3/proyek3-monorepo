@@ -17,3 +17,35 @@ export const findAllKelas = async () => {
     return Promise.reject(new Error('Find all kelas gagal'))
   }
 }
+
+export const insertOneKelas = async (
+  kodeKelas,
+  kodeProgramStudi,
+  NIP,
+  Tahun  
+) => {
+  try {
+    const kelas = await Kelas.create({
+      kode_kelas: kodeKelas,
+      tahun: Tahun,
+      nip: NIP,
+      kode_program_studi: kodeProgramStudi
+    })
+    return kelas
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deleteKelasbyKodekelas = async (kodekelas) => {
+  try {
+    const result = await Kelas.destroy({
+      where: {
+        kode_kelas: kodekelas
+      }
+    })
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}

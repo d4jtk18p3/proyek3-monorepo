@@ -1,8 +1,8 @@
 import * as PengajarDAO from '../dao/Pengajar'
 import * as PerkuliahaDAO from '../dao/Perkuliahan'
 import * as KelasDAO from '../dao/Kelas'
-// import expressValidator from 'express-validator/check'
-// const { validationResult } = expressValidator
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 export const getKelasAjarByDosen = async (req, res, next) => {
   try {
@@ -60,5 +60,94 @@ export const getListTahun = async (req, res) => {
     })
   } catch (error) {
     res.status(error.status).json({ error })
+  }
+}
+
+export const getAllKelas = async (req, res, next) => {
+  try {
+    const kelas = await KelasDAO.findAllKelas()
+    res.status(200).json({
+      message: 'get all kelas success',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getOneKelasByKodekelas = async (req, res, next) => {
+  try {
+    const { kodekelas } = req.params
+    const kelas = await KelasDAO.findKelasByKodeKelas(kodekelas)
+    res.status(200).json({
+      message: 'get one kelas by kodekelas success',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const postNewKelas = async (req, res, next) => {
+  try {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      error.status = 400
+      throw error
+    }
+
+    const {
+      kodeKelas,
+      kodeProgramStudi,
+      NIP,
+      Tahun,
+    } = req.body
+
+    const kelas = await KelasDAO.insertOneKelas(
+      parseInt(kodeKelas),
+      kodeProgramStudi,
+      NIP,
+      parseInt(Tahun)
+    )
+
+    if (typeof kelas === 'undefined') {
+      error.status = 500
+      error.message = 'Insert kelas gagal'
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'insert kelas sukses',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }  
+}
+
+export const deleteKelasbyKodekelas = async (req, res, next) => {
+  try {
+    const { kodekelas } = req.params
+    const result = await KelasDAO.deleteKelasbyKodekelas(kodekelas)
+    if (result === 1) {
+      res.status(200).json({
+        message: 'Delete kelas berhasil',
+        data: {
+          kodekelas
+        }
+      })
+    } else {
+      const error = new Error('Delete kelas gagal')
+      error.statusCode = 500
+      throw error
+    }
+  } catch (error) {
+    next(error)
   }
 }
