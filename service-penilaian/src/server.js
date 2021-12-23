@@ -9,13 +9,13 @@ import mahasiswaRouter from './routes/Mahasiswa'
 import userRouter from './routes/User'
 import kategoriNilaiRouter from './routes/Kategori_Nilai'
 import penilaianRouter from './routes/Penilaian'
-//import kelasRouter from './routes/Kelas'
+import kelasRouter from './routes/Kelas'
 // import matkulRouter from './routes/MataKuliah'
 import matkulRouter from './routes/Mata Kuliah'
 
 const app = express()
 app.use(cors())
-// Non aktifkan dulu keycloak agar tidak ada validasi token
+// Nonaktifkan dahulu Keycloak agar tidak ada validasi token
 // app.use(keycloak.middleware())
 // app.use(keycloak.protect())
 app.use(bodyParser.json())
@@ -25,7 +25,7 @@ app.use('/mahasiswa', mahasiswaRouter)
 app.use('/user', userRouter)
 app.use('/kategori-nilai', kategoriNilaiRouter)
 app.use('/penilaian', penilaianRouter)
-//app.use('/kelas', kelasRouter)
+app.use('/kelas', kelasRouter)
 app.use('/matkul', matkulRouter)
 
 // error handling
