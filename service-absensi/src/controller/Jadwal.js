@@ -6,7 +6,7 @@ export const getJadwalDosenHariTertentu = async (req, res) => {
   const { hari } = req.params
   try {
     const result = await JadwalDAO.getJadwalDosenHariTertentu(NIP, hari)
-    res.status(200).send({
+    res.status(200).json({
       message: `Jadwal kuliah Dosen ${NIP} pada hari ${hari}`,
       data: {
         jadwal: result
@@ -23,7 +23,7 @@ export const getJadwalMhsHrTertentuHandler = async (req, res) => {
   const hari = req.query.hari
   try {
     const result = await JadwalDAO.getJadwalMhsHrTertentu(nim, hari)
-    res.json({
+    res.status(200).json({
       message: `Jadwal kuliah nim ${nim} pada hari ${hari}`,
       data: {
         jadwal: result

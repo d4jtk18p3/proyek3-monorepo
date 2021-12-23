@@ -7,7 +7,7 @@ export const getRekapPresensiDosenTertentu = async (req, res) => {
   const { NIP } = req.params
   try {
     const result = await DaftarHadirDosenDAO.getRekapPresensiDosenTertentu(NIP)
-    res.json({
+    res.status(200).json({
       message: `Data Rekap Presensi Dosen ${NIP}  `,
       data: {
         presensi: result
@@ -23,7 +23,7 @@ export const updatePresensiDosenTertentu = async (req, res) => {
   const { isStudi, idJadwal } = req.body
   try {
     const result = await DaftarHadirDosenDAO.updatePresensiDosenTertentu(NIP, isStudi, idJadwal)
-    res.json({
+    res.status(200).json({
       message: ` Presensi Dosen ${NIP} pada hari ini dengan id_studi ${isStudi} idJadwal ${idJadwal} berhasil  `,
       data: {
         presensi: result

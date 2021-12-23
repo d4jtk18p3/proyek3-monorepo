@@ -6,7 +6,7 @@ export const getPresensiDosenTertentuWithMatkul = async (req, res) => {
   const { NIP } = req.params
   try {
     const result = await DosenDAO.getPresensiDosenTertentuWithMatkul(NIP)
-    res.status(200).send({
+    res.status(200).json({
       message: `Data Presensi Dosen  ${NIP} Dengan Matkul Yang Diajar `,
       data: {
         presensi: result
