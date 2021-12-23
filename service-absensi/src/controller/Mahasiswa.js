@@ -6,7 +6,7 @@ export const dosenGetMhsByMatkul = async (req, res) => {
   const { idMatkul } = req.params
   try {
     const result = await MahasiswaDAO.dosenGetMhsByMatkul(idMatkul)
-    res.json({
+    res.status(200).json({
       message: `Data Mahasiswa berdasarkan Id Mata Kuliah ${idMatkul}`,
       data: {
         mahasiswa: result
@@ -21,7 +21,7 @@ export const dosenGetOneMhsByNIM = async (req, res) => {
   const { NIM } = req.params
   try {
     const result = await MahasiswaDAO.dosenGetOneMhsByNIM(NIM)
-    res.json({
+    res.status(200).json({
       message: `Data Rekap Presensi Mahasiswa dengan NIM ${NIM}`,
       data: {
         mahasiswa: result

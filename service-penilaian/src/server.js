@@ -14,7 +14,7 @@ import matkulRouter from './routes/Mata Kuliah'
 
 const app = express()
 app.use(cors())
-// Non aktifkan dulu keycloak agar tidak ada validasi token
+// Nonaktifkan dahulu Keycloak agar tidak ada validasi token
 // app.use(keycloak.middleware())
 // app.use(keycloak.protect())
 app.use(bodyParser.json())
