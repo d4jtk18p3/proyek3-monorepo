@@ -26,6 +26,7 @@ export const getDosenByNIP = async (req, res, next) => {
     const { NIP } = req.params
     const dosen = await DosenDAO.findDosenByNIP(NIP)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get dosen by NIP sukses',
       data: {
         dosen
@@ -40,6 +41,7 @@ export const getAllDosen = async (req, res, next) => {
   try {
     const dosen = await DosenDAO.findAllDosen()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all dosen sukses',
       data: {
         dosen
@@ -55,6 +57,7 @@ export const getDosenByJabatan = async (req, res, next) => {
     const jabatan = req.query.jabatan
     const dosen = await DosenDAO.findDosenByJabatan(jabatan)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get dosen yang menjadi ' + jabatan + ' sukses',
       data: {
         dosen
@@ -78,6 +81,7 @@ export const postNewDosen = async (req, res, next) => {
     const dosen = await DosenDAO.insertOneDosen(NIP, namaDosen, jabatan, email, permission, username)
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert dosen sukses',
       data: {
         dosen
@@ -99,6 +103,7 @@ export const deleteDosenByNIP = async (req, res, next) => {
     }
     const dosen = await DosenDAO.destroyDosenByNip(NIP)
     res.status(200).json({
+      status: res.statusCode,
       message: 'delete dosen by NIP sukses',
       data: {
         dosen
@@ -119,6 +124,7 @@ export const getPerkuliahanDosen = async (req, res, next) => {
     }
     const result = await DosenDAO.getPerkuliahanDosen(nip)
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get Perkuliahan Dosen sukses',
       data: {
         result

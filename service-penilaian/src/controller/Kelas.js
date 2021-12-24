@@ -28,6 +28,7 @@ export const getKelasAjarByDosen = async (req, res, next) => {
       return !duplicate
     })
     res.status(200).json({
+      status: res.statusCode,
       message: 'get matkul by dosen sukses',
       data: {
         uniqueClass
@@ -53,6 +54,7 @@ export const getListTahun = async (req, res) => {
     }).sort()
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'get list tahun from tabel kelas sukses',
       data: {
         listTahunUnique
@@ -67,6 +69,7 @@ export const getAllKelas = async (req, res, next) => {
   try {
     const kelas = await KelasDAO.findAllKelas()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all kelas success',
       data: {
         kelas
@@ -82,6 +85,7 @@ export const getOneKelasByKodekelas = async (req, res, next) => {
     const { kodekelas } = req.params
     const kelas = await KelasDAO.findKelasByKodeKelas(kodekelas)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get one kelas by kodekelas success',
       data: {
         kelas
@@ -121,6 +125,7 @@ export const postNewKelas = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert kelas sukses',
       data: {
         kelas
@@ -128,7 +133,7 @@ export const postNewKelas = async (req, res, next) => {
     })
   } catch (error) {
     next(error)
-  }  
+  }
 }
 
 export const deleteKelasbyKodekelas = async (req, res, next) => {
@@ -137,6 +142,7 @@ export const deleteKelasbyKodekelas = async (req, res, next) => {
     const result = await KelasDAO.deleteKelasbyKodekelas(kodekelas)
     if (result === 1) {
       res.status(200).json({
+        status: res.statusCode,
         message: 'Delete kelas berhasil',
         data: {
           kodekelas

@@ -7,27 +7,27 @@ const { validationResult } = expressValidator
 import axios from 'axios'
 
 export const FinalisasiNilai = async (req, res, next) => {
-    try{
-        const idPerkuliahan = req.params.id_perkuliahan
-        const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(idPerkuliahan)
-        const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
+  try {
+    const idPerkuliahan = req.params.id_perkuliahan
+    const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(idPerkuliahan)
+    const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
 
-        console.log(matkul)
+    console.log(matkul)
 
-        const mhs = await StudiDAO.findStudiByIdPerkuliahan(idPerkuliahan)
-        var arrNIM = []
-        for(var i=0; i<mhs.length; i++){
-            arrNIM.push(mhs[i].id_mahasiswa)
-        }
+    const mhs = await StudiDAO.findStudiByIdPerkuliahan(idPerkuliahan)
+    var arrNIM = []
+    for (var i = 0; i < mhs.length; i++) {
+      arrNIM.push(mhs[i].id_mahasiswa)
+    }
 
-        // Ngirim notifikasi
-        for (const el of arrNIM) {
-            const resultSendEmail = await axios.post(
-              process.env.URL_NOTIF + '/email-notif/personal',
-              {
-                idUser: el,
-                subject: `Finalisasi ${matkul.nama_mata_kuliah} (${matkul.id})`,
-                bodyEmail: `<!DOCTYPE html>
+    // Ngirim notifikasi
+    for (const el of arrNIM) {
+      const resultSendEmail = await axios.post(
+        process.env.URL_NOTIF + '/email-notif/personal',
+        {
+          idUser: el,
+          subject: `Finalisasi ${matkul.nama_mata_kuliah} (${matkul.id})`,
+          bodyEmail: `<!DOCTYPE html>
                 <html>
                   <head>
                     <meta charset="utf-8">
@@ -114,23 +114,24 @@ export const FinalisasiNilai = async (req, res, next) => {
                     </table>
                   </body>
                 </html>`
-              }
-            )
-            console.log(resultSendEmail)
-          }
-
-       
-        if(mhs === undefined || arrNIM === null){
-          console.log("Finalisasi gagal")
-          throw error
         }
-        res.status(200).json({
-          message: 'Finalisasi success',
-          data: {
-            dataMahasiswa: arrNIM
-          }
-        })
-      } catch(error){
-        next(error)
+      )
+      console.log(resultSendEmail)
+    }
+
+
+    if (mhs === undefined || arrNIM === null) {
+      console.log("Finalisasi gagal")
+      throw error
+    }
+    res.status(200).json({
+      status: res.statusCode,
+      message: 'Finalisasi success',
+      data: {
+        dataMahasiswa: arrNIM
       }
+    })
+  } catch (error) {
+    next(error)
+  }
 }

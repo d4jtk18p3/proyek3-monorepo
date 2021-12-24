@@ -5,11 +5,11 @@ const { validationResult } = expressValidator
 export const postNewKategoriNilai = async (req, res, next) => {
   try {
     const {
-    id_kategori,
-	  parent,
-	  nama_kategori,
-	  bobot_nilai,
-    id_mata_kuliah
+      id_kategori,
+      parent,
+      nama_kategori,
+      bobot_nilai,
+      id_mata_kuliah
     } = req.body
     const error = validationResult(req)
 
@@ -18,7 +18,7 @@ export const postNewKategoriNilai = async (req, res, next) => {
       throw error
     }
 
-    const kategorinilaiInsert = await KategoriNilaiDAO.insertOneKategoriNilai(id_kategori,parent,nama_kategori,bobot_nilai,id_mata_kuliah)
+    const kategorinilaiInsert = await KategoriNilaiDAO.insertOneKategoriNilai(id_kategori, parent, nama_kategori, bobot_nilai, id_mata_kuliah)
 
     if (typeof kategorinilaiInsert === 'undefined') {
       error.status = 500
@@ -27,6 +27,7 @@ export const postNewKategoriNilai = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert kategori nilai sukses',
       data: {
         kategorinilaiInsert
