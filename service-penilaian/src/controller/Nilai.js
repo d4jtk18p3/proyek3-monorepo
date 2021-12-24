@@ -7,9 +7,9 @@ export const postNewNilai = async (req, res, next) => {
   try {
     const {
       id_nilai,
-	  id_kategori,
-	  nilai,
-    nim
+      id_kategori,
+      nilai,
+      nim
     } = req.body
     const error = validationResult(req)
 
@@ -18,7 +18,7 @@ export const postNewNilai = async (req, res, next) => {
       throw error
     }
 
-    const nilaiInsert = await NilaiDAO.insertOneNilai(id_nilai,id_kategori, nilai,nim)
+    const nilaiInsert = await NilaiDAO.insertOneNilai(id_nilai, id_kategori, nilai, nim)
 
     if (typeof nilaiInsert === 'undefined') {
       error.status = 500
@@ -27,6 +27,7 @@ export const postNewNilai = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert nilai sukses',
       data: {
         nilaiInsert
@@ -50,7 +51,7 @@ export const importNilai = async (req, res, next) => {
       throw error
     }
 
-    const importNilai = await NilaiDAO.importNilai(id_perkuliahan,dataKategori, dataNilai)
+    const importNilai = await NilaiDAO.importNilai(id_perkuliahan, dataKategori, dataNilai)
 
     if (typeof importNilai === 'undefined') {
       error.status = 500
@@ -59,6 +60,7 @@ export const importNilai = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Import nilai sukses',
       data: {
         importNilai
@@ -70,12 +72,12 @@ export const importNilai = async (req, res, next) => {
 }
 
 export const getNilaiByPerkuliahan = async (req, res, next) => {
-  try{
+  try {
     const idPerkuliahan = req.params.id_perkuliahan
     const kategori = await kategoriNilaiDAO.findKategoriByPerkuliahan(idPerkuliahan)
     var listKategori = []
     var dataKategori = []
-    for (var i = 0; i < kategori.length; i++){
+    for (var i = 0; i < kategori.length; i++) {
       var kode_kategori = kategori[i].kode_kategori
       var ktgr = {
         kode_kategori: kategori[i].kode_kategori,
@@ -88,19 +90,20 @@ export const getNilaiByPerkuliahan = async (req, res, next) => {
     }
 
     const allNilai = await NilaiDAO.getNilaiByListKategoriPerkuliahan(listKategori)
-    
-    if(allNilai === null){
+
+    if (allNilai === null) {
       console.log("Get nilai by perkuliahan gagal")
       throw error
     }
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all nilai success',
       data: {
         dataKategori: dataKategori,
         dataNilai: allNilai
       }
     })
-  } catch(error){
+  } catch (error) {
     next(error)
   }
 }
@@ -111,6 +114,7 @@ export const deleteNilaibyMahasiswa = async (req, res, next) => {
     const result = await NilaiDAO.deleteNilaibyMahasiswa(nilaid)
     if (result === 1) {
       res.status(200).json({
+        status: res.statusCode,
         message: 'Delete nilai berhasil',
         data: {
           mahasiswaId
@@ -130,6 +134,7 @@ export const getAllNilai = async (req, res, next) => {
   try {
     const nilai = await NilaiDAO.getAllNilai()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all nilai success',
       data: {
         nilai
@@ -147,6 +152,7 @@ export const updateNilaibyMahasiswa = async (req, res, next) => {
     if (updateNilai === 1) {
       const nilai = await NilaiDAO.getOneNilaibyMahasiswa(id_mahasiswa)
       res.status(200).json({
+        status: res.statusCode,
         message: 'Update Nilai Mahasiswa berhasil',
         data: {
           nilai
@@ -168,6 +174,7 @@ export const getOneNilaibyMahasiswa = async (req, res, next) => {
     const { NIM } = req.params
     const nilai = await NilaiDAO.getOneNilaibyMahasiswa(NIM)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get one Mahasiswa by NIM success',
       data: {
         mahasiswa
@@ -186,6 +193,7 @@ export const getNilaiByKelasMatkulSemester = async (req, res, next) => {
 
     const nilai = await NilaiDAO.getNilaiByKelasMKSemester(kode_kelas, mata_kuliah, semester)
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get Nilai by Kelas, Mata Kuliah, and Semester success',
       data: {
         nilai

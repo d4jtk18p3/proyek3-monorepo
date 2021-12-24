@@ -26,6 +26,7 @@ export const getMatkulAjarByDosen = async (req, res) => {
       }
     }
     res.status(200).json({
+      status: res.statusCode,
       message: 'get matkul by dosen sukses',
       data: {
         listMatkul,
@@ -78,6 +79,7 @@ export const postNewMatkul = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert matkul sukses',
       data: {
         matkul
@@ -92,6 +94,7 @@ export const getAllMatkul = async (req, res, next) => {
   try {
     const matkul = await MatkulDAO.findAllMatkul()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all matkul success',
       data: {
         matkul
@@ -107,6 +110,7 @@ export const getOneMatkulById = async (req, res, next) => {
     const { id } = req.params
     const matkul = await MatkulDAO.findMatkulById(id)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get one Matkul by Id success',
       data: {
         matkul
@@ -138,6 +142,7 @@ export const updateDataMatkulById = async (req, res, next) => {
     if (updateMatkul === 1) {
       const matkul = await MatkulDAO.findMatkulById(id)
       res.status(200).json({
+        status: res.statusCode,
         message: 'Update data Matkul berhasil',
         data: {
           matkul
@@ -160,6 +165,7 @@ export const deleteMatkulbyId = async (req, res, next) => {
     const result = await MatkulDAO.deleteMatkulbyId(id)
     if (result === 1) {
       res.status(200).json({
+        status: res.statusCode,
         message: 'Delete matkul berhasil',
         data: {
           id
