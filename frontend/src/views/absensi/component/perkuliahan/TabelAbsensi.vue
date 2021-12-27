@@ -29,11 +29,11 @@
         v-for="(item, index) in mahasiswa"
         :key="item.id_studi"
         >
-        <td class="text-capitalize text-caption font-weight-light test" v-if="!isMobile" :style="{color: currentTheme.onSurface}">{{ index + 1 }}</td>
-        <td class="text-capitalize text-caption font-weight-light" v-if="!isMobile" :style="{color: currentTheme.onSurface}">{{ item.nim }}</td>
-        <td class="text-capitalize text-caption font-weight-light" :style="{color: currentTheme.onSurface}">{{ item.nama }}</td>
-        <td class="text-capitalize text-caption font-weight-light" :style="{color: currentTheme.onSurface}">{{ item.status }}</td>
-        <td class="text-capitalize text-caption font-weight-light" :style="{color: currentTheme.onSurface}">{{ item.keterlambatan }} menit</td>
+        <td class="text-capitalize text-caption font-weight-medium test" v-if="!isMobile" :style="{color: currentTheme.onSurface}">{{ index + 1 }}</td>
+        <td class="text-capitalize text-caption font-weight-medium" v-if="!isMobile" :style="{color: currentTheme.onSurface}">{{ item.nim }}</td>
+        <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.nama }}</td>
+        <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.status }}</td>
+        <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.keterlambatan }} menit</td>
         <td>
           <v-radio-group
           column

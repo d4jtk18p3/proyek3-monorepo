@@ -30,7 +30,7 @@
             :headers="headers"
             :items="items"
             :hide-default-footer="true"
-            class="font-weight-bold"
+            class="font-weight-medium"
           >
           <template v-slot:header="{ props: { headers } }">
             <thead>

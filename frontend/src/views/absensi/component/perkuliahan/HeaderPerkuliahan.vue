@@ -4,34 +4,34 @@
       <v-col>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
           <v-col cols="2">
-            <h2>Mata Kuliah</h2>
+            <h3>Mata Kuliah</h3>
           </v-col>
           <v-col>
-            <h2> : {{item.mata_kuliah.nama_mata_kuliah}} </h2>
+            <h3> : {{item.mata_kuliah.nama_mata_kuliah}} </h3>
           </v-col>
         </v-row>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
           <v-col cols="2">
-            <h2>Kelas</h2>
+            <h3>Kelas</h3>
           </v-col>
           <v-col>
-            <h2>  : {{item.kelas.kode_kelas}} </h2>
+            <h3>  : {{item.kelas.kode_kelas}} </h3>
           </v-col>
         </v-row >
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
           <v-col cols="2">
-            <h2>Jumlah Mhs</h2>
+            <h3>Jumlah Mhs</h3>
           </v-col>
           <v-col>
-            <h2>  : {{jumlahMahasiswa}} </h2>
+            <h3>  : {{jumlahMahasiswa}} </h3>
           </v-col>
         </v-row>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">
           <v-col cols="2">
-            <h2>Tanggal</h2>
+            <h3>Tanggal</h3>
           </v-col>
           <v-col>
-            <h2>  : {{date}} </h2>
+            <h3>  : {{date}} </h3>
           </v-col>
         </v-row>
       </v-col>
@@ -83,7 +83,7 @@ export default {
     })
   },
   beforeMount () {
-    var month = "" + (this.d.getMonth() + 1)
+    var month = "" + (this.d.getMonth())
     var day = "" + this.d.getDate()
     var year = this.d.getFullYear()
     this.date = day + " " + this.months[month] + " " + year
@@ -100,5 +100,9 @@ export default {
 }
 p {
   margin : 0px;
+}
+
+h3 {
+  font-weight: 500;
 }
 </style>

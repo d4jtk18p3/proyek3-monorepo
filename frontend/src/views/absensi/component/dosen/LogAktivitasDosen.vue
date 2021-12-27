@@ -1,8 +1,8 @@
 <template>
   <v-card width="auto" :class="$vuetify.breakpoint.mobile ? 'ml-0' : 'ml-4'">
     <v-app-bar :style="{ background: currentTheme.onBackground }">
-      <v-toolbar-title class="responsive font-weight-bold" style="color: white"
-        ><h3>Jadwal</h3></v-toolbar-title
+      <v-toolbar-title class="responsive" style="color: white"
+        ><h3 class="font-weight-medium">Jadwal</h3></v-toolbar-title
       >
       <v-spacer></v-spacer>
     </v-app-bar>

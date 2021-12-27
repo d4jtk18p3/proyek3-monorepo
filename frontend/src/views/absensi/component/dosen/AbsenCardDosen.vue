@@ -152,7 +152,7 @@ export default {
         this.currentMinute +
         ":" +
         current.getSeconds();
-      //this.presensiSchedule();
+      this.presensiSchedule();
     }, INTERVAL);
   },
   data() {
@@ -179,7 +179,6 @@ export default {
   },
   methods: {
     presensi(index, idStudi, idJadwal) {
-      console.log(idJadwal);
       if (this.jadwalDsn[currentJadwal].id_jadwal_kedua !== 0) {
         this.presensiDosen(
           index,
@@ -193,11 +192,9 @@ export default {
         );
       } else {
         this.presensiDosen(index, idStudi, idJadwal);
-        console.log("jelek");
       }
     },
     presensiDosen(index, idStudi, idJadwal) {
-      console.log(idJadwal);
       PresensiDosen.presensiDosen(this.username, idStudi, idJadwal)
         .then(response => {
           this.jadwalDsn[index].absen = true;
@@ -208,14 +205,12 @@ export default {
               "Pada tanggal " +
               this.currentDate
           );
-          console.log(response);
         })
         .catch(e => {
           console.log(e);
         });
     },
     statusKehadiranDosen(idJadwal) {
-      console.log(this.jadwalDsn);
       PresensiDosen.getStatusKehadiran(
         this.username,
         idJadwal,
@@ -238,7 +233,6 @@ export default {
         });
     },
     toPerkuliahan(index, item) {
-      console.log(index);
       this.$router.push({ name: "Perkuliahan", params: { item } });
     },
     presensiSchedule() {

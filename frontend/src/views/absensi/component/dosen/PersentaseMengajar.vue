@@ -3,7 +3,7 @@
     <v-card class="d-flex pa-0" :height="455" :width="'100%'">
       <div class="flex-column w-100">
         <div id="card-title">
-          <h3 class="white--text mt-2">
+          <h3 class="white--text mt-2 font-weight-medium">
             Rekap Presensi Dosen
           </h3>
         </div>
@@ -27,9 +27,9 @@
               </v-col>
               <v-col cols="4">
                 <v-card-text
-                  class="responsive ml-3 mt-3 ma-0 pa-0 font-weight-bold text-center"
+                  class="responsive ml-3 mt-3 ma-0 pa-0 font-weight-black text-center"
                   id="dark-blue"
-                  >60%</v-card-text
+                  ><h1 class="mb-2">60%</h1></v-card-text
                 >
                 <v-card-text
                   class="responsive ml-3 ma-0 pa-0 text-center"

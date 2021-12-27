@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="success" v-on="on" dark>Generate BAP</v-btn>
+  <v-btn color="#2196F3" v-on="on" dark>Generate BAP</v-btn>
 </template>
 
 <script>

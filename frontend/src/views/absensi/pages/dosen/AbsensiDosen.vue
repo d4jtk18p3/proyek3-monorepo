@@ -8,7 +8,7 @@
       </v-col>
     </v-row>
     <v-row class="mb-4">
-      <v-col cols="12" class="pa-0">
+      <v-col cols="12" class="pt-0 pb-0">
         <breadcumbs :breadcrumb-items="breadcrumbItems" />
       </v-col>
     </v-row>
