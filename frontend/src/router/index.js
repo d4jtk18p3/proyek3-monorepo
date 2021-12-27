@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/home",
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
     component: () => import(/* webpackChunkName: "akun" */"../views/Home")
   },
   // {

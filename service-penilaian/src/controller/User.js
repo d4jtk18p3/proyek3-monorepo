@@ -66,6 +66,7 @@ export const createUser = async (req, res, next) => {
     result.dataValues.tempPwdKc = tempPassword
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert user sukses',
       data: result
     })
@@ -103,6 +104,7 @@ export const getAllUser = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Success retrieve all user data',
       data: resultFiltered.slice((page - 1) * perPage, page * perPage)
     })
