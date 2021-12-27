@@ -19,7 +19,7 @@
           >
             <v-img :src="require('../assets/sistem-absensi-card.png')" height="200"/>
           </v-card>
-          <v-card
+          <!-- <v-card
             max-height="192"
             max-width="192"
             @click="onClickedMonitoring()"
@@ -27,7 +27,7 @@
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-monitoring-card.png')" height="200"/>
-          </v-card>
+          </v-card> -->
           <v-card
             max-height="192"
             max-width="192"
@@ -37,7 +37,7 @@
           >
             <v-img :src="require('../assets/sistem-penilaian-card.png')" height="200"/>
           </v-card>
-          <v-card
+          <!-- <v-card
             max-height="192"
             max-width="192"
             @click="onClickedLogbook()"
@@ -45,7 +45,7 @@
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-logbook-card.png')" height="200"/>
-          </v-card>
+          </v-card> -->
           <v-card
             max-height="192"
             max-width="192"
