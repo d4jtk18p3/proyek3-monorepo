@@ -53,6 +53,7 @@ export const getListTahun = async (req, res) => {
     }).sort()
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'get list tahun from tabel kelas sukses',
       data: {
         listTahunUnique
