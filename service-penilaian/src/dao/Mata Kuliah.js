@@ -104,6 +104,7 @@ export const getListSemester = async (req, res) => {
     }).sort()
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'get list semester from tabel semester sukses',
       data: {
         listSemesterUnique
