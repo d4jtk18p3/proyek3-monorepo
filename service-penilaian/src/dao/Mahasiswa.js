@@ -48,10 +48,9 @@ export const findMahasiswaByNIM = async (NIM) => {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
         nim:NIM
-      },
-      order: [['NIM', 'ASC']]
+      }
     })
-    return mahasiswa
+    return mahasiswa[0]
   } catch (error) {
     console.error(error)
   }
@@ -84,7 +83,7 @@ export const updateNomorHpMahasiswa = async (NIM, nomorHP) => {
   try {
     const mahasiswa = await Mahasiswa.update(
       {
-        nomor_hp: nomorHP
+        nomor_ponsel: nomorHP
       },
       {
         where: {
