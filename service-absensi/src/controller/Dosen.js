@@ -7,7 +7,7 @@ export const getPresensiDosenTertentuWithMatkul = async (req, res) => {
   try {
     const result = await DosenDAO.getPresensiDosenTertentuWithMatkul(NIP)
     res.status(200).json({
-      message: `Data Presensi Dosen  ${NIP} Dengan Matkul Yang Diajar `,
+      message: `Mengambil Data Presensi Dosen  ${NIP} Dengan Matkul Yang Diajar Berhasil `,
       data: {
         presensi: result
       }

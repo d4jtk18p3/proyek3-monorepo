@@ -8,7 +8,7 @@ export const getRekapPresensiDosenTertentu = async (req, res) => {
   try {
     const result = await DaftarHadirDosenDAO.getRekapPresensiDosenTertentu(NIP)
     res.status(200).json({
-      message: `Data Rekap Presensi Dosen ${NIP}  `,
+      message: `Mengambil Data Rekap Presensi Dosen ${NIP} berhasil  `,
       data: {
         presensi: result
       }
