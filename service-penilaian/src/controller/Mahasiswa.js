@@ -72,7 +72,7 @@ export const updateNomorHpMahasiswa = async (req, res, next) => {
 
 export const deleteMahasiswabyId = async (req, res, next) => {
   try {
-    const mahasiswaId = req.params.id_mahasiswa
+    const mahasiswaId = req.params.NIM
     const result = await MahasiswaDAO.deleteMahasiswabyId(mahasiswaId)
     if (result === 1) {
       res.status(200).json({

@@ -102,7 +102,7 @@ export const deleteMahasiswabyId = async (mahasiswaId) => {
   try {
     const result = await Mahasiswa.destroy({
       where: {
-        id_mahasiswa: mahasiswaId
+        nim: mahasiswaId
       }
     })
     return result
