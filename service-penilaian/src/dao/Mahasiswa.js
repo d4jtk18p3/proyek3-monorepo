@@ -47,11 +47,7 @@ export const findMahasiswaByNIM = async (NIM) => {
   try {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
-        NIM: sequelize.where(
-          sequelize.fn('LOWER', sequelize.col('NIM')),
-          'LIKE',
-          '%' + NIM.toLowerCase() + '%'
-        )
+        nim:NIM
       },
       order: [['NIM', 'ASC']]
     })
@@ -74,7 +70,7 @@ export const insertOneMahasiswa = async (
       nim: NIM,
       nama: namaMahasiswa,
       kode_kelas: kodeKelas,
-      email,
+      email: email,
       nomor_ponsel: nomorHp,
       url_foto: urlFoto
     })
@@ -92,7 +88,7 @@ export const updateNomorHpMahasiswa = async (NIM, nomorHP) => {
       },
       {
         where: {
-          NIM
+          nim:NIM
         },
         silent: true
       }
