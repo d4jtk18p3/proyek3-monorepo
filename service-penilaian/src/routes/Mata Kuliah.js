@@ -9,6 +9,6 @@ router.get('/all-matkul', MataKuliahController.getAllMatkul)
 router.get('/get-one/:id', MataKuliahController.getOneMatkulById)
 router.put('/update-matkul-by-id/:id', MataKuliahController.updateDataMatkulById)
 router.delete('/delete-matkul-by-id/:id', MataKuliahController.deleteMatkulbyId)
-// router.get('/list-semester', MataKuliahController.getListSemester)
+router.get('/list-semester', MataKuliahController.getListSemester)
 
 export default router

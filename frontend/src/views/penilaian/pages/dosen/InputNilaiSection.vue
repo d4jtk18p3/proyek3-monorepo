@@ -6,80 +6,67 @@
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems" />
     </v-col>
-    <v-col :cols="isMobile ? `12` : `3` " :offset="isMobile ? `0` : `0`">
-        <p
-        :class="isMobile ? `text-left font-weight-bold text-h6` : `text-left font-weight-bold text-h5`"
-        :style="{color: currentTheme.onBackground}"
-        >Kelas</p>
-        <v-item-group>
-        <v-card link class="mb-3" v-for="item in listKelas" :key="item.Kelas">
-          <v-item v-slot="{ active, toggle }">
-            <KelasItem :kelas="item.kode_kelas" @click.native="getMatkulbyKelas(item) + toggle()" :bgcolor="active ? '#FB8C00' : currentTheme.surface"/>
-          </v-item>
-        </v-card>
-        </v-item-group>
-    </v-col> -->
 
-    <v-row>
-      <v-col cols="3">
-        <v-select
+    <div :style="isMobile ? `display: block` : `display: flex; justify-content: space-around`">
+      <div>
+          <v-select
           v-model="MataKuliahFilterValue"
           :items="ListMataKuliah"
           filled
           label="Semua Mata Kuliah"
           @change="filterMataKuliah"
-        ></v-select>
-      </v-col>
-      <v-col cols="3">
-        <v-select
+          ></v-select>
+      </div>
+      <div>
+          <v-select
           v-model="KelasFilterValue"
           :items="ListKelas"
           filled
           label="Semua Kelas"
           @change="filterKelas"
-        ></v-select>
-      </v-col>
-      <v-col cols="3">
-        <v-select
+          ></v-select>
+      </div>
+      <div>
+          <v-select
           v-model="SemesterFilterValue"
           :items="ListSemester"
           filled
           label="Semua Semester"
           @change="filterSemester"
-        ></v-select>
-      </v-col>
-      <v-col cols="3">
-        <v-select
+          ></v-select>
+      </div>
+      <div>
+          <v-select
           v-model="TahunFilterValue"
           :items="ListTahun"
           filled
           label="Semua tahun"
           @change="filterTahun"
-        ></v-select>
-      </v-col>
-      <v-col cols="3">
-        <p
-          class="text-left font-weight-bold text-h5"
-          :style="{ color: currentTheme.onBackground }"
-        >
-          List Rekap Nilai
+          ></v-select>
+      </div>
+    </div>
+
+    <v-row>
+      <v-col>
+        <p class="text-left font-weight-bold text-h5"
+          :style="{color: currentTheme.onBackground}">List Rekap Nilai
         </p>
-      </v-col>
-      <v-col cols="12" class="text-right">
-        <v-btn
-          class="ma-2 white--text"
-          :loading="loading"
-          :disabled="loading"
-          color="blue"
-          @click="downloadTemplate()"
-        >
-          Download Template
-        </v-btn>
-      </v-col>
+       </v-col>
+         <v-col cols="14" class="text-right">
+          <v-btn
+            class="ma-2 white--text"
+            :loading="loading"
+            :disabled="loading"
+            color="blue"
+            @click="downloadTemplate()"
+          >
+            Download Template
+          </v-btn>
+          </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="12">
+      <v-col>
         <template>
           <v-data-table
             dense
@@ -94,85 +81,41 @@
       </v-col>
     </v-row>
 
-    <!-- <v-divider v-if="!isMobile" vertical class="mx-5"></v-divider>
-    <v-col sm="8">
-    <p
-    :class="isMobile ? `text-left font-weight-bold text-h6` : `text-left font-weight-bold text-h5`"
-    :style="{color: currentTheme.onBackground}"
-    >Mata Kuliah</p>
-    <v-row v-if="listMatkul">
-        <v-col
-          no-gutters v-for="(item, index) in listMatkul" :key="item.Matkul"
-          sm="4"
-        >
-          <NilaiMataKuliah :mataKuliah="item.nama_mata_kuliah" :semester="item.semester" :idMatkul="item.id" :idPerkuliahan="id_perkuliahan[index]" :onMatkulClicked="routeNilaiMatkul"/>
-        </v-col>
-      </v-row>
-    </v-col> -->
-
     <v-col cols="12">
-      <p
-        class="text-left font-weight-bold text-h5"
-        :style="{ color: currentTheme.onBackground }"
-      >
-        Daftar Nilai {{ nama_mata_kuliah }}-{{ kelas }}
-      </p>
+      <p class="text-left font-weight-bold text-h5"
+      :style="{color: currentTheme.onBackground}">Daftar Nilai {{nama_mata_kuliah}}-{{kelas}}</p>
       <v-col>
         <v-row>
-          <v-btn
-            class="white--text"
-            color="green"
-            elevation="2"
-            @click="openFile()"
-          >
-            IMPORT
+          <v-btn  class="ml-3 white--text" color="green" elevation="2" @click="openFile()" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+          IMPORT
           </v-btn>
-          <v-btn
-            class="ml-3 white--text"
-            color="red"
-            elevation="2"
-            @click="resetTable()"
-          >
-            DELETE
+          <v-btn  class="ml-3 white--text" color="red" elevation="2" @click="resetTable()" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+          DELETE
           </v-btn>
-          <v-btn class="ml-3 white--text" color="blue">
-            DOWNLOAD
+          <v-btn  class="ml-3 white--text" color="blue" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+          DOWNLOAD
           </v-btn>
         </v-row>
       </v-col>
     </v-col>
 
-    <v-col>
-      <v-row>
-        <v-col>
-          <p
-            class="text-left font-weight-bold text-h5"
-            :style="{ color: currentTheme.onBackground }"
-          >
-            ETS
-          </p>
-        </v-col>
-        <v-col class="text-right">
-          <v-btn class="white--text" color="orange">
-            DELETE CATEGORY
-          </v-btn>
-          <v-btn
-            class="ml-3 white--text"
-            color="orange"
-            @click="tambahKategori('ETS')"
-          >
-            ADD CATEGORY
-          </v-btn>
-          <v-btn
-            class="ml-3 white--text"
-            color="orange"
-            @click="saveKategori()"
-          >
-            SAVE
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-col>
+    <div :style="isMobile ? `display: block` : `display: flex;justify-content: space-between`">
+      <div>
+        <p class="font-weight-bold text-h5"
+        :style="{color: currentTheme.onBackground}">ETS</p>
+      </div>
+      <div :style="isMobile ? `flex-direction: column; align-items: center;` : `display: flex; justify-content: flex-end`">
+        <v-btn class="ml-3 white--text" color="orange" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        DELETE CATEGORY
+        </v-btn>
+        <v-btn class="ml-3 white--text" color="orange" @click="tambahKategori('ETS')" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        ADD CATEGORY
+        </v-btn>
+        <v-btn class="ml-3 white--text" color="orange" @click="saveKategori()" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        SAVE
+        </v-btn>
+      </div>
+    </div>
 
     <v-col cols="12">
       <v-simple-table>
@@ -303,29 +246,24 @@
       </v-simple-table>
     </v-col>
 
-    <v-col cols="12">
-      <v-row>
-        <v-col>
-          <p
-            class="text-left font-weight-bold text-h5"
-            :style="{ color: currentTheme.onBackground }"
-          >
-            EAS
-          </p>
-        </v-col>
-        <v-col class="text-right">
-          <v-btn class="white--text" color="orange">
-            DELETE CATEGORY
-          </v-btn>
-          <v-btn class="ml-3 white--text" color="orange">
-            ADD CATEGORY
-          </v-btn>
-          <v-btn class="ml-3 white--text" color="orange">
-            SAVE
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-col>
+    <div :style="isMobile ? `display: block` : `display: flex;justify-content: space-between`">
+      <div>
+        <p class="font-weight-bold text-h5"
+        :style="{color: currentTheme.onBackground}">EAS</p>
+      </div>
+      <div :style="isMobile ? `flex-direction: column; align-items: center;` : `display: flex; justify-content: flex-end`">
+        <v-btn class="ml-3 white--text" color="orange" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        DELETE CATEGORY
+        </v-btn>
+        <v-btn class="ml-3 white--text" color="orange" @click="tambahKategori('ETS')" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        ADD CATEGORY
+        </v-btn>
+        <v-btn class="ml-3 white--text" color="orange" @click="saveKategori()" :style="isMobile ? `display: block; width: 100%; margin-bottom: 8px` : `display: inline`">
+        SAVE
+        </v-btn>
+      </div>
+    </div>
+
     <v-col cols="12">
       <v-simple-table>
         <thead>
@@ -456,24 +394,19 @@
     </v-col>
   </v-row>
 </template>
-<style scoped>
-v-data-table >>> div > table {
-  border-spacing: 0 6rem;
-}
-</style>
 
 <style scoped>
-v-data-table >>> div > table {
-  border-spacing: 0 6rem;
-}
+  v-data-table >>> div > table {
+    border-spacing: 0 6rem;
+  }
 </style>
 
 <script>
-import { mapGetters } from "vuex";
-import Breadcumbs from "@/views/shared/navigation/Breadcumbs";
+import { mapGetters } from "vuex"
+import Breadcumbs from "@/views/shared/navigation/Breadcumbs"
 // import NilaiMataKuliah from "@/views/penilaian/component/dosen/NilaiMataKuliah"
 // import KelasItem from "@/views/template/component/absensi/KelasItem"
-import DosenAPI from "@/datasource/network/penilaian/PenilaianDosen";
+import DosenAPI from "@/datasource/network/penilaian/PenilaianDosen"
 // import { PENILAIAN_API_URL } from "../../../../config"
 
 export default {
