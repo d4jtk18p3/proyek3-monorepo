@@ -19,7 +19,10 @@
         <th class="text-left">
           <div :style="tableTitleStyle" class="text-subtitle-2">Keterlambatan</div>
         </th>
-        <th class="text-left">
+        <th class="text-left" v-if="!editFlag">
+          <div :style="tableTitleStyle" class="text-subtitle-2">Keterangan</div>
+        </th>
+        <th class="text-left" v-if="editFlag">
           <div :style="tableTitleStyle" class="text-subtitle-2">Edit</div>
         </th>
       </tr>
@@ -34,35 +37,40 @@
         <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.nama }}</td>
         <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.status }}</td>
         <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}">{{ item.keterlambatan }} menit</td>
-        <td>
+        <td v-if="editFlag">
           <v-radio-group
           column
           v-model="item.isHadir"
           :disabled="item.status === 'Izin yang diajukan sedang diperiksa waldos' || item.status === 'sakit' ||  item.status === 'izin' ||  item.status === 'Tidak Hadir'"
           @change="updateMahasiswa(item)"
           >
-            <v-row>
-            <v-col cols="6">
-              <v-radio
-                label ="Hadir"
-                :value="true"
-                :color="currentTheme.onSurface" >
-              </v-radio>
-              </v-col>
+            <v-row class="d-flex flex-column">
               <v-col cols="6">
-              <v-radio
-              label ="Tidak Hadir"
-              :value="false"
-              :color="currentTheme.onSurface">
-              </v-radio>
-            </v-col>
+                <v-radio
+                  label ="Hadir"
+                  :value="true"
+                  :color="currentTheme.onSurface" >
+                </v-radio>
+                </v-col>
+                <v-col cols="6">
+                <v-radio
+                label ="Tidak Hadir"
+                :value="false"
+                :color="currentTheme.onSurface">
+                </v-radio>
+              </v-col>
             </v-row>
           </v-radio-group>
         </td>
+        <td class="text-capitalize text-caption font-weight-medium" :style="{color: currentTheme.onSurface}" v-if="!editFlag">{{ item.isHadir ? "Hadir" : "Tidak Hadir" }}</td>
       </tr>
       </tbody>
     </template>
   </v-simple-table>
+  <h1 class="text-center ma-8" v-if="mahasiswa.length === 0">Kuliah Belum Dimulai</h1>
+  <v-row justify="end">
+    <v-btn :disabled="mahasiswa.length === 0" class="ma-6 pl-6 pr-6" :color="editFlag? '#00C853' :'#FB8C00'" dark @click="toogleEdit()">{{ editFlag? "Submit" : "Edit" }}</v-btn>
+  </v-row>
 </v-container>
 </template>
 
@@ -87,7 +95,8 @@ export default {
       currentDate: new Date().toISOString().substr(0, 10),
       data: [],
       mahasiswa: [],
-      radios: true
+      radios: true,
+      editFlag: false,
     }
   },
   methods: {
@@ -110,6 +119,9 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    toogleEdit () {
+      this.editFlag = !this.editFlag;
     }
   },
   computed: {

@@ -111,7 +111,7 @@ import DateTime from "@/utils/dateTime.js";
 
 const INTERVAL = 1000;
 const moment = require("moment");
-var currentJadwal = 0;
+let currentJadwal = 0;
 
 export default {
   name: "AbsenCard",
@@ -129,7 +129,7 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
     // this.testProgressBar()
     var current = new Date();
     this.currentHour = current.getHours();
@@ -141,8 +141,8 @@ export default {
       "-" +
       current.getDate();
     this.currentDay = DateTime.getDay(current.getDay());
-    this.presensiSchedule();
-    setInterval(() => {
+    await this.presensiSchedule();
+    this.intervalId = setInterval(() => {
       current = new Date();
       this.currentHour = current.getHours();
       this.currentMinute = current.getMinutes();
@@ -165,6 +165,7 @@ export default {
       currentJadwal: null,
       currentKehadiran: null,
       interval: 0,
+      intervalId,
       //  data test
       jamAwal1: "23:00:00",
       jamAkhir1: "23:20:00",
@@ -235,8 +236,9 @@ export default {
     toPerkuliahan(index, item) {
       this.$router.push({ name: "Perkuliahan", params: { item } });
     },
-    presensiSchedule() {
+    async presensiSchedule() {
       //  Jika Jadwalnya masih ada
+      console.log(currentJadwal);
       if (currentJadwal < this.jadwalDsn.length) {
         // Pengubahan Format
         var format = "HH:mm:ss";
@@ -308,6 +310,8 @@ export default {
             this.jadwalDsn[currentJadwal].absen = true;
           }
         }
+      } else {
+        clearInterval(this.intervalId);
       }
     },
     cekAktivasiTombol(idJadwal) {
@@ -334,6 +338,10 @@ export default {
         }
       }
     }
+  },
+  beforeDestroy () {
+    clearInterval(this.intervalId);
+    currentJadwal = 0;
   }
 };
 </script>

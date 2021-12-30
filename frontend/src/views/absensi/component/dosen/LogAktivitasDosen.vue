@@ -36,7 +36,7 @@
                   tile
                   :style="{ color: currentTheme.onBackground }"
                 >
-                  {{ item.mata_kuliah.nama_mata_kuliah }}
+                  {{ item.mata_kuliah.nama_mata_kuliah }} {{ item.jenis }}
                 </v-card>
               </v-col>
               <v-col sm="5" offset-sm="0" md="5" offset-md="0">
