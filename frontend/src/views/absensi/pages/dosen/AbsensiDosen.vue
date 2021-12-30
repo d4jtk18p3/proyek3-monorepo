@@ -41,6 +41,14 @@
         ></AbsenCardDosen>
       </v-col>
     </v-row>
+    <v-card>
+      <v-col cols="pb-0">
+        <h2>Rekap Presensi Mahasiswa</h2>
+      </v-col>
+      <v-col cols="auto" >
+        <PresensiCardMhs :rekapAbsenMhs="rekapAbsenMhs"></PresensiCardMhs>
+      </v-col>
+    </v-card>
     <v-overlay :value="isLoading">
       <v-progress-circular
         indeterminate
@@ -82,6 +90,8 @@ import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen";
 import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar";
 import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
 import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
+import PresensiCardMhs from "@/views/absensi/component/dosen/RekapPresensiMhs";
+// import PresensiMahasiswa from "@/datasource/network/absensi/PresensiMahasiswa";
 
 // const schedule = require("node-schedule")
 const INTERVAL = 1000 * 60 * 60;
@@ -92,7 +102,8 @@ export default {
     AbsenCardDosen,
     LogAktivitas,
     PersentaseMengajar,
-    Breadcumbs
+    Breadcumbs,
+    PresensiCardMhs
   },
   created() {
     const tasks = [];
@@ -140,6 +151,7 @@ export default {
       menu: false,
       jadwalDsn: [],
       persentaseMengajar: [],
+      rekapAbsenMhs: [],
       currentDay: null,
       isLoading: true,
       username: "",
@@ -194,6 +206,15 @@ export default {
           console.log(e);
         });
     },
+    // getPresensiMahasiswa() {
+    //   PresensiMahasiswa.presensiMahasiswa(this.id_studi, this.id_jadwal, this.identity.preferred_username)
+    //     .then(response => {
+    //       this.presensiMahasiswa = response.data;
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //     });
+    // },
     cekMatkulSama() {
       var i = 0;
 

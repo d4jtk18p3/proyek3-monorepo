@@ -11,6 +11,7 @@
         class="d-flex align-self-center"
       >
         <v-col>
+          <v-hover v-slot="{ hover }">
           <v-card
             class="text-center justify-center rounded-md d-flex flex-column active"
             width="325"
@@ -21,6 +22,8 @@
                 : currentTheme.surface,
               color: currentTheme.onSurface
             }"
+            :elevation="hover ? 12 : 2"
+            :class="{ 'on-hover': hover }"
           >
             <h3 class="mt-4 text-center">Presensi Dosen Pengampu</h3>
             <v-card-text :style="{ color: currentTheme.onSurface }"
@@ -84,7 +87,8 @@
                 Kehadiran Mahasiswa</v-btn
               >
             </v-card-actions>
-          </v-card>
+            </v-card>
+            </v-hover>
         </v-col>
       </v-slide-item>
     </v-slide-group>
@@ -357,5 +361,8 @@ export default {
 #custom-disabled-danger.v-btn--disabled {
   background-color: #ff5252 !important;
   color: white !important;
+}
+.v-btn:hover {
+  background: blue !important;
 }
 </style>
