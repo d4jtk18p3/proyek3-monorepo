@@ -14,6 +14,8 @@ module.exports = {
     manifestOptions: {
       short_name: "SAP",
       start_url: "/home"
-    }
+    },
+    themeColor: "#FFFFFF",
+    msTileColor: "#FFFFFF"
   }
 }

@@ -38,7 +38,7 @@ export default {
     SideBar,
     NavBar
   },
-  created () {
+  async created () {
     // this.sychronize("dani")
     if (!this.$keycloak) {
       this.initKeycloak()
@@ -52,6 +52,11 @@ export default {
       this.isLoading = false
       this.cekUserRoles()
     })
+    if (this.identity.realm_access.roles[0] === "dosen") {
+      await this.$router.push({name: "AbsensiDosen"})
+    } else {
+      await this.$router.push({name: "AbsensiMahasiswa"})
+    }
   },
   data () {
     return {

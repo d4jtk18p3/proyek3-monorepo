@@ -15,22 +15,25 @@
     <!-- :justify="$vuetify.breakpoint.sm ? 'left' : 'center'" -->
     <v-row no-gutters class="absensi-container">
       <v-col
-        :md="isWali ? 4 : 7"
+        :md="isWali ? 5 : 7"
         :sm="12"
-        :class="$vuetify.breakpoint.sm ? 'ma-0 mb-4' : 'ml-0 mr-2'"
       >
         <PersentaseMengajar
           :persentaseMengajar="persentaseMengajar"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"
         ></PersentaseMengajar>
       </v-col>
       <v-col md="4" :sm="12">
-        <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
+        <LogAktivitas 
+          :jadwalDsn="jadwalDsn"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"
+        ></LogAktivitas>
       </v-col>
-      <v-col cols="auto" v-if="isWali">
-        <h2 align="center" class="text-h5 font-weight-bold">
-          Validasi Ketidakhadiran {{$vuetify.breakpoint.mobile}}
-        </h2>
-        <DaftarHadir :ketidakhadiran="ketidakhadiran"> </DaftarHadir>
+      <v-col md="3" :sm="12" v-if="isWali">
+        <DaftarHadir 
+          :ketidakhadiran="ketidakhadiran"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"  
+        > </DaftarHadir>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -59,7 +62,7 @@
     </v-overlay>
   </v-container>
 </template>
-<style scoped>
+<style>
 @media screen and (max-width: 768px) {
   .responsive {
     font-size: 32px;
@@ -80,6 +83,30 @@
     font-family: sans-serif;
   }
 }
+
+#card-title {
+  background: #272343;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top: 2px;
+  height: 63.5px;
+}
+
+#card-title h3 {
+  margin: 3px;
+  padding: 10px 10px;
+}
+
+#dark-blue {
+  color: #272343;
+}
+
+#rounded-bar {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+}
 </style>
 
 <script>
@@ -92,6 +119,7 @@ import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
 import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
 import PresensiCardMhs from "@/views/absensi/component/dosen/RekapPresensiMhs";
 // import PresensiMahasiswa from "@/datasource/network/absensi/PresensiMahasiswa";
+import DaftarHadir from "@/views/absensi/component/ketidakhadiran/DaftarHadir"
 
 // const schedule = require("node-schedule")
 const INTERVAL = 1000 * 60 * 60;
@@ -103,7 +131,8 @@ export default {
     LogAktivitas,
     PersentaseMengajar,
     Breadcumbs,
-    PresensiCardMhs
+    PresensiCardMhs,
+    DaftarHadir,
   },
   created() {
     const tasks = [];
