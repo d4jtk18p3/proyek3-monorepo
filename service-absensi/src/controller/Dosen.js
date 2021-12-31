@@ -7,9 +7,9 @@ export const getDosenTertentu = async (req, res) => {
   try {
     const result = await DosenDAO.getDosenTertentu(NIP)
     res.status(200).json({
-      message: `Mengambil Data Presensi Dosen  ${NIP} Dengan Matkul Yang Diajar Berhasil `,
+      message: `Mengambil Data  Dosen  ${NIP} Dengan Matkul Yang Diajar Berhasil `,
       data: {
-        presensi: result
+        dosen: result
       }
     })
   } catch (error) {
