@@ -4,11 +4,19 @@ import * as JadwalDAO from './Jadwal'
 import db from '../db'
 
 // new Method From 19
-export const getRekapPresensiDosenTertentu = async (NIP) => {
+export const getRekapPresensiDosenTertentuWithMatkul = async (NIP) => {
   try {
     const result = await db.query(`
-    SELECT "nip","isHadir","tanggal" FROM "daftar_hadir_dosen" 
-    WHERE "nip" = '${NIP}'
+    SELECT pengajar.nip, h_dosen."isHadir", matkul.id, matkul.nama_mata_kuliah 
+    FROM "Pengajar" pengajar
+    INNER JOIN "daftar_hadir_dosen" h_dosen
+      ON pengajar.nip = h_dosen.nip
+    INNER JOIN "Perkuliahan" perkuliahan
+      ON pengajar.id_perkuliahan = perkuliahan.id
+    INNER JOIN "Mata_Kuliah" matkul
+      ON perkuliahan.id_mata_kuliah = matkul.id
+    WHERE pengajar.nip = '${NIP}'
+
 ;
     `)
     return result[0]
