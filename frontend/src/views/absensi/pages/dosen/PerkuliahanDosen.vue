@@ -18,7 +18,7 @@
     </v-col>
     <v-col
     cols = "2" class="d-flex justify-end">
-      <UploadBAP></UploadBAP>
+      <UploadBAP :perkuliahan="item"></UploadBAP>
     </v-col>
   </v-row>
   <v-card>

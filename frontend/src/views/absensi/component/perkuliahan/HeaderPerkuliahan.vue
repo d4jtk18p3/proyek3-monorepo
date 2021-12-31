@@ -7,7 +7,7 @@
             <h3>Mata Kuliah</h3>
           </v-col>
           <v-col>
-            <h3> : {{item.mata_kuliah.nama_mata_kuliah}} </h3>
+            <h3> : {{item.mata_kuliah.nama_mata_kuliah}} {{ item.jenis }}</h3>
           </v-col>
         </v-row>
         <v-row no-gutters :style="{ color: currentTheme.onBackground }">

@@ -120,7 +120,7 @@
     </template>
   </v-navigation-drawer>
 </template>
-<style>
+<style scoped>
 #last-item {
   position: absolute;
   bottom: 0;

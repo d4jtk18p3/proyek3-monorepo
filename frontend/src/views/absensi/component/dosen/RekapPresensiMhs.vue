@@ -473,8 +473,5 @@ export default {
         background: none;
         color: white !important;
     }
-    .v-list-item__title:hover{
-        color: white !important;
-    }
     /* .mdi dan .v-icon class -> icon luar table keganti juga warnanya*/
 </style>
