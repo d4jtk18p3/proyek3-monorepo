@@ -7,7 +7,7 @@ export const getJadwalDosenHariTertentu = async (req, res) => {
   try {
     const result = await JadwalDAO.getJadwalDosenHariTertentu(NIP, hari)
     res.status(200).json({
-      message: `Jadwal kuliah Dosen ${NIP} pada hari ${hari}`,
+      message: `Mengambil Jadwal kuliah Dosen ${NIP} pada hari ${hari} Berhasil `,
       data: {
         jadwal: result
       }
