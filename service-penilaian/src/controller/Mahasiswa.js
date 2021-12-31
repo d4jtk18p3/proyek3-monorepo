@@ -9,13 +9,10 @@ export const postNewMahasiswa = async (req, res, next) => {
     const {
       NIM,
       namaMahasiswa,
-      angkatan,
-      tingkat,
+      kodeKelas,
       email,
       nomorHp,
-      urlFoto,
-      status,
-      username
+      urlFoto
     } = req.body
     const error = validationResult(req)
 
@@ -27,13 +24,10 @@ export const postNewMahasiswa = async (req, res, next) => {
     const mahasiswa = await MahasiswaDAO.insertOneMahasiswa(
       NIM,
       namaMahasiswa,
-      parseInt(angkatan),
-      parseInt(tingkat),
+      parseInt(kodeKelas),
       email,
       nomorHp,
-      urlFoto,
-      status,
-      username
+      urlFoto
     )
 
     if (typeof mahasiswa === 'undefined') {
@@ -80,7 +74,7 @@ export const updateNomorHpMahasiswa = async (req, res, next) => {
 
 export const deleteMahasiswabyId = async (req, res, next) => {
   try {
-    const mahasiswaId = req.params.id_mahasiswa
+    const mahasiswaId = req.params.NIM
     const result = await MahasiswaDAO.deleteMahasiswabyId(mahasiswaId)
     if (result === 1) {
       res.status(200).json({

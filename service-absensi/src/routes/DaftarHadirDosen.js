@@ -8,7 +8,7 @@ router.put('/presensi-dosen', DaftarHadirDosenController.presensiDosenHandler)
 router.get('/nip-jadwal-tgl', DaftarHadirDosenController.getDaftarHadirNipJadwalTgl)
 router.get('/persentase-mengajar-dosen', DaftarHadirDosenController.persentaseMengajarDosenHandler)
 // New Method From 19
-router.get('/presensi-dosen/:NIP', DaftarHadirDosenController.getRekapPresensiDosenTertentu)
+router.get('/presensi-dosen/:NIP', DaftarHadirDosenController.getRekapPresensiDosenTertentuWithMatkul)
 router.put('/presensi-dosen/:NIP', DaftarHadirDosenController.updatePresensiDosenTertentu)
 //
 

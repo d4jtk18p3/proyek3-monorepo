@@ -41,11 +41,10 @@ export const postNewMahasiswa = [
     })
   }),
   body('namaMahasiswa', 'Nama Mahasiswa wajib diisi').exists(),
-  body('angkatan', 'Angkatan wajib diisi').exists(),
-  body('tingkat', 'Tingkat wajib diisi').exists(),
+  body('kodeKelas').exists(),
   body('email', 'Format email tidak valid').isEmail(),
-  body('status', 'Status wajib diisi').exists()
-  // body('nomorHp', 'Nomor Hp tidak valid').isLength({ min: 11 })
+  //body('nomorHp', 'Nomor Hp tidak valid').isLength({ min: 11 }),
+  body('urlFoto').exists(),
 ]
 
 export const updateNomorHpMahasiswa = [
