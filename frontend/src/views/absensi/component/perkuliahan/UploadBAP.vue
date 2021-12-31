@@ -16,7 +16,58 @@
               Berita Acara Perkuliahan
             </h2>
           </v-card-title>
-          <v-form>
+          <v-container style="width: 80%" class="mt-5" v-if="statusBAP">
+            <div class="text-content">
+              <p>
+                <span class="font-weight-bold">Mata Kuliah</span>:
+                {{ perkuliahan.mata_kuliah.nama_mata_kuliah }}
+                {{ perkuliahan.jenis }}
+              </p>
+              <p>
+                <span class="font-weight-bold">Kelas</span>:
+                {{ perkuliahan.kelas.kode_kelas }}
+              </p>
+              <p>
+                <span class="font-weight-bold">Jumlah Mhs</span>: {{ "27" }}
+              </p>
+              <p>
+                <span class="font-weight-bold">Tanggal</span>: {{ currentDate }}
+              </p>
+            </div>
+            <div class="mb-4">
+              <p class="mb-1 font-weight-bold">Materi</p>
+              <div class="grey lighten-2 pa-2">
+                <p class="ma-0">Web Responsive</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <p class="mb-1 font-weight-bold">Kegiatan Mahasiswa</p>
+              <div class="grey lighten-2 pa-2">
+                <ol>
+                  <li v-for="(item, index) in tempKegiatan" :key="index">
+                    {{ item }}
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div class="mb-4">
+              <p class="mb-1 font-weight-bold">Bukti Perkuliahan</p>
+              <div class="grey lighten-2 pa-2" style="height: 20vh"></div>
+            </div>
+            <div class="mb-4">
+              <p class="mb-1 font-weight-bold">Kehadiran</p>
+              <div class="grey lighten-2 pa-2">
+                <p class="ma-0">Hadir : {{ 27 }}</p>
+                <p class="ma-0">Tidak hadir : {{ 0 }}</p>
+              </div>
+            </div>
+            <div class="d-flex justify-end mt-16 action-btn">
+              <v-btn color="#2196F3" dark class="pl-8 pr-8 mr-2" @click="submitBAP()">Export PDF</v-btn>
+              <v-btn color="#FB8C00" dark class="pl-8 pr-8 mr-2" @click="submitBAP()">Edit</v-btn>
+              <v-btn color="#00C853" dark class="pl-8 pr-8" @click="submitBAP()">Done</v-btn>
+            </div>
+          </v-container>
+          <v-form v-else>
             <v-container style="width: 80%" class="mt-5">
               <div class="mb-4">
                 <p class="mb-1">Materi</p>
@@ -41,8 +92,17 @@
                   class="mt-2"
                 ></v-text-field>
                 <div class="d-flex justify-end mt-4">
-                  <v-btn color="#2196F3" dark rounded @click="addKegiatan()">+</v-btn>
-                  <v-btn class="ml-2" color="#FF5252" dark rounded @click="removeKegiatan()">-</v-btn>
+                  <v-btn color="#2196F3" dark rounded @click="addKegiatan()"
+                    >+</v-btn
+                  >
+                  <v-btn
+                    class="ml-2"
+                    color="#FF5252"
+                    dark
+                    rounded
+                    @click="removeKegiatan()"
+                    >-</v-btn
+                  >
                 </div>
               </div>
               <div class="mb-4">
@@ -53,7 +113,13 @@
                 ></Upload>
               </div>
               <div class="d-flex justify-end mt-16">
-                <v-btn color="#00C853" dark class="pl-8 pr-8" @click="submitBAP()">Save</v-btn>
+                <v-btn
+                  color="#00C853"
+                  dark
+                  class="pl-8 pr-8"
+                  @click="submitBAP()"
+                  >Save</v-btn
+                >
               </div>
             </v-container>
           </v-form>
@@ -62,6 +128,24 @@
     </template>
   </v-dialog>
 </template>
+
+<style scoped>
+.text-content > p > span {
+  display: inline-block;
+  min-width: 110px;
+}
+
+@media screen and (max-width: 425px) {
+  .action-btn {
+    flex-direction: column;
+    margin-top: 1rem !important;
+  }
+  .action-btn>button {
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+}
+</style>
 
 <script>
 import { mapGetters } from "vuex";
@@ -86,9 +170,11 @@ export default {
           value: "",
         },
       ],
+      tempKegiatan: ["Alex pusing", "Salman bingung", "Faza tidur"],
       buktiKuliah: [],
       kehadiranMhs: [],
       currentDate: new Date().toISOString().substr(0, 10),
+      statusBAP: true,
     };
   },
   methods: {
@@ -113,10 +199,12 @@ export default {
     removeKegiatan() {
       this.kegiatan.pop();
     },
-    async submitBAP () {
+    async submitBAP() {
       await this.getKehadiran();
 
-      const hadir = this.kehadiranMhs.filter((item) => item.isHadir === true).length
+      const hadir = this.kehadiranMhs.filter(
+        (item) => item.isHadir === true
+      ).length;
       const tidak_hadir = this.kehadiranMhs.length - hadir;
 
       const fileData = new FormData();
@@ -127,11 +215,13 @@ export default {
         id_jadwal: this.perkuliahan.id_jadwal,
         tanggal: this.currentDate,
         materi: this.materi,
-        kegiatan: this.kegiatan.map((item) => {return item.value}),
+        kegiatan: this.kegiatan.map((item) => {
+          return item.value;
+        }),
         // NOT WORKING, IDK WHY
         bukti: this.buktiKuliah[0],
         hadir,
-        tidak_hadir
+        tidak_hadir,
       };
 
       console.log(BAP);
@@ -140,7 +230,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
   components: {
     Upload,
@@ -150,8 +240,8 @@ export default {
       currentTheme: "theme/getCurrentColor",
     }),
     identity: function () {
-      return this.$store.getters.identity
-    }
+      return this.$store.getters.identity;
+    },
   },
 };
 </script>

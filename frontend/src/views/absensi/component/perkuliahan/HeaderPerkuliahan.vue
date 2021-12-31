@@ -64,7 +64,7 @@ export default {
   props: ["item"],
   data () {
     return {
-      jumlahMahasiswa: 32,
+      jumlahMahasiswa: 27,
       d: new Date(),
       date: "",
       months: [
