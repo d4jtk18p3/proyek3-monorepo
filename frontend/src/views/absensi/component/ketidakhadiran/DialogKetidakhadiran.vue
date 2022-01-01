@@ -8,7 +8,7 @@
             <h1 align="center" >Validasi Ketidakhadiran</h1>
              <v-form class="content" ref="form">
                  <v-row>
-                    <v-col cols="3">
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 4 : 3">
                     <p class="font-weight-bold">NIM</p>
                     </v-col>
                     <v-col cols="6">
@@ -16,7 +16,7 @@
                     </v-col>
                  </v-row>
                  <v-row>
-                    <v-col cols="3">
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 4 : 3">
                     <p class="font-weight-bold">Nama</p>
                     </v-col>
                     <v-col cols="6">
@@ -24,7 +24,7 @@
                     </v-col>
                  </v-row>
                  <v-row>
-                    <v-col cols="3">
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 4 : 3">
                     <p class="font-weight-bold">Kelas</p>
                     </v-col>
                     <v-col cols="6">
@@ -32,7 +32,7 @@
                     </v-col>
                  </v-row>
                  <v-row>
-                    <v-col cols="3">
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 4 : 3">
                     <p class="font-weight-bold">Keterangan</p>
                     </v-col>
                     <v-col cols="6">
@@ -134,5 +134,11 @@ padding : 3rem 5rem 5rem 5rem;
 height: 100%;
 width: 100%;
 flex-direction: column;
+}
+
+@media screen and (max-width: 425px) {
+  .content {
+    padding: 2rem;
+  }
 }
 </style>

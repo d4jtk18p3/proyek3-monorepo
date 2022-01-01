@@ -8,5 +8,14 @@ module.exports = {
   },
   transpileDependencies: [
     "vuetify"
-  ]
+  ],
+  pwa: {
+    name: "Sistem Absensi dan Penilaian",
+    manifestOptions: {
+      short_name: "SAP",
+      start_url: "/home"
+    },
+    themeColor: "#FFFFFF",
+    msTileColor: "#FFFFFF"
+  }
 }

@@ -8,29 +8,32 @@
       </v-col>
     </v-row>
     <v-row class="mb-4">
-      <v-col cols="12" class="pa-0">
+      <v-col cols="12" class="pt-0 pb-0">
         <breadcumbs :breadcrumb-items="breadcrumbItems" />
       </v-col>
     </v-row>
     <!-- :justify="$vuetify.breakpoint.sm ? 'left' : 'center'" -->
-    <v-row no-gutters :justify="left">
+    <v-row no-gutters class="absensi-container">
       <v-col
-        cols="auto"
-        offset-md="2"
-        :class="$vuetify.breakpoint.mobile ? 'ma-8 ml-0' : 'ml-0 mr-8'"
+        :md="isWali ? 5 : 7"
+        :sm="12"
       >
         <PersentaseMengajar
           :persentaseMengajar="persentaseMengajar"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"
         ></PersentaseMengajar>
       </v-col>
-      <v-col cols="auto">
-        <LogAktivitas :jadwalDsn="jadwalDsn"></LogAktivitas>
+      <v-col md="4" :sm="12">
+        <LogAktivitas 
+          :jadwalDsn="jadwalDsn"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"
+        ></LogAktivitas>
       </v-col>
-      <v-col cols="auto" offset-md="2" v-if="isWali">
-        <h2 align="center" class="text-h5 font-weight-bold">
-          Validasi Ketidakhadiran
-        </h2>
-        <DaftarHadir :ketidakhadiran="ketidakhadiran"> </DaftarHadir>
+      <v-col md="3" :sm="12" v-if="isWali">
+        <DaftarHadir 
+          :ketidakhadiran="ketidakhadiran"
+          :class="$vuetify.breakpoint.mobile ? 'mb-10' : 'mr-8'"  
+        > </DaftarHadir>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -41,6 +44,14 @@
         ></AbsenCardDosen>
       </v-col>
     </v-row>
+    <v-card>
+      <v-col cols="pb-0">
+        <h2>Rekap Presensi Mahasiswa</h2>
+      </v-col>
+      <v-col cols="auto" >
+        <PresensiCardMhs :rekapAbsenMhs="rekapAbsenMhs"></PresensiCardMhs>
+      </v-col>
+    </v-card>
     <v-overlay :value="isLoading">
       <v-progress-circular
         indeterminate
@@ -51,13 +62,16 @@
     </v-overlay>
   </v-container>
 </template>
-<style scoped>
+<style>
 @media screen and (max-width: 768px) {
   .responsive {
     font-size: 32px;
     line-height: 38px;
     letter-spacing: 0.117px;
     font-family: sans-serif;
+  }
+  .absensi-container {
+    flex-direction: column;
   }
 }
 
@@ -69,6 +83,30 @@
     font-family: sans-serif;
   }
 }
+
+#card-title {
+  background: #272343;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top: 2px;
+  height: 63.5px;
+}
+
+#card-title h3 {
+  margin: 3px;
+  padding: 10px 10px;
+}
+
+#dark-blue {
+  color: #272343;
+}
+
+#rounded-bar {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+}
 </style>
 
 <script>
@@ -79,6 +117,9 @@ import LogAktivitas from "@/views/absensi/component/dosen/LogAktivitasDosen";
 import PersentaseMengajar from "@/views/absensi/component/dosen/PersentaseMengajar";
 import JadwalDosen from "@/datasource/network/absensi/jadwalDosen";
 import DashboardDosen from "@/datasource/network/absensi/dashboardDosen";
+import PresensiCardMhs from "@/views/absensi/component/dosen/RekapPresensiMhs";
+// import PresensiMahasiswa from "@/datasource/network/absensi/PresensiMahasiswa";
+import DaftarHadir from "@/views/absensi/component/ketidakhadiran/DaftarHadir"
 
 // const schedule = require("node-schedule")
 const INTERVAL = 1000 * 60 * 60;
@@ -89,7 +130,9 @@ export default {
     AbsenCardDosen,
     LogAktivitas,
     PersentaseMengajar,
-    Breadcumbs
+    Breadcumbs,
+    PresensiCardMhs,
+    DaftarHadir,
   },
   created() {
     const tasks = [];
@@ -137,6 +180,7 @@ export default {
       menu: false,
       jadwalDsn: [],
       persentaseMengajar: [],
+      rekapAbsenMhs: [],
       currentDay: null,
       isLoading: true,
       username: "",
@@ -191,6 +235,15 @@ export default {
           console.log(e);
         });
     },
+    // getPresensiMahasiswa() {
+    //   PresensiMahasiswa.presensiMahasiswa(this.id_studi, this.id_jadwal, this.identity.preferred_username)
+    //     .then(response => {
+    //       this.presensiMahasiswa = response.data;
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //     });
+    // },
     cekMatkulSama() {
       var i = 0;
 

@@ -2,10 +2,8 @@
 <v-container>
  <v-row :style="{color: currentTheme.onBackground}">
   <v-col cols="12">
-   <p class="text-h4 font-weight-bold">Perkuliahan</p>
-  </v-col>
-  <v-col cols="12">
-   <breadcumbs :breadcrumb-items="breadcrumbItems"/>
+   <h1 class="font-weight-bold">Perkuliahan</h1>
+   <breadcumbs class="pt-2" :breadcrumb-items="breadcrumbItems"/>
   </v-col>
  </v-row>
  <v-row>
@@ -18,13 +16,19 @@
     <v-col>
       <p class="text-h4 font-weight-bold">Daftar Kehadiran Mahasiswa</p>
     </v-col>
-    <v-col justify="end"
-    cols = "2">
-      <UploadBAP></UploadBAP>
+    <v-col
+    cols = "2" class="d-flex justify-end">
+      <UploadBAP :perkuliahan="item"></UploadBAP>
     </v-col>
   </v-row>
+  <v-card>
+    <v-col class="pb-0">
+      <h2>Rekap Presensi Mahasiswa</h2>
+    </v-col>
     <TabelAbsensi :perkuliahan="item">
     </TabelAbsensi>
+
+  </v-card>
 </v-container>
 </template>
 

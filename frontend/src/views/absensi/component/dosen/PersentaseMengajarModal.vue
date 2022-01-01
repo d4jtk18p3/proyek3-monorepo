@@ -18,7 +18,7 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-actions>
-        <div class="pa-12 pt-0">
+        <div class="pa-4 pt-0">
           <v-card-title class="pt-0 pl-0 black--text font-weight-black"> Rekap Presensi Dosen </v-card-title>
           <v-data-table
             disable-filtering
@@ -26,10 +26,11 @@
             disable-sort
             hide-default-header
             item
+            :mobile-breakpoint="0"
             :headers="headers"
             :items="items"
             :hide-default-footer="true"
-            class="font-weight-bold"
+            class="font-weight-medium"
           >
           <template v-slot:header="{ props: { headers } }">
             <thead>
@@ -43,7 +44,7 @@
           </v-data-table>
           <div class="mt-6 font-weight-bold">
             <p>Total Minggu Perkuliahan: 6 Minggu</p>
-            <p>Total Minggu Perkuliahan Tersisa: 7 Minggu</p>
+            <p>Total Minggu Perkuliahan Tersisa: 16 Minggu</p>
           </div>
         </div>
       </v-card>

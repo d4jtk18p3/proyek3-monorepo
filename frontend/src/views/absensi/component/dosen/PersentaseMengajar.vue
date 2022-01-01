@@ -1,45 +1,64 @@
 <template>
   <v-flex>
-    <v-card class="d-flex pa-0" :height="455" :width="541">
-      <div class="flex-column w-100">
+    <v-card class="d-flex pa-0" :height="455" :width="'100%'">
+      <div class="flex-column w100">
         <div id="card-title">
-          <h3 class="white--text mt-2">
+          <h3 class="white--text mt-2 font-weight-medium">
             Rekap Presensi Dosen
           </h3>
         </div>
-        <div class="flex-column mx-2 mt-2">
-          <v-card-actions>
-            <v-row no-gutters>
-              <v-col cols="8">
-                <PersentaseMengajarModal
-                  :matakuliah="'PCD TE'"
-                />
-                <v-progress-linear
-                  class="mr-3 pa-0"
-                  id="rounded-bar"
-                  :height="25"
-                  :value="60"
-                  color="#59DCDC"
-                  background-color="#DADADA"
-                >
-                  <!-- :value="persentaseMengajar.persentaseJamMengajarDosen" -->
-                </v-progress-linear>
-              </v-col>
-              <v-col cols="4">
-                <v-card-text
-                  class="responsive ml-3 mt-3 ma-0 pa-0 font-weight-bold text-center"
-                  id="dark-blue"
-                  >60%</v-card-text
-                >
-                <v-card-text
-                  class="responsive ml-3 ma-0 pa-0 text-center"
-                  id="dark-blue"
-                  >Total Jam Mengajar</v-card-text
-                >
-              </v-col>
-            </v-row>
-          </v-card-actions>
-        </div>
+        <v-virtual-scroll :items="items" :item-height="120" height="390">
+          <template v-slot:default="{ item }">
+            <div class="flex-column mx-2 mt-2">
+              <v-card-actions>
+                <v-row no-gutters align="center">
+                  <v-col cols="8">
+                    <PersentaseMengajarModal :matakuliah="item.matkul" />
+                    <v-progress-linear
+                      class="mr-3 pa-0"
+                      id="rounded-bar"
+                      :height="25"
+                      :value="item.percent"
+                      color="#59DCDC"
+                      background-color="#DADADA"
+                    >
+                      <!-- :value="persentaseMengajar.persentaseJamMengajarDosen" -->
+                    </v-progress-linear>
+                  </v-col>
+                  <v-col cols="4">
+                    <v-card-text
+                      class="
+                        responsive
+                        ml-3
+                        mt-3
+                        ma-0
+                        pa-0
+                        font-weight-black
+                        text-center
+                      "
+                      id="dark-blue"
+                      ><h1 class="font-weight-black">
+                        {{ item.percent }}%
+                      </h1></v-card-text
+                    >
+                    <v-card-text
+                      class="
+                        responsive
+                        ml-3
+                        ma-0
+                        pa-0
+                        text-center
+                        font-weight-bold
+                      "
+                      id="dark-blue"
+                      >Total Jam Mengajar</v-card-text
+                    >
+                  </v-col>
+                </v-row>
+              </v-card-actions>
+            </div>
+          </template>
+        </v-virtual-scroll>
       </div>
     </v-card>
   </v-flex>
@@ -62,34 +81,6 @@
     font-size: 18px;
   }
 }
-
-.w-100 {
-  width: 100%;
-}
-
-#card-title {
-  background: #272343;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  padding-top: 2px;
-  height: 63.5px;
-}
-
-#card-title h3 {
-  margin: 3px;
-  padding: 10px 10px;
-}
-
-#dark-blue {
-  color: #272343;
-}
-
-#rounded-bar {
-  border-radius: 15px;
-  border-style: solid;
-  border-color: black;
-  border-width: thin;
-}
 </style>
 
 <script>
@@ -99,11 +90,37 @@ import PersentaseMengajarModal from "./PersentaseMengajarModal.vue";
 export default {
   name: "PersentaseMengajar",
   components: {
-    PersentaseMengajarModal
+    PersentaseMengajarModal,
   },
   data() {
     return {
-      persenTidakMengajar: 0
+      persenTidakMengajar: 0,
+      items: [
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+        {
+          matkul: "PCD TE",
+          percent: "60",
+        },
+      ],
     };
   },
   props: {
@@ -111,14 +128,14 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
 
   computed: {
     ...mapGetters({
-      currentTheme: "theme/getCurrentColor"
-    })
-  }
+      currentTheme: "theme/getCurrentColor",
+    }),
+  },
 };
 </script>

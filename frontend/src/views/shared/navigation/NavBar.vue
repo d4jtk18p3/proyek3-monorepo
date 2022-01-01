@@ -66,7 +66,7 @@
     <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-img :src="require('../../../assets/polban.png')" max-width="30" contain class="mr-2"/>
-    <v-toolbar-title style="font-size: 14px">Politeknik Negeri Bandung</v-toolbar-title>
+    <v-toolbar-title style="font-size: 14px" @click="onClickedHome()">Politeknik Negeri Bandung</v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- <v-btn icon @click="notification_click()">
       <v-badge
@@ -82,6 +82,7 @@
     <v-navigation-drawer
       v-model="drawer"
       fixed
+      hide-overlay
       width="100%"
       style="margin-top: 48px"
       v-if="$vuetify.breakpoint.mobile"
@@ -121,19 +122,15 @@
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Beranda</v-list-item-title>
+              <v-list-item-title @click="onClickedHome()">Beranda</v-list-item-title>
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Absensi</v-list-item-title>
+              <v-list-item-title @click="onClickedAbsensi()">Absensi</v-list-item-title>
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Profil</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Nilai</v-list-item-title>
+              <v-list-item-title @click="onClickedPenilaian()">Penilaian</v-list-item-title>
             </v-list-item>
 
             <v-divider></v-divider>
@@ -171,6 +168,8 @@ export default {
       group: null,
       darkmode: false,
       toHome: "/home",
+      toAbsensi: "/absensi",
+      toPenilaian: "/penilaian",
       isLoading: true
     }
   },
@@ -190,7 +189,8 @@ export default {
     }
     Promise.all(tasks).then(result => {
       this.isLoading = false
-      this.user.nama = this.identity.given_name
+      this.user.nama = this.identity.given_name || "User"
+      this.user.nomorInduk = this.identity.preferred_username
     })
   },
   methods: {
@@ -210,6 +210,12 @@ export default {
       if (this.$router.currentRoute.path !== this.toHome) {
         await this.$router.push({ path: this.toHome })
       }
+    },
+    async onClickedAbsensi () {
+      await this.$router.push({ path: this.toAbsensi })
+    },
+    async onClickedPenilaian () {
+      await this.$router.push({ path: this.toPenilaian })
     },
     ...mapActions({
       toogleTheme: "theme/toogleDark"

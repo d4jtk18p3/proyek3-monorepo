@@ -4,22 +4,22 @@
     <v-main>
       <v-container :class="isMobile? 'pa-5' : 'pa-12'">
         <v-row>
-          <v-card class="pa-md-1 mx-lg-auto" outlined color="transparent" :style="{ color: currentTheme.onBackground }">
-            <p class="text-h4 font-weight-bold">Selamat Datang, {{ identity.given_name }}</p>
+          <v-card class="pa-md-1 mt-2 mx-lg-auto w100" outlined color="transparent" :style="{ color: currentTheme.onBackground }">
+            <p class="text-h4 font-weight-bold text-center">Selamat Datang, {{ identity.given_name }}</p>
             <!-- <p class="text-h4 font-weight-bold">Selamat Datang,</p> -->
           </v-card>
         </v-row>
-        <v-row>
+        <v-row justify="center">
           <v-card
             max-height="192"
             max-width="192"
             @click="onClickedAbsensi()"
-            class="pb-0 ma-md-2 mx-lg-auto rounded-lg"
+            class="pb-0 mb-8 ma-md-2 mx-lg-auto rounded-lg"
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-absensi-card.png')" height="200"/>
           </v-card>
-          <v-card
+          <!-- <v-card
             max-height="192"
             max-width="192"
             @click="onClickedMonitoring()"
@@ -27,17 +27,17 @@
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-monitoring-card.png')" height="200"/>
-          </v-card>
+          </v-card> -->
           <v-card
             max-height="192"
             max-width="192"
             @click="onClickedPenilaian()"
-            class="pb-0 ma-md-2 mx-lg-auto rounded-lg"
+            class="pb-0 mb-8 ma-md-2 mx-lg-auto rounded-lg"
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-penilaian-card.png')" height="200"/>
           </v-card>
-          <v-card
+          <!-- <v-card
             max-height="192"
             max-width="192"
             @click="onClickedLogbook()"
@@ -45,12 +45,12 @@
             outlined color="transparent"
           >
             <v-img :src="require('../assets/sistem-logbook-card.png')" height="200"/>
-          </v-card>
+          </v-card> -->
           <v-card
             max-height="192"
             max-width="192"
             @click="logout()"
-            class="pb-0 ma-md-2 mx-lg-auto rounded-lg"
+            class="pb-0 mb-8 ma-md-2 mx-lg-auto rounded-lg"
             outlined color="transparent"
           >
             <v-img :src="require('../assets/logout-card.png')" height="200"/>
@@ -83,7 +83,6 @@ export default {
       return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
     },
     identity: function () {
-      console.log(this.$store.getters.identity)
       return this.$store.getters.identity
     }
   },

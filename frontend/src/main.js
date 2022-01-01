@@ -5,6 +5,7 @@ import store from "./store"
 import vuetify from "./plugins/vuetify"
 import VCalendar from "v-calendar"
 import VueApexCharts from "vue-apexcharts"
+import "./registerServiceWorker"
 
 Vue.config.productionTip = false
 Vue.use(VueApexCharts)

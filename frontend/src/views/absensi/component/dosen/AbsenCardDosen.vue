@@ -11,80 +11,91 @@
         class="d-flex align-self-center"
       >
         <v-col>
-          <v-card
-            class="text-center justify-center rounded-md d-flex flex-column active"
-            width="325"
-            height="300"
-            :style="{
-              background: !item.active
-                ? currentTheme.surface
-                : currentTheme.surface,
-              color: currentTheme.onSurface
-            }"
-          >
-            <h3 class="mt-4 text-center">Presensi Dosen Pengampu</h3>
-            <v-card-text :style="{ color: currentTheme.onSurface }"
-              >{{ item.mata_kuliah.nama_mata_kuliah }}
-              {{ item.jenis }}</v-card-text
+          <v-hover v-slot="{ hover }">
+            <v-card
+              class="
+                text-center
+                justify-center
+                rounded-md
+                d-flex
+                flex-column
+                active
+              "
+              width="325"
+              height="300"
+              :style="{
+                background: !item.active
+                  ? currentTheme.surface
+                  : currentTheme.surface,
+                color: currentTheme.onSurface,
+              }"
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
             >
-            <v-spacer></v-spacer>
-            <v-row justify="center">
-              <v-col class="pb-0 ml-4 mr-4">
-                <p>
-                  {{ currentDay }}, {{ item.waktu_mulai.slice(0, 5) }} -
-                  {{ item.waktu_selesai.slice(0, 5) }} WIB
-                </p>
-              </v-col>
-              <v-progress-linear
-                background-color="#bfbfbf"
-                :color="item.hadir ? 'success' : 'error'"
-                :value="item.hadir ? 100 : item.progress"
-                height="5"
-                class="ml-8 mr-8 justify-center"
-              ></v-progress-linear>
-            </v-row>
-            <v-card-actions class="justify-center">
-              <v-btn
-                :id="
-                  item.hadir
-                    ? 'custom-disabled-safe'
-                    : item.progress === 100
-                    ? 'custom-disabled-danger'
-                    : 'custom-disabled-warn'
-                "
-                :disabled="
-                  item.progress === 0 || item.progress === 100 || item.hadir
-                "
-                style="color: white;"
-                elevation="2"
-                rounded-md
-                class="responsive mt-5 ml-5 mr-5"
-                color="#2196f3"
-                width="120"
-                @click="presensi(index, item.id_studi, item.id_jadwal)"
+              <h3 class="mt-4 text-center">Presensi Dosen Pengampu</h3>
+              <v-card-text :style="{ color: currentTheme.onSurface }"
+                >{{ item.mata_kuliah.nama_mata_kuliah }}
+                {{ item.jenis }}</v-card-text
               >
-                {{
-                  item.hadir
-                    ? "Hadir"
-                    : item.progress === 100
-                    ? "Tidak Hadir"
-                    : "Presensi"
-                }}</v-btn
-              >
-            </v-card-actions>
-            <v-card-actions class="justify-center">
-              <v-btn
-                :to="{ name: 'Perkuliahan', params: { item } }"
-                elevation="2"
-                rounded-md
-                class="responsive mb-2 ml-8 mr-8 justify-center white--text"
-                width="200"
-                color="#2196F3"
-              >
-                Kehadiran Mahasiswa</v-btn
-              >
-            </v-card-actions>
-          </v-card>
+              <v-spacer></v-spacer>
+              <v-row justify="center">
+                <v-col class="pb-0 ml-4 mr-4">
+                  <p>
+                    {{ currentDay }}, {{ item.waktu_mulai.slice(0, 5) }} -
+                    {{ item.waktu_selesai.slice(0, 5) }} WIB
+                  </p>
+                </v-col>
+                <v-progress-linear
+                  background-color="#bfbfbf"
+                  :color="item.hadir ? 'success' : 'error'"
+                  :value="item.hadir ? 100 : item.progress"
+                  height="5"
+                  class="ml-8 mr-8 justify-center"
+                ></v-progress-linear>
+              </v-row>
+              <v-card-actions class="justify-center">
+                <v-btn
+                  :id="
+                    item.hadir
+                      ? 'custom-disabled-safe'
+                      : item.progress === 100
+                      ? 'custom-disabled-danger'
+                      : 'custom-disabled-warn'
+                  "
+                  :disabled="
+                    item.progress === 0 || item.progress === 100 || item.hadir
+                  "
+                  style="color: white"
+                  elevation="2"
+                  rounded-md
+                  class="responsive mt-5 ml-5 mr-5"
+                  color="#2196f3"
+                  width="120"
+                  @click="presensi(index, item.id_studi, item.id_jadwal)"
+                >
+                  {{
+                    item.hadir
+                      ? "Hadir"
+                      : item.progress === 100
+                      ? "Tidak Hadir"
+                      : "Presensi"
+                  }}</v-btn
+                >
+              </v-card-actions>
+              <v-card-actions class="justify-center">
+                <v-btn
+                  :to="{ name: 'Perkuliahan', params: { item } }"
+                  elevation="2"
+                  rounded-md
+                  class="responsive mb-2 ml-8 mr-8 justify-center white--text"
+                  width="200"
+                  color="#2196F3"
+                >
+                  Kehadiran Mahasiswa</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-hover>
         </v-col>
       </v-slide-item>
     </v-slide-group>
@@ -109,9 +120,9 @@ import { mapGetters } from "vuex";
 import PresensiDosen from "@/datasource/network/absensi/PresensiDosen";
 import DateTime from "@/utils/dateTime.js";
 
-const INTERVAL = 1000;
+const INTERVAL = 500;
 const moment = require("moment");
-var currentJadwal = 0;
+let currentJadwal = 0;
 
 export default {
   name: "AbsenCard",
@@ -120,16 +131,16 @@ export default {
       type: Array,
       default() {
         return {};
-      }
+      },
     },
     username: {
       type: String,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
-  created() {
+  async created() {
     // this.testProgressBar()
     var current = new Date();
     this.currentHour = current.getHours();
@@ -141,8 +152,8 @@ export default {
       "-" +
       current.getDate();
     this.currentDay = DateTime.getDay(current.getDay());
-    this.presensiSchedule();
-    setInterval(() => {
+    await this.presensiSchedule();
+    this.intervalId = setInterval(() => {
       current = new Date();
       this.currentHour = current.getHours();
       this.currentMinute = current.getMinutes();
@@ -165,21 +176,21 @@ export default {
       currentJadwal: null,
       currentKehadiran: null,
       interval: 0,
+      intervalId,
       //  data test
       jamAwal1: "23:00:00",
       jamAkhir1: "23:20:00",
       jamAwal2: "23:30:00",
-      jamAkhir2: "23:50:00"
+      jamAkhir2: "23:50:00",
     };
   },
   computed: {
     ...mapGetters({
-      currentTheme: "theme/getCurrentColor"
-    })
+      currentTheme: "theme/getCurrentColor",
+    }),
   },
   methods: {
     presensi(index, idStudi, idJadwal) {
-      console.log(idJadwal);
       if (this.jadwalDsn[currentJadwal].id_jadwal_kedua !== 0) {
         this.presensiDosen(
           index,
@@ -193,13 +204,11 @@ export default {
         );
       } else {
         this.presensiDosen(index, idStudi, idJadwal);
-        console.log("jelek");
       }
     },
     presensiDosen(index, idStudi, idJadwal) {
-      console.log(idJadwal);
       PresensiDosen.presensiDosen(this.username, idStudi, idJadwal)
-        .then(response => {
+        .then((response) => {
           this.jadwalDsn[index].absen = true;
           this.jadwalDsn[currentJadwal].hadir = true;
           console.log(
@@ -208,24 +217,21 @@ export default {
               "Pada tanggal " +
               this.currentDate
           );
-          console.log(response);
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         });
     },
     statusKehadiranDosen(idJadwal) {
-      console.log(this.jadwalDsn);
       PresensiDosen.getStatusKehadiran(
         this.username,
         idJadwal,
         this.currentDate
       )
-        .then(response => {
+        .then((response) => {
           this.currentKehadiran = response.data;
-          this.jadwalDsn[
-            currentJadwal
-          ].hadir = this.currentKehadiran[0].isHadir;
+          this.jadwalDsn[currentJadwal].hadir =
+            this.currentKehadiran[0].isHadir;
           console.log(
             "Status kehadiran dosen pada jadwal " +
               idJadwal +
@@ -233,15 +239,14 @@ export default {
               this.jadwalDsn[currentJadwal].hadir
           );
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         });
     },
     toPerkuliahan(index, item) {
-      console.log(index);
       this.$router.push({ name: "Perkuliahan", params: { item } });
     },
-    presensiSchedule() {
+    async presensiSchedule() {
       //  Jika Jadwalnya masih ada
       if (currentJadwal < this.jadwalDsn.length) {
         // Pengubahan Format
@@ -307,13 +312,18 @@ export default {
             // if (this.currentKehadiran[0].isHadir === true && this.currentKehadiran[0].id_keterangan === null) {
             //   console.log("Mahasiswa sudah absen di jadwal ke- " + this.jadwalDsn[currentJadwal].id_jadwal)
             // }
-            currentJadwal++;
+            if (currentJadwal !== this.jadwalDsn.length-1)
+              currentJadwal++;
+            else
+              clearInterval(this.intervalId);
           } else {
             //  jika sekarang bukan waktu setelah mata kuliah (keknya inisalah dan perlu diperbaiki kondisinya)
             this.jadwalDsn[currentJadwal].active = true;
             this.jadwalDsn[currentJadwal].absen = true;
           }
         }
+      } else {
+        clearInterval(this.intervalId);
       }
     },
     cekAktivasiTombol(idJadwal) {
@@ -339,8 +349,12 @@ export default {
           );
         }
       }
-    }
-  }
+    },
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId);
+    currentJadwal = 0;
+  },
 };
 </script>
 
@@ -363,5 +377,8 @@ export default {
 #custom-disabled-danger.v-btn--disabled {
   background-color: #ff5252 !important;
   color: white !important;
+}
+.v-btn:hover {
+  background: blue !important;
 }
 </style>
