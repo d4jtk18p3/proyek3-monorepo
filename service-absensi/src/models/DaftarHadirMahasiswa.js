@@ -36,6 +36,14 @@ const DaftarHadirMahasiswa = db.define(
         key: 'id_keterangan'
       }
     },
+    nim: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Mahasiswa',
+        key: 'nim'
+      }
+    },
     minggu: {
       type: Sequelize.INTEGER
     },
