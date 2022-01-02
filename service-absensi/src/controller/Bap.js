@@ -25,6 +25,8 @@ export const uploadBAP = async (req, res, next) => {
       })
     }
 
+
+    /*
     if (req.file === undefined) {
       // file undefined
       return res.status(400).json({
@@ -32,11 +34,17 @@ export const uploadBAP = async (req, res, next) => {
         data: {}
       })
     }
+    */
 
     const { nip, materi, kegiatan, tanggal, idPerkuliahan, idJadwal } = req.body
 
     try {
-      const url = req.file.path
+      
+      // Bypass upload
+      // const url = req.file.path
+      // Skip
+      const url = "Bypassed - error sementara"
+
       const results = await DosenService.uploadBAP(nip, materi, kegiatan, url, tanggal, idPerkuliahan, idJadwal)
       const rows = results[0]
       res.json({
@@ -117,9 +125,9 @@ export const createBap = async (req, res, next) => {
     const { nip, materi, kegiatan, tanggal, idPerkuliahan, idJadwal } = req.body
 
     try {
-      //const url = req.file.path
-      const url = "coba tmp url"
-      //const results = await DosenService.uploadBAP("196009281994031000", "cek", "cek", "cek", "2069-11-29", 1, 2)
+      const url = req.file.path
+      //const url = "coba tmp url"
+      //const results = await DosenService.uploadBAP("196009281994031000", "cek", "cek", "cek", "2012-12-12", 2, 1)
       const results = await DosenService.uploadBAP(nip, materi, kegiatan, url, tanggal, idPerkuliahan, idJadwal)
       const rows = results[0]
       res.json({
