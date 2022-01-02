@@ -36,7 +36,7 @@ services:
       target: production
       dockerfile: prod.Dockerfile
     ports:
-      - "5001:5001"
+      - "5002:5002"
     volumes:
       - ./service-penilaian:/usr/src/app
       - /usr/src/app/node_modules

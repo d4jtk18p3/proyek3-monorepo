@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 14415
 
 CMD ["npm", "run", "serve:production"]
