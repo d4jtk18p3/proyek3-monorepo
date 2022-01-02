@@ -123,7 +123,7 @@ export const createBap = async (req, res, next) => {
       //const url = req.file.path
       //const results = await DosenService.uploadBAP("196009281994031000", "cek", "cek", "cek", "2012-12-12", 2, 1)
       
-      const url = "Bypassed - Error"
+      const url = "Bypassed - Error !"
       const results = await DosenService.uploadBAP(nip, materi, kegiatan, url, tanggal, idPerkuliahan, idJadwal)
       const rows = results[0]
       res.json({
