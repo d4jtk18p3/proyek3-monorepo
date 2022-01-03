@@ -174,7 +174,7 @@ export default {
       buktiKuliah: [],
       kehadiranMhs: [],
       currentDate: new Date().toISOString().substr(0, 10),
-      statusBAP: true,
+      statusBAP: false,
     };
   },
   methods: {
@@ -207,26 +207,43 @@ export default {
       ).length;
       const tidak_hadir = this.kehadiranMhs.length - hadir;
 
+      console.log(this.perkuliahan);
+
+      console.log(this.buktiKuliah);
       const fileData = new FormData();
-      fileData.append("file", this.buktiKuliah[0]);
+      fileData.append("bap-bukti", this.buktiKuliah[0]);
+      fileData.append("tanggal",  this.currentDate);
+      fileData.append("nip", this.identity.preferred_username);
+      fileData.append("idJadwal", this.perkuliahan.id_jadwal);
+      fileData.append("idPerkuliahan", this.perkuliahan.id_perkuliahan);
+      fileData.append("materi", this.materi);
+      fileData.append("kegiatan", this.kegiatan.map((item) => {
+        return item.value;
+        }));
+      fileData.append("hadir", hadir);
+      fileData.append("tidak_hadir", tidak_hadir);
 
-      const BAP = {
-        nip: this.identity.preferred_username,
-        id_jadwal: this.perkuliahan.id_jadwal,
-        tanggal: this.currentDate,
-        materi: this.materi,
-        kegiatan: this.kegiatan.map((item) => {
-          return item.value;
-        }),
-        // NOT WORKING, IDK WHY
-        bukti: this.buktiKuliah[0],
-        hadir,
-        tidak_hadir,
-      };
+      // const BAP = {
+      //   nip: this.identity.preferred_username,
+      //   id_jadwal: this.perkuliahan.id_jadwal,
+      //   tanggal: this.currentDate,
+      //   materi: this.materi,
+      //   kegiatan: this.kegiatan.map((item) => {
+      //     return item.value;
+      //   }),
+      //   // NOT WORKING, IDK WHY
+      //   file: fileData,
+      //   hadir,
+      //   tidak_hadir,
+      // };
+      const BAP = fileData
 
-      console.log(BAP);
+      for (var pair of fileData.entries()) {
+        console.log(pair[0]+ ", " + pair[1]); 
+      }
       try {
-        const response = await bapApi.postBAP(BAP);
+        const response = await bapApi.getBAP(this.perkuliahan.id_perkuliahan, this.currentDate);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }

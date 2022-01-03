@@ -15,7 +15,7 @@ module.exports = {
       short_name: "SAP",
       start_url: "/home"
     },
-    themeColor: "#FFFFFF",
+    themeColor: "#f5f5f5",
     msTileColor: "#FFFFFF"
   }
 }
