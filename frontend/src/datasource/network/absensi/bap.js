@@ -25,6 +25,16 @@ const getBAP = async (idJadwal, tanggal) => {
   }
 }
 
+const getBAPbyNIP = async (NIP) => {
+  const BAPEndpoint = BAP_URL + `/get-by-nip/${NIP}`;
+  try {
+    const result = await baseHttp.get(BAPEndpoint);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const updateBAP = async (idBAP, data) => {
   const BAPEndpoint = BAP_URL + `/update/${idBAP}`;
   try {
@@ -38,5 +48,6 @@ const updateBAP = async (idBAP, data) => {
 export default {
   postBAP,
   getBAP,
+  getBAPbyNIP,
   updateBAP,
 }

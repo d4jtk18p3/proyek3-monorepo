@@ -15,6 +15,7 @@
                   <v-col cols="8">
                     <PersentaseMengajarModal
                       :matakuliah="item.nama_mata_kuliah"
+                      :presensi="presensi"
                     />
                     <v-progress-linear
                       class="mr-3 pa-0"
