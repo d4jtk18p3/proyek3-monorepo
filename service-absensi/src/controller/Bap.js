@@ -85,7 +85,7 @@ export const updateBap = async (req, res, next) => {
   const { materi, kegiatan, bukti } = req.body
   try {
     const result = await DosenService.updateSatuBAP(id_bap, materi, kegiatan, bukti)
-    //const result = await DosenService.updateSatuBAP(id_bap, "3", "3", "3")
+    // const result = await DosenService.updateSatuBAP(id_bap, "3", "3", "3")
     res.json({
       message: `Memperbarui data BAP berdasarkan id : ${id_bap}`,
       data: result
@@ -142,6 +142,19 @@ export const deleteBap = async (req, res, next) => {
     const result = await DosenService.delSatuBAP(id_bap)
     res.json({
       message: `Menghapus data BAP berdasarkan id : ${id_bap}`,
+      data: result
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getBapbyNIP = async (req, res, next) => {
+  const { NIP } = req.params
+  try {
+    const result = await DosenService.getSatuBAPbyNIP(NIP)
+    res.json({
+      message: `Mengambil data BAP berdasarkan NIP : ${NIP}`,
       data: result
     })
   } catch (error) {
