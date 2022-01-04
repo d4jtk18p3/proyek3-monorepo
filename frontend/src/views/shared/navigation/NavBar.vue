@@ -170,7 +170,7 @@ export default {
       toHome: "/home",
       toAbsensi: "/absensi",
       toPenilaian: "/penilaian",
-      isLoading: true
+      isLoading: false
     }
   },
   computed: {
@@ -222,20 +222,26 @@ export default {
     }),
     async waitAuthenticated () {
       return new Promise((resolve) => {
-        const unwatch = this.$store.watch(state => {
-          return this.$store.getters.identity
-        }, value => {
-          if (!value) {
-            return
-          }
-          // if (!value.isActive) {
-          //   this.$router.replace({ path: "/reset-password" })
-          // }
-          unwatch()
-          resolve()
-        }, {
-          immediate: true
-        })
+        if (this.identity.preferred_username) {
+          resolve();
+        }
+        else {
+          this.$router.push({path: "/"});
+        }
+        // const unwatch = this.$store.watch(state => {
+        //   return this.$store.getters.identity
+        // }, value => {
+        //   if (!value) {
+        //     return
+        //   }
+        //   // if (!value.isActive) {
+        //   //   this.$router.replace({ path: "/reset-password" })
+        //   // }
+        //   unwatch()
+        //   resolve()
+        // }, {
+        //   immediate: true
+        // })
       })
     }
   },

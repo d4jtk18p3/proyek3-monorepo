@@ -24,3 +24,22 @@ export const resetPassword = async (token, newPassword, newHint) => {
     return await errorHandler(e)
   }
 }
+
+export const checkNIPDosen = async (NIP) => {
+  try {
+    const result = await baseHttp.get(`api/dosen/get-one/${NIP}`);
+    return result.data.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export const checkNIMMahasiswa = async (NIM) => {
+  try {
+    const result = await baseHttp.get(`api/mahasiswa/getOne/${NIM}`);
+    console.log(result);
+    return result.data.data;
+  } catch (error) {
+    return null;
+  }
+}

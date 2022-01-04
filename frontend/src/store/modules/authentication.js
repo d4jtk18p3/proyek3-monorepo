@@ -14,19 +14,23 @@ const authentication = {
   mutations: {
     SET_IDENTITY(state, identity) {
       state.identity = identity;
+    },
+    LOG_ACCOUNT(state, payload) {
+      localStorage.setItem("nomorInduk", payload.nomorInduk);
+      localStorage.setItem("realm", payload.realm);
     }
   },
 
-  
-getters: {
+
+  getters: {
     identity: state => {
       // return state.identity
       console.log(state.identity)
       return {
         realm_access: {
-          roles: ["dosen"]
+          roles: [authentication.actions.getAuthStorage().realm]
         },
-        preferred_username: "199112182019032000"
+        preferred_username: authentication.actions.getAuthStorage().nomorInduk
       }
     }
   },
@@ -34,6 +38,19 @@ getters: {
 
 
   actions: {
+    logAuthStorage({commit}, payload) {
+      commit("LOG_ACCOUNT", payload);
+    },
+    getAuthStorage() {
+      return {
+        nomorInduk: localStorage.getItem("nomorInduk"),
+        realm: localStorage.getItem("realm")
+      }
+    },
+    deleteAuthStorage() {
+      localStorage.removeItem("nomorInduk");
+      localStorage.removeItem("realm");
+    },
     async authenticate({ commit }, forceLogin = false) {
       const auth = await keycloak.init({ onLoad: "login-required" });
 
