@@ -19,10 +19,12 @@ export const getRekapPresensiDosenTertentu = async (NIP) => {
 
 export const updatePresensiDosenTertentu = async (NIP, idStudi, idJadwal) => {
   try {
+    const date = new Date()
+    const tglHariIni = `${date.getFullYear()}-${(date.getMonth() + 1) <= 9 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)}-${date.getDate() <= 9 ? ('0' + date.getDate()) : date.getDate()}`
     const result = await db.query(`
     UPDATE "daftar_hadir_dosen"
     SET "isHadir" = true
-    WHERE "nip" = '${NIP}' AND "tanggal" = CURRENT_DATE AND "id_studi" = ${idStudi} AND "idJadwal" = ${idJadwal} RETURNING *;
+    WHERE "nip" = '${NIP}' AND "tanggal" = '${tglHariIni}' AND "id_studi" = ${idStudi} AND "idJadwal" = ${idJadwal}  RETURNING *;
     `)
     return result[0]
   } catch (error) {
