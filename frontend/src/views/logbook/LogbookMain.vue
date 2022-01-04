@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       isAuthenticated: "",
-      isLoading: true,
+      isLoading: false,
       sideBarItemsMhs: [
         { text: "Logbook Saya", icon: "mdi-notebook-multiple", to: "/logbook/mylogbook" },
         { text: "Tambah Logbook", icon: "mdi-notebook-plus", to: "/logbook/addlogbook" }

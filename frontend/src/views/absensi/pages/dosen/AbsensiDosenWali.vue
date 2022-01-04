@@ -105,7 +105,7 @@ export default {
       persentaseMengajar: [],
       currentDay: null,
       kelas: 1803,
-      isLoading: true
+      isLoading: false
     }
   },
   computed: {

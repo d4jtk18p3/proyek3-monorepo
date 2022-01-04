@@ -88,7 +88,9 @@ export default {
   },
   methods: {
     logout: function () {
-      this.$store.dispatch("logout", this.$router)
+      this.$store.dispatch("deleteAuthStorage");
+      location.reload();
+      //this.$store.dispatch("logout", this.$router)
     },
     async onClickedAbsensi () {
       await this.$router.push({ path: this.toAbsensi })
@@ -101,6 +103,10 @@ export default {
     },
     async onClickedLogbook () {
       await this.$router.push({ path: this.toLogbook })
+    }
+  }, created() {
+    if (!this.identity.preferred_username) {
+    this.$router.push({path: "/"});
     }
   }
 }

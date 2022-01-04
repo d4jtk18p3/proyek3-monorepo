@@ -19,7 +19,7 @@ import { mapGetters } from "vuex"
 
 export default {
   data: () => ({
-    isLoading: true
+    isLoading: false
   }),
 
   computed: {
@@ -29,6 +29,9 @@ export default {
 
     isMobile () {
       return this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.xs
+    },
+    identity: function () {
+      return this.$store.getters.identity
     }
   },
 
@@ -39,22 +42,26 @@ export default {
 
     async waitAuthenticated () {
       return new Promise((resolve) => {
-        const unwatch = this.$store.watch(state => {
-          return this.$store.getters.identity
-        }, value => {
-          if (!value) {
-            return
-          }
+        if (this.identity.preferred_username)
+          this.$router.push({path: "/home"});
+        else
+          this.$router.push({path: "/login"});
+        // const unwatch = this.$store.watch(state => {
+        //   return this.$store.getters.identity
+        // }, value => {
+        //   if (!value) {
+        //     return
+        //   }
 
-          if (!value.isActive) {
-            this.$router.replace({ path: "/reset-password" })
-          }
+        //   if (!value.isActive) {
+        //     this.$router.replace({ path: "/reset-password" })
+        //   }
 
-          unwatch()
-          resolve()
-        }, {
-          immediate: true
-        })
+        //   unwatch()
+        //   resolve()
+        // }, {
+        //   immediate: true
+        // })
       })
     }
   },
