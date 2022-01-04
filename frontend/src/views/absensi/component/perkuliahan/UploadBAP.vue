@@ -196,16 +196,16 @@ export default {
       type: Array,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       materi: "",
       kegiatan: [
         {
-          value: "",
-        },
+          value: ""
+        }
       ],
       tempKegiatan: ["Alex pusing", "Salman bingung", "Faza tidur"],
       buktiKuliah: [],
@@ -213,7 +213,7 @@ export default {
       bap: {},
       currentDate: new Date().toISOString().substr(0, 10),
       statusBAP: false,
-      editMode: false,
+      editMode: false
     };
   },
   methods: {
@@ -241,9 +241,8 @@ export default {
     async submitBAP() {
       await this.getKehadiran();
 
-      const hadir = this.kehadiranMhs.filter(
-        (item) => item.isHadir === true
-      ).length;
+      const hadir = this.kehadiranMhs.filter(item => item.isHadir === true)
+        .length;
       const tidak_hadir = this.kehadiranMhs.length - hadir;
 
       const fileData = new FormData();
@@ -255,7 +254,7 @@ export default {
       fileData.append("materi", this.materi);
       fileData.append(
         "kegiatan",
-        this.kegiatan.map((item) => {
+        this.kegiatan.map(item => {
           return item.value;
         })
       );
@@ -298,7 +297,7 @@ export default {
           this.bap = response.data.bap;
           this.bap.kegiatan = this.bap.kegiatan.split(",");
           this.materi = this.bap.materi;
-          this.kegiatan = this.bap.kegiatan.map((e) => {
+          this.kegiatan = this.bap.kegiatan.map(e => {
             return { value: e };
           });
           console.log(this.bap);
@@ -315,18 +314,18 @@ export default {
       this.editMode = false;
       this.statusBAP = true;
     },
-    async handleEditBAP () {
+    async handleEditBAP() {
       const BAP = {
         materi: this.materi,
-        kegiatan: this.kegiatan.map((item) => {
+        kegiatan: this.kegiatan.map(item => {
           return item.value;
         }),
         bukti: this.bap.bukti
       };
       try {
-         await bapApi.updateBAP(this.bap.id_BAP, BAP);
-         await this.fetchData();
-         this.unToogleEdit();
+        await bapApi.updateBAP(this.bap.id_BAP, BAP);
+        await this.fetchData();
+        this.unToogleEdit();
       } catch (error) {
         console.log(error);
       }
@@ -339,15 +338,15 @@ export default {
     }
   },
   components: {
-    Upload,
+    Upload
   },
   computed: {
     ...mapGetters({
-      currentTheme: "theme/getCurrentColor",
+      currentTheme: "theme/getCurrentColor"
     }),
-    identity: function () {
+    identity: function() {
       return this.$store.getters.identity;
-    },
-  },
+    }
+  }
 };
 </script>
