@@ -1,0 +1,11 @@
+:2104 {
+  handle_path /keycloak-proxy/* {
+    reverse_proxy localhost:14416
+  }
+
+  handle_path /api/* {
+    reverse_proxy localhost:14418
+  }
+
+  reverse_proxy localhost:14415
+}

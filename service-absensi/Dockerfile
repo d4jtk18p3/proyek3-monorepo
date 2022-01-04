@@ -1,19 +1,14 @@
-#FROM node:16-alpine3.14
+FROM node:16-alpine3.13
 
-#WORKDIR /usr/src/service-absensi
+COPY . /src/app
 
-#CMD ["./bootstrap.sh"]
+WORKDIR /src/app
+RUN npm ci --only=production
 
-FROM node:15-alpine AS development
+WORKDIR /src/app/postgres-database
+RUN npm install --only=production
 
-WORKDIR /usr/src/app
+WORKDIR /src/app/monitoring
+RUN npm install --only=production
 
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 6002
-
-CMD ["npm", "run", "serve:development"]
+CMD ["node", "--experimental-specifier-resolution=node", "src/main.js"]

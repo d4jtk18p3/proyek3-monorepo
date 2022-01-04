@@ -3,12 +3,13 @@ import * as MahasiswaDAO from './Mahasiswa'
 import * as JadwalDAO from './Jadwal'
 import db from '../db'
 
-export const insertOne = async (idStudi, idKeterangan, keterlambatan, tanggal, isHadir, minggu, bulan, ja, jb) => {
+export const insertOne = async (idStudi, idKeterangan, nimMhs, keterlambatan, tanggal, isHadir, minggu, bulan, ja, jb) => {
   // Belum melibatkan db common
   try {
     const result = await DaftarHadirMahasiswa.create({
       id_studi: idStudi,
       id_keterangan: idKeterangan,
+      nim: nimMhs,
       keterlambatan,
       tanggal,
       isHadir,
@@ -72,7 +73,7 @@ export const bikinDaftarHadirSeluruhMhsHariIni = async () => {
         const isPunya = await isSudahPunyaDaftarHadir(matkul.id_studi, tglHariIni, matkul.ja, matkul.jb)
         if (!isPunya) {
           // bikin daftar hadir untuk setiap matkul hari ini
-          await insertOne(matkul.id_studi, null, 0, tglHariIni, false, calculateWeekOfMonth(date.getDate()), date.getMonth() + 1, matkul.ja, matkul.jb)
+          await insertOne(matkul.id_studi, null, mhs.nim, 0, tglHariIni, false, calculateWeekOfMonth(date.getDate()), date.getMonth() + 1, matkul.ja, matkul.jb)
           // console.log(result)
         }
       })
