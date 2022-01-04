@@ -3,10 +3,10 @@ import * as DaftarHadirDosenService from '../services/DaftarHadirDosen'
 import * as DaftarHadirDosenDAO from '../dao/DaftarHadirDosen'
 
 // New Method From 19
-export const getRekapPresensiDosenTertentu = async (req, res) => {
+export const getRekapPresensiDosenTertentuWithMatkul = async (req, res) => {
   const { NIP } = req.params
   try {
-    const result = await DaftarHadirDosenDAO.getRekapPresensiDosenTertentu(NIP)
+    const result = await DaftarHadirDosenDAO.getRekapPresensiDosenTertentuWithMatkul(NIP)
     res.status(200).json({
       message: `Mengambil Data Rekap Presensi Dosen ${NIP} berhasil  `,
       data: {
