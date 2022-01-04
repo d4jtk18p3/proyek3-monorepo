@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       isAuthenticated: "",
-      isLoading: false,
+      isLoading: true,
       sideBarItemsDsn: [
         { text: "Dashboard Tugas", icon: "mdi-chart-bar", to: "/monitoring/dosen/dashboard-tugas" },
         { text: "Monitoring Tugas", icon: "mdi-clipboard-check-multiple-outline", to: "/monitoring/dosen/monitoring-tugas" }
