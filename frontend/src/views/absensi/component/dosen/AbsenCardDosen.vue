@@ -4,6 +4,12 @@
     max-width="1000"
     :style="{ background: currentTheme.background }"
   >
+    <h1 
+      v-if="jadwalDsn.length === 0"
+      class="mt-16 mb-16 text-center font-weight-black"
+    >
+      Tidak Ada Perkuliahan
+    </h1>
     <v-slide-group class="d-flex align-center" value="3">
       <v-slide-item
         v-for="(item, index) in jadwalDsn"
