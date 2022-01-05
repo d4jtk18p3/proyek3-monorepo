@@ -24,9 +24,9 @@ getters: {
       console.log(state.identity)
       return {
         realm_access: {
-          roles: ["dosen"]
+          roles: ["dosen"] //dosen
         },
-        preferred_username: "199112182019032000"
+        preferred_username: "196012261992031000" //196012261992031000 181524001
       }
     }
   },
