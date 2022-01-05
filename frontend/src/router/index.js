@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/home",
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     component: () => import(/* webpackChunkName: "akun" */"../views/Home")
   },
   // {
@@ -129,12 +129,12 @@ const routes = [
   },
   {
     path: "/absensi",
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     component: () => import("../views/absensi/AbsensiMain"),
     children: [
       {
         meta: {
-          requiresAuth: false,
+          requiresAuth: true,
           title: "Absensi Mahasiswa"
         },
         path: "/absensi/mahasiswa/absensi",
@@ -146,13 +146,13 @@ const routes = [
       },
       {
         path: "/absensi/dosen/dosenwali",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "NilaiMahasiswa",
         component: () => import(/* webpackChunkName: "absensimahasiswa" */ "../views/absensi/pages/dosen/AbsensiDosenWali")
       },
       {
         path: "/absensi/mahasiswa/upload",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "UploadBukti",
         component: () =>
           import(
@@ -161,7 +161,7 @@ const routes = [
       },
       {
         path: "/absensi/dosen/absensi",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "AbsensiDosen",
         component: () =>
           import(
@@ -284,89 +284,6 @@ const routes = [
     ]
   },
   {
-    path: "/monitoring",
-    meta: { requiresAuth: true },
-    component: () => import("../views/monitoring/monitoringmain"),
-    children: [
-      {
-        path: "/monitoring/dosen/dashboard-tugas",
-        meta: { requiresAuth: true },
-        name: "DashboardDosenMain",
-        component: () => import(/* webpackChunkName: "dashboardDosenMain" */"../views/monitoring/pages/dosen/DashboardDosenMain")
-      },
-      {
-        path: "/monitoring/dosen/dashboard-tugas/daftar-tugas/:id_matkul/:id_perkuliahan",
-        meta: { requiresAuth: true },
-        name: "DashboardDosenMonitoring",
-        component: () => import(/* webpackChunkName: "dashboardDosenMonitoring" */"../views/monitoring/pages/dosen/DashboardDosenMonitoring")
-      },
-      {
-        path: "/monitoring/dosen/monitoring-tugas",
-        meta: { requiresAuth: true },
-        name: "MonitoringDosenMatkul",
-        component: () => import(/* webpackChunkName: "monitoringDosenMatkul" */ "../views/monitoring/pages/dosen/MonitoringDosenMatkul")
-      },
-      {
-        path: "/monitoring/dosen/monitoring-tugas/daftar-tugas/:id_matkul/:id_perkuliahan",
-        meta: { requiresAuth: true },
-        name: "MonitoringDosenDaftarTugas",
-        component: () => import(/* webpackChunkName: "monitoringDosenDaftarTugas" */ "../views/monitoring/pages/dosen/MonitoringDosenDaftarTugas")
-      },
-      // {
-      //   path: "/monitoring/dosen/monitoring-tugas/matkul",
-      //   name: "MonitoringDosenMain",
-      //   component: () => import(/* webpackChunkName: "monitoringDosenMain" */ "../views/monitoring/pages/dosen/MonitoringDosenMain")
-      // },
-      {
-        path: "/monitoring/dosen/monitoring-tugas/daftar-tugas/:id_matkul/:id_perkuliahan/tugas/:id_tugas",
-        meta: { requiresAuth: true },
-        name: "MonitoringDosenTugas",
-        component: () => import(/* webpackChunkName: "monitoringDosenTugas" */ "../views/monitoring/pages/dosen/MonitoringDosenTabel")
-      },
-      {
-        path: "/monitoring/dosen/monitoring-tugas/daftar-tugas/:id_matkul/:id_perkuliahan/tugas/:id_tugas/:id_mhs",
-        meta: { requiresAuth: true },
-        name: "MonitoringDosenDetailTabel",
-        component: () => import(/* webpackChunkName: "monitoringDosenDetailTabel" */ "../views/monitoring/pages/dosen/MonitoringDosenDetailTabel")
-      },
-      {
-        path: "/monitoring/mahasiswa/dashboard",
-        meta: { requiresAuth: true },
-        name: "DashboardMonitoringMhs",
-        component: () => import(/* webpackChunkName: "dashboard" */"../views/monitoring/pages/mahasiswa/dashboard/DashboardMahasiswa")
-      },
-      {
-        path: "/monitoring/mahasiswa/daftar-tugas",
-        meta: { requiresAuth: true },
-        name: "MonitoringMenu",
-        component: () => import(/* webpackChunkName: "dashboard" */"../views/monitoring/pages/mahasiswa/monitoring/MonitoringMahasiswaDaftarTugas")
-      },
-      {
-        path: "/monitoring/mahasiswa/matakuliah/:namaMatkul&:namaTugas&:id",
-        meta: { requiresAuth: true },
-        name: "MonitoringTugas",
-        component: () => import(/* webpackChunkName: "dashboard" */"../views/monitoring/pages/mahasiswa/monitoring/MonitoringMahasiswaTugasItem")
-      },
-      {
-        path: "/monitoring/mahasiswa/monitoringTeman/:namaMatkul&:namaTugas&:id",
-        meta: { requiresAuth: true },
-        name: "MonitoringTeman",
-        component: () => import(/* webpackChunkName: "dashboard" */"../views/monitoring/pages/mahasiswa/monitoring/MonitoringMahasiswaBersama")
-      },
-      {
-        path: "/monitoring/mahasiswa/matakuliah",
-        meta: { requiresAuth: true },
-        name: "MonitoringDaftarMatkul",
-        component: () => import(/* webpackChunkName: "dashboard" */"../views/monitoring/pages/mahasiswa/monitoring/MonitoringMahasiswaDaftarMatKul")
-      }
-      // {
-      //   path: "/auth/reset-password",
-      //   name: "ResetPassword",
-      //   component: () => import(/* webpackChunkName: "add-new-user" */ "../views/auth/pages/resetPassword/ResetPassword")
-      // }
-    ]
-  },
-  {
     path: "/component-template",
     component: () => import("../views/componentTemplate/ComponentTemplateMain"),
     children: [
@@ -454,7 +371,7 @@ const routes = [
   },
   {
     path: "/penilaian",
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     component: () => import("../views/penilaian/PenilaianMain"),
     children: [
       {
@@ -467,7 +384,7 @@ const routes = [
       },
       {
         path: "/penilaian/input-nilai-matkul/:id",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "Input Nilai Matkul",
         component: () =>
           import(
@@ -477,7 +394,7 @@ const routes = [
       },
       {
         path: "/penilaian/dashboard-nilai-mahasiswa",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "Dashboard Nilai Mahasiswa",
         component: () =>
           import(
@@ -486,7 +403,7 @@ const routes = [
       },
       {
         path: "/penilaian/dashboard-nilai-dosen-pengampu",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "Dashboard Nilai Section",
         component: () =>
           import(
@@ -495,7 +412,7 @@ const routes = [
       },
       {
         path: "/penilaian/dashboard-nilai-dosen-pengampu/:id",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "Dashboard Nilai Dosen Pengampu",
         component: () =>
           import(
@@ -504,7 +421,7 @@ const routes = [
       },
       {
         path: "/penilaian/transkripsi-nilai/:id",
-        meta: { requiresAuth: false },
+        meta: { requiresAuth: true },
         name: "Transkripsi Nilai",
         component: () =>
           import(
@@ -513,37 +430,57 @@ const routes = [
         props: true
       }
     ]
+  },{
+    path: "/",
+    meta: { requiresAuth: true },
+    component: () => import(
+      /* webpackChunkName: "akun" */"../views/akun/Main"
+    ),
+    children: [
+      {
+        path: "login",
+        meta: { requiresAuth: false },
+        component: () => import(
+          /* webpackChunkName: "akun.login" */"../views/akun/pages/Login"
+        )
+      },
+      {
+        path: "reset-password",
+        meta: { requiresAuth: true },
+        component: () => import(/* webpackChunkName: "akun.reset-password" */ "../views/akun/pages/ResetPassword")
+      }
+    ]
   }
 ]
 
 const getRoutes = () => {
   const hostname = window.location.hostname
 
-  if (hostname === process.env.VUE_APP_AKUN_HOSTNAME) {
-    return [
-      {
-        path: "/",
-        meta: { requiresAuth: true },
-        component: () => import(
-          /* webpackChunkName: "akun" */"../views/akun/Main"
-        ),
-        children: [
-          {
-            path: "login",
-            meta: { requiresAuth: false },
-            component: () => import(
-              /* webpackChunkName: "akun.login" */"../views/akun/pages/Login"
-            )
-          },
-          {
-            path: "reset-password",
-            meta: { requiresAuth: true },
-            component: () => import(/* webpackChunkName: "akun.reset-password" */ "../views/akun/pages/ResetPassword")
-          }
-        ]
-      }
-    ]
-  }
+  // if (hostname === process.env.VUE_APP_AKUN_HOSTNAME) {
+  //   return [
+  //     {
+  //       path: "/",
+  //       meta: { requiresAuth: true },
+  //       component: () => import(
+  //         /* webpackChunkName: "akun" */"../views/akun/Main"
+  //       ),
+  //       children: [
+  //         {
+  //           path: "login",
+  //           meta: { requiresAuth: false },
+  //           component: () => import(
+  //             /* webpackChunkName: "akun.login" */"../views/akun/pages/Login"
+  //           )
+  //         },
+  //         {
+  //           path: "reset-password",
+  //           meta: { requiresAuth: true },
+  //           component: () => import(/* webpackChunkName: "akun.reset-password" */ "../views/akun/pages/ResetPassword")
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
   return routes
 }
 

@@ -61,7 +61,7 @@ export default {
   data () {
     return {
       isAuthenticated: "",
-      isLoading: true,
+      isLoading: false,
       sideBarItemsMhs: [
         { text: "Absensi Mahasiswa", icon: "mdi-email-outline", to: "/absensi/mahasiswa/absensi" }
       ],
@@ -128,17 +128,23 @@ export default {
     },
     async waitAuthenticated () {
       return new Promise((resolve) => {
-        const unwatch = this.$store.watch(state => {
-          return this.$store.getters.identity
-        }, value => {
-          if (!value) {
-            return
-          }
-          unwatch()
-          resolve()
-        }, {
-          immediate: true
-        })
+        if (this.identity.preferred_username) {
+          resolve();
+        }
+        else {
+          this.$router.push({path: "/"});
+        }
+        // const unwatch = this.$store.watch(state => {
+        //   return this.$store.getters.identity
+        // }, value => {
+        //   if (!value) {
+        //     return
+        //   }
+        //   unwatch()
+        //   resolve()
+        // }, {
+        //   immediate: true
+        // })
       })
     },
     cekUserRoles () {
