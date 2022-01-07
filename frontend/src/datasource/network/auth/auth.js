@@ -1,5 +1,6 @@
 import baseHttp from "./http"
-import errorHandler from "@/datasource/network/errorHandler"
+import errorHandler
+  from "@/datasource/network/errorHandler"
 export const requestResetPasswordEmail = async (email) => {
   try {
     const result = await baseHttp.post("user/forget-password", {
@@ -21,5 +22,24 @@ export const resetPassword = async (token, newPassword, newHint) => {
     return result.data
   } catch (e) {
     return await errorHandler(e)
+  }
+}
+
+export const checkNIPDosen = async (NIP) => {
+  try {
+    const result = await baseHttp.get(`api/dosen/get-one/${NIP}`);
+    return result.data.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export const checkNIMMahasiswa = async (NIM) => {
+  try {
+    const result = await baseHttp.get(`api/mahasiswa/getOne/${NIM}`);
+    console.log(result);
+    return result.data.data;
+  } catch (error) {
+    return null;
   }
 }

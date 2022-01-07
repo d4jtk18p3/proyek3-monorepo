@@ -13,10 +13,10 @@
         <v-btn
           text
           small
-          class="font-weight-bold"
+          class="font-weight-bold primary--text pa-0"
           :style="item.disabled ? breadcrumbItemDisableStyle : breadcrumbItemEnableStyle"
           @click="onButtonBreadcumbClick(item.href)"
-        >{{item.text}}</v-btn>
+        ><h3>{{item.text}}</h3></v-btn>
       </v-breadcrumbs-item>
     </template>
   </v-breadcrumbs>

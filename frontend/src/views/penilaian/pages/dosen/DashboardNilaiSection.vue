@@ -1,28 +1,30 @@
 <template>
   <v-row :style="{color: currentTheme.onBackground}">
     <v-col cols="12">
-      <p class="text-h4 font-weight-bold">Dashboard Nilai Mata Kuliah</p>
+      <p :class="isMobile ? `text-h5 font-weight-bold` : `text-h4 font-weight-bold`">Dashboard Nilai Mata Kuliah</p>
     </v-col>
     <v-col cols="12">
       <breadcumbs :breadcrumb-items="breadcrumbItems"/>
     </v-col>
     <v-col :cols="isMobile ? `12` : `3` " :offset="isMobile ? `0` : `0`">
         <p
-        class="text-left font-weight-bold text-h5"
+        :class="isMobile ? `text-left font-weight-bold text-h6` : `text-left font-weight-bold text-h5`"
         :style="{color: currentTheme.onBackground}"
         >Kelas</p>
         <v-item-group>
-        <v-card link class="mb-3" v-for="item in listKelas" :key="item.Kelas">
+        <v-hover v-slot="{ hover }" >
+        <v-card link :elevation="hover ? 12 : 2" class="mb-3" v-for="item in listKelas" :key="item.Kelas">
           <v-item v-slot="{ active, toggle }">
             <KelasItem :kelas="item.kode_kelas" @click.native="getMatkulbyKelas(item) + toggle()" :bgcolor="active ? '#FB8C00' : currentTheme.surface"/>
           </v-item>
         </v-card>
+        </v-hover>
         </v-item-group>
     </v-col>
     <v-divider v-if="!isMobile" vertical class="mx-5"></v-divider>
     <v-col sm="8">
     <p
-    class="text-left font-weight-bold text-h5"
+    :class="isMobile ? `text-left font-weight-bold text-h6` : `text-left font-weight-bold text-h5`"
     :style="{color: currentTheme.onBackground}"
     >Mata Kuliah</p>
     <v-row v-if="listMatkul">
@@ -89,7 +91,7 @@ export default {
   methods: {
     async getMatkulbyKelas (kodeKelas, index) {
       // console.log(kodeKelas)
-      const matkul = await DosenAPI.getMatkul(this.nip, kodeKelas.kode_kelas)
+      const matkul = await DosenAPI.getMatkul(196610181995121000, 1803)
       this.id_perkuliahan = matkul.id_perkuliahan
       this.listMatkul = matkul.listMatkul
     },
@@ -101,7 +103,7 @@ export default {
   async mounted () {
     const identity = this.$store.getters.identity
     this.nip = identity.preferred_username // "196610181995121000"
-    const kelas = await DosenAPI.getKelas(this.nip)
+    const kelas = await DosenAPI.getKelas(196610181995121000)
     this.listKelas = kelas.uniqueClass
   }
 }

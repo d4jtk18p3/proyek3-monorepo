@@ -36,7 +36,7 @@ export default {
   data () {
     return {
       isAuthenticated: "",
-      isLoading: true,
+      isLoading: false,
       sideBarItems: [
         { text: "Daftar via Form", icon: "mdi-account-plus", to: "/admin/add-user/form" },
         { text: "Daftar via Excel", icon: "mdi-account-multiple-plus", to: "/admin/add-user/excel" }

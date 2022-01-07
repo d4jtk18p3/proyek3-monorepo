@@ -17,7 +17,7 @@ export const findOneMahasiswaByNIM = async (NIM) => {
 export const findAllMahasiswa = async () => {
   try {
     const mahasiswa = await Mahasiswa.findAll({
-      order: [['NIM', 'ASC']]
+      order: [['nim', 'ASC']]
     })
     return mahasiswa
   } catch (error) {
@@ -30,12 +30,12 @@ export const findMahasiswaByName = async (nama) => {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
         nama_mahasiswa: sequelize.where(
-          sequelize.fn('LOWER', sequelize.col('nama_mahasiswa')),
+          sequelize.fn('LOWER', sequelize.col('nama')),
           'LIKE',
           '%' + nama.toLowerCase() + '%'
         )
       },
-      order: [['nama_mahasiswa', 'ASC']]
+      order: [['nama', 'ASC']]
     })
     return mahasiswa
   } catch (error) {
@@ -47,15 +47,10 @@ export const findMahasiswaByNIM = async (NIM) => {
   try {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
-        NIM: sequelize.where(
-          sequelize.fn('LOWER', sequelize.col('NIM')),
-          'LIKE',
-          '%' + NIM.toLowerCase() + '%'
-        )
-      },
-      order: [['NIM', 'ASC']]
+        nim:NIM
+      }
     })
-    return mahasiswa
+    return mahasiswa[0]
   } catch (error) {
     console.error(error)
   }
@@ -74,7 +69,7 @@ export const insertOneMahasiswa = async (
       nim: NIM,
       nama: namaMahasiswa,
       kode_kelas: kodeKelas,
-      email,
+      email: email,
       nomor_ponsel: nomorHp,
       url_foto: urlFoto
     })
@@ -88,11 +83,11 @@ export const updateNomorHpMahasiswa = async (NIM, nomorHP) => {
   try {
     const mahasiswa = await Mahasiswa.update(
       {
-        nomor_hp: nomorHP
+        nomor_ponsel: nomorHP
       },
       {
         where: {
-          NIM
+          nim:NIM
         },
         silent: true
       }
@@ -107,7 +102,7 @@ export const deleteMahasiswabyId = async (mahasiswaId) => {
   try {
     const result = await Mahasiswa.destroy({
       where: {
-        id_mahasiswa: mahasiswaId
+        nim: mahasiswaId
       }
     })
     return result

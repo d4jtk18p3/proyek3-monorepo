@@ -9,61 +9,63 @@ export const updateIndeksPrestasi = async (req, res, next) => {
   try {
     const dataip_semester = req.body.dataip_semester
     var listip_semester = []
-    
-    for(var i = 0; i<dataip_semester.length; i++){
+
+    for (var i = 0; i < dataip_semester.length; i++) {
       var nim = dataip_semester[i].nim
-      const recordip_semester = await IndeksPrestasiDAO.updateIndeksPrestasibyMahasiswa(ip_semester,nim)
+      const recordip_semester = await IndeksPrestasiDAO.updateIndeksPrestasibyMahasiswa(ip_semester, nim)
       listip_semester.push(recordip_semester)
     }
 
-    if (listip_semester === null){
+    if (listip_semester === null) {
       console.log('gagal update indeks prestasi')
       throw error
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'update indeks prestasi sukses',
       data: {
         listip_semester
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
 export const getIndeksPrestasibyMahasiswa = async (req, res, next) => {
   try {
-    const dataip_semester= await IndeksPrestasiDAO.getOneIpBymahasiswa(nim)
+    const dataip_semester = await IndeksPrestasiDAO.getOneIpBymahasiswa(nim)
 
     var listip_semester = []
-    for(var i = 0; i<dataip_semester.length; i++){
+    for (var i = 0; i < dataip_semester.length; i++) {
       var mhs = await MahasiswaDAO.findOneMahasiswaByNIM(dataip_semester[i].id_mahasiswa)
-      const result = {nim: dataip_semester[i].id_mahasiswa, nama: mhs.nama nilai_akhir: dataip_semester[i].indeks_prestasi}
+      const result = { nim: dataip_semester[i].id_mahasiswa, nama: mhs.nama, nilai_akhir: dataip_semester[i].indeks_prestasi }
       listip_semester.push(result)
     }
-    
+
     if (listip_semester === null) {
       console.log('Get indeks prestasi by mahasiswa gagal')
       throw error
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get indeks prestasi by mahasiswa sukses',
       data: {
         listip_semester
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
 export const postNewIndeksPrestasi = async (req, res, next) => {
   try {
     const {
-	  id_ip,
+      id_ip,
       ip_semester,
-	  nim,
-	  semester
+      nim,
+      semester
     } = req.body
     const error = validationResult(req)
 
@@ -72,7 +74,7 @@ export const postNewIndeksPrestasi = async (req, res, next) => {
       throw error
     }
 
-    const indeksPrestasiInsert = await IndeksPrestasiDAO.insertOneIp(id_ip,ip_semester,nim,semester)
+    const indeksPrestasiInsert = await IndeksPrestasiDAO.insertOneIp(id_ip, ip_semester, nim, semester)
 
     if (typeof indeksPrestasiInsert === 'undefined') {
       error.status = 500
@@ -81,6 +83,7 @@ export const postNewIndeksPrestasi = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert Indeks Prestasi sukses',
       data: {
         indeksPrestasiInsert
@@ -97,6 +100,7 @@ export const deleteIndeksPrestasibyMaahasiswa = async (req, res, next) => {
     const result = await IndeksPrestasiDAO.deleteIndeksPrestasibyMahasiswa(nim)
     if (result === 1) {
       res.status(200).json({
+        status: res.statusCode,
         message: 'Delete nilai berhasil',
         data: {
           mahasiswaId
@@ -116,6 +120,7 @@ export const getAllIndeksPrestasi = async (req, res, next) => {
   try {
     const nilai = await IndeksPrestasiDAO.getAllIndeksPrestasi()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all indeks prestasi success',
       data: {
         nilai
@@ -133,6 +138,7 @@ export const updateNilaiAkhirbyMatkul = async (req, res, next) => {
     if (updateNilaiAkhir === 1) {
       const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
       res.status(200).json({
+        status: res.statusCode,
         message: 'Update Nilai Akhir Mahasiswa berhasil',
         data: {
           nilai_akhir
@@ -154,6 +160,7 @@ export const getOneIpBymahasiswa = async (req, res, next) => {
     const { id_ip } = req.params
     const indeksprestasi = await IndeksPrestasiDAO.getOneIpBymahasiswa(nim)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get one Indeks Prestasi by Mahasiswa success',
       data: {
         id_ip

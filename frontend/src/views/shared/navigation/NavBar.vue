@@ -16,9 +16,9 @@
         </v-row>
       </v-card>
       <v-spacer></v-spacer>
-      <!-- <v-text-field
+      <v-text-field
         hide-details
-        label="Cari disini"
+        label="Cari di sini"
         append-icon="mdi-magnify"
         class="shrink"
         style="width:300px"
@@ -26,8 +26,8 @@
         outlined
         dense
         @click:append="notification_click"
-      ></v-text-field> -->
-      <!-- <v-btn class="ml-2" icon @click="notification_click()">
+      ></v-text-field> 
+      <v-btn class="ml-2" icon @click="notification_click()">
         <v-badge
           :content="usernotif"
           :value="usernotif"
@@ -36,8 +36,8 @@
         >
           <v-icon :style="{color: currentTheme.colorPrimary}">mdi-bell-outline</v-icon>
         </v-badge>
-      </v-btn> -->
-      <v-btn depressed :style="{background : currentTheme}" right class="ml-1" height="50px">
+      </v-btn>
+      <!-- <v-btn depressed :style="{background : currentTheme}" right class="ml-1" height="50px">
         <div :style="{background: currentTheme.colorPrimary, 'border-radius': '100%', padding: '2px'}">
           <v-avatar size="27">
             <img
@@ -54,7 +54,7 @@
           </v-overlay>
         </v-toolbar-title>
         <v-icon :style="{color: currentTheme.colorPrimary}">mdi-menu-down</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
     <v-app-bar
       app
@@ -66,7 +66,7 @@
     <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-img :src="require('../../../assets/polban.png')" max-width="30" contain class="mr-2"/>
-    <v-toolbar-title style="font-size: 14px">Politeknik Negeri Bandung</v-toolbar-title>
+    <v-toolbar-title style="font-size: 14px" @click="onClickedHome()">Politeknik Negeri Bandung</v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- <v-btn icon @click="notification_click()">
       <v-badge
@@ -81,21 +81,22 @@
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
-      absolute
+      fixed
+      hide-overlay
       width="100%"
       style="margin-top: 48px"
       v-if="$vuetify.breakpoint.mobile"
     >
-          <!-- <v-text-field
+          <v-text-field
             hide-details
-            label="Cari disini"
+            label="Cari di sini"
             append-icon="mdi-magnify"
             class="mx-5 mt-5"
             single-line
             outlined
             dense
             @click:append="search()"
-          ></v-text-field> -->
+          ></v-text-field>
           <v-list
           >
             <v-list-item class="profile mx-3" two-line>
@@ -121,19 +122,15 @@
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Beranda</v-list-item-title>
+              <v-list-item-title @click="onClickedHome()">Beranda</v-list-item-title>
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Absensi</v-list-item-title>
+              <v-list-item-title @click="onClickedAbsensi()">Absensi</v-list-item-title>
             </v-list-item>
 
             <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Profil</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item class="mx-3 profile font-weight-bold">
-              <v-list-item-title>Nilai</v-list-item-title>
+              <v-list-item-title @click="onClickedPenilaian()">Penilaian</v-list-item-title>
             </v-list-item>
 
             <v-divider></v-divider>
@@ -171,7 +168,9 @@ export default {
       group: null,
       darkmode: false,
       toHome: "/home",
-      isLoading: true
+      toAbsensi: "/absensi",
+      toPenilaian: "/penilaian",
+      isLoading: false
     }
   },
   computed: {
@@ -190,7 +189,8 @@ export default {
     }
     Promise.all(tasks).then(result => {
       this.isLoading = false
-      this.user.nama = this.identity.given_name
+      this.user.nama = this.identity.given_name || "User"
+      this.user.nomorInduk = this.identity.preferred_username
     })
   },
   methods: {
@@ -211,25 +211,37 @@ export default {
         await this.$router.push({ path: this.toHome })
       }
     },
+    async onClickedAbsensi () {
+      await this.$router.push({ path: this.toAbsensi })
+    },
+    async onClickedPenilaian () {
+      await this.$router.push({ path: this.toPenilaian })
+    },
     ...mapActions({
       toogleTheme: "theme/toogleDark"
     }),
     async waitAuthenticated () {
       return new Promise((resolve) => {
-        const unwatch = this.$store.watch(state => {
-          return this.$store.getters.identity
-        }, value => {
-          if (!value) {
-            return
-          }
-          // if (!value.isActive) {
-          //   this.$router.replace({ path: "/reset-password" })
-          // }
-          unwatch()
-          resolve()
-        }, {
-          immediate: true
-        })
+        if (this.identity.preferred_username) {
+          resolve();
+        }
+        else {
+          this.$router.push({path: "/"});
+        }
+        // const unwatch = this.$store.watch(state => {
+        //   return this.$store.getters.identity
+        // }, value => {
+        //   if (!value) {
+        //     return
+        //   }
+        //   // if (!value.isActive) {
+        //   //   this.$router.replace({ path: "/reset-password" })
+        //   // }
+        //   unwatch()
+        //   resolve()
+        // }, {
+        //   immediate: true
+        // })
       })
     }
   },

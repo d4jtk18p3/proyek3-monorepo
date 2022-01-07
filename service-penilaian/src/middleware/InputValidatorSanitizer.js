@@ -2,7 +2,8 @@ import expressValidator from 'express-validator';
 const { body, param } = expressValidator;
 import * as DosenDAO from '../dao/Dosen'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
-
+import * as MatkulDAO from '../dao/Mata Kuliah'
+import * as KelasDAO from '../dao/Kelas'
 
 // CATATAN : File ini berisi middleware untuk memvalidasi dan sanitasi inputan yang dikirim oleh user
 
@@ -40,11 +41,10 @@ export const postNewMahasiswa = [
     })
   }),
   body('namaMahasiswa', 'Nama Mahasiswa wajib diisi').exists(),
-  body('angkatan', 'Angkatan wajib diisi').exists(),
-  body('tingkat', 'Tingkat wajib diisi').exists(),
+  body('kodeKelas').exists(),
   body('email', 'Format email tidak valid').isEmail(),
-  body('status', 'Status wajib diisi').exists()
-  // body('nomorHp', 'Nomor Hp tidak valid').isLength({ min: 11 })
+  //body('nomorHp', 'Nomor Hp tidak valid').isLength({ min: 11 }),
+  body('urlFoto').exists(),
 ]
 
 export const updateNomorHpMahasiswa = [
@@ -61,15 +61,15 @@ export const createUser = [
   body('role', 'Role wajib diisi').exists()
 ]
 
-export const postNewNilai=[
+export const postNewNilai = [
   body('nilai', 'Nilai Wajib diisi').exists()
 ]
 
-export const postNewNilaiAkhir=[
+export const postNewNilaiAkhir = [
   body('nilai_akhir', 'Nilai Akhir Wajib diisi').exists()
 ]
 
-export const postNewKategoriNilai=[
+export const postNewKategoriNilai = [
   body('id_kategori', 'id kategori Wajib diisi').exists(),
   body('bobot_nilai', 'bobot nilai Wajib diisi').exists(),
   body('id_matakuliah', 'id mata kuliah Wajib diisi').exists(),
@@ -93,4 +93,34 @@ export const deleteDosenByNIP = [
       }
     })
   })
+]
+
+export const postNewMatkul = [
+  body('id', 'ID wajib diisi').exists().bail(),
+  body('id').custom((value) => {
+    return MatkulDAO.findMatkulById(value).then((matkul) => {
+      if (matkul) {
+        return Promise.reject(new Error('Id Matkul sudah terdaftar'))
+      }
+    })
+  }),
+  body('semester', 'Semester wajib diisi').exists(),
+  body('namaMataKuliah', 'Nama Mata Kuliah wajib diisi').exists(),
+  body('sksTeori', 'SKS Teori wajib diisi').exists(),
+  body('sksPraktik', 'SKS Praktik wajib diisi').exists(),
+  body('kodeProgramStudi', 'kode Program Studi wajib diisi').exists()
+]
+
+export const postNewKelas = [
+  body('kodeKelas', 'kodeKelas wajib diisi').exists().bail(),
+  body('kodeKelas').custom((value) => {
+    return KelasDAO.findKelasByKodeKelas(value).then((kelas) => {
+      if (kelas) {
+        return Promise.reject(new Error('Kode kelas sudah terdaftar'))
+      }
+    })
+  }),
+  body('kodeProgramStudi', 'kode program studi wajib diisi').exists(),
+  body('NIP', 'nip wajib diisi').exists(),
+  body('Tahun', 'tahun wajib diisi').exists()
 ]

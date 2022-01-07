@@ -38,7 +38,7 @@ export default {
     SideBar,
     NavBar
   },
-  created () {
+  async created () {
     // this.sychronize("dani")
     if (!this.$keycloak) {
       this.initKeycloak()
@@ -52,17 +52,21 @@ export default {
       this.isLoading = false
       this.cekUserRoles()
     })
+    if (this.identity.realm_access.roles[0] === "dosen") {
+      await this.$router.push({name: "AbsensiDosen"})
+    } else {
+      await this.$router.push({name: "AbsensiMahasiswa"})
+    }
   },
   data () {
     return {
       isAuthenticated: "",
-      isLoading: true,
+      isLoading: false,
       sideBarItemsMhs: [
         { text: "Absensi Mahasiswa", icon: "mdi-email-outline", to: "/absensi/mahasiswa/absensi" }
       ],
       sideBarItemsDsn: [
-        { text: "Absensi Dosen Pengampu", icon: "mdi-email-outline", to: "/absensi/dosen/absensi" },
-        { text: "Absensi Dosen Wali", icon: "mdi-email-outline", to: "/absensi/dosen/dosenwali" }
+        { text: "Absensi Dosen", icon: "mdi-email-outline", to: "/absensi/dosen/absensi" },
       ],
       isUserDosen: false
     }
@@ -124,17 +128,23 @@ export default {
     },
     async waitAuthenticated () {
       return new Promise((resolve) => {
-        const unwatch = this.$store.watch(state => {
-          return this.$store.getters.identity
-        }, value => {
-          if (!value) {
-            return
-          }
-          unwatch()
-          resolve()
-        }, {
-          immediate: true
-        })
+        if (this.identity.preferred_username) {
+          resolve();
+        }
+        else {
+          this.$router.push({path: "/"});
+        }
+        // const unwatch = this.$store.watch(state => {
+        //   return this.$store.getters.identity
+        // }, value => {
+        //   if (!value) {
+        //     return
+        //   }
+        //   unwatch()
+        //   resolve()
+        // }, {
+        //   immediate: true
+        // })
       })
     },
     cekUserRoles () {

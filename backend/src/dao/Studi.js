@@ -1,4 +1,4 @@
-import Studi from '@proyek3/postgres-database/models/Studi'
+import Studi from '../../../postgres-database/src/models/Studi'
 // import sequelize from '@proyek3/postgres-database/db'
 
 export const getStudiByID = async (id) => {

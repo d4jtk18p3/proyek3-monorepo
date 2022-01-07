@@ -40,6 +40,17 @@ module.exports = {
       onDelete: 'SET NULL'
     })
 
+    await queryInterface.addColumn('daftar_hadir_mahasiswa', 'nim', {
+      type: Sequelize.STRING(15),
+      allowNull: true,
+      references: {
+        model: 'Mahasiswa',
+        key: 'nim'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
+    })
+
     await queryInterface.addColumn('Jadwal', 'nip', {
       type: Sequelize.STRING(30),
       allowNull: true,

@@ -14,26 +14,27 @@ export const updateNilaiAkhir = async (req, res, next) => {
     var idPerkuliahan = req.params.id_perkuliahan
     const dataNilaiAkhir = req.body.dataNilaiAkhir
     var listNilaiAkhir = []
-    
-    for(var i = 0; i<dataNilaiAkhir.length; i++){
+
+    for (var i = 0; i < dataNilaiAkhir.length; i++) {
       var nim = dataNilaiAkhir[i].nim
-      const nilaiAkhir = {nilai_akhir: dataNilaiAkhir[i].nilai_akhir, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas}
+      const nilaiAkhir = { nilai_akhir: dataNilaiAkhir[i].nilai_akhir, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas }
       const recordNilaiAkhir = await StudiDAO.updateNilaiAkhirByNimPerkuliahan(nim, idPerkuliahan, nilaiAkhir)
       listNilaiAkhir.push(recordNilaiAkhir)
     }
 
-    if (listNilaiAkhir === null){
+    if (listNilaiAkhir === null) {
       console.log('gagal update nilai akhir')
       throw error
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'update nilai akhir sukses',
       data: {
         listNilaiAkhir
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
@@ -43,24 +44,25 @@ export const getNilaiAkhirByPerkuliahanDosen = async (req, res, next) => {
     const dataNilaiAkhir = await StudiDAO.findStudiByIdPerkuliahan(idPerkuliahan)
 
     var listNilaiAkhir = []
-    for(var i = 0; i<dataNilaiAkhir.length; i++){
+    for (var i = 0; i < dataNilaiAkhir.length; i++) {
       var mhs = await MahasiswaDAO.findOneMahasiswaByNIM(dataNilaiAkhir[i].id_mahasiswa)
-      const result = {nim: dataNilaiAkhir[i].id_mahasiswa, nama: mhs.nama, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas, nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
+      const result = { nim: dataNilaiAkhir[i].id_mahasiswa, nama: mhs.nama, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas, nilai_akhir: dataNilaiAkhir[i].nilai_akhir }
       listNilaiAkhir.push(result)
     }
-    
+
     if (listNilaiAkhir === null) {
       console.log('Get nilai akhir by perkuliahan gagal')
       throw error
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get nilai akhir by perkuliahan sukses',
       data: {
         listNilaiAkhir
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
@@ -73,11 +75,11 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
       kode_kelas: mhs.kode_kelas
     }
     var listResult = new Array(8)
-    var ipk =0 ,sks =0, indeks = 0
+    var ipk = 0, sks = 0, indeks = 0
 
-    for (var l=0; l<listResult.length; l++){
+    for (var l = 0; l < listResult.length; l++) {
       listResult[l] = {
-        label: "SEM-" + (l+1),
+        label: "SEM-" + (l + 1),
         ips: 0,
         totalIndeks: 0,
         totalSks: 0,
@@ -86,7 +88,7 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     }
     const dataNilai = await StudiDAO.findStudiByNIM(mhs.nim)
 
-    for(var i = 0; i<dataNilai.length; i++){
+    for (var i = 0; i < dataNilai.length; i++) {
       const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
       const result = {
@@ -100,14 +102,14 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
       listResult[matkul.semester - 1].nilaiSemester.push(result)
     }
     //Menghitung ips
-    for (var j=0; j<listResult.length; j++){
+    for (var j = 0; j < listResult.length; j++) {
       listResult[j].ips = listResult[j].totalIndeks / listResult[j].totalSks
       sks += listResult[j].totalSks
       indeks += listResult[j].totalIndeks
     }
 
-    ipk = indeks/sks
-    console.log(indeks,sks,ipk)
+    ipk = indeks / sks
+    console.log(indeks, sks, ipk)
 
 
     if (dataNilai === undefined) {
@@ -116,6 +118,7 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get nilai akhir by mahasiswa sukses',
       data: {
         Nama: dataMahasiswa.nama,
@@ -125,7 +128,7 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
         Nilai: listResult
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
@@ -137,10 +140,10 @@ export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
     var listResult = []
     var totalIndeks = 0
     var totalSks = 0
-    for(var i = 0; i<dataNilai.length; i++){
+    for (var i = 0; i < dataNilai.length; i++) {
       const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
-      if(matkul.semester == smt){
+      if (matkul.semester == smt) {
         const result2 = {
           semester: matkul.semester,
           kode_matkul: matkul.id,
@@ -151,12 +154,12 @@ export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
           nilai_akhir: dataNilai[i].nilai_akhir
         }
         listResult.push(result2)
-        }
       }
-      for(var j=0; j<listResult.length; j++){
-        totalIndeks += listResult[j].nilai_akhir * listResult[j].sks
-        totalSks += listResult[j].sks
-      }
+    }
+    for (var j = 0; j < listResult.length; j++) {
+      totalIndeks += listResult[j].nilai_akhir * listResult[j].sks
+      totalSks += listResult[j].sks
+    }
     var ip = totalIndeks / totalSks
     if (dataNilai === undefined || listResult === null) {
       console.log('Get nilai akhir by mahasiswa gagal')
@@ -164,6 +167,7 @@ export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'Get nilai akhir by mahasiswa sukses',
       data: {
         dataNilaiAkhir: listResult,
@@ -171,7 +175,7 @@ export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
         IPS: ip
       }
     })
-  } catch(error) {
+  } catch (error) {
     next(error)
   }
 }
@@ -179,8 +183,8 @@ export const postNewNilaiAkhir = async (req, res, next) => {
   try {
     const {
       id_studi,
-	  id,
-	  nilai_akhir
+      id,
+      nilai_akhir
     } = req.body
     const error = validationResult(req)
 
@@ -189,7 +193,7 @@ export const postNewNilaiAkhir = async (req, res, next) => {
       throw error
     }
 
-    const nilaiAkhirInsert = await NilaiAkhirDAO.insertOneNilaiAkhir(id_studi,id, nilai_akhir)
+    const nilaiAkhirInsert = await NilaiAkhirDAO.insertOneNilaiAkhir(id_studi, id, nilai_akhir)
 
     if (typeof nilaiAkhirInsert === 'undefined') {
       error.status = 500
@@ -198,6 +202,7 @@ export const postNewNilaiAkhir = async (req, res, next) => {
     }
 
     res.status(200).json({
+      status: res.statusCode,
       message: 'insert nilai akhir sukses',
       data: {
         nilaiAkhirInsert
@@ -214,6 +219,7 @@ export const deleteNilaiAkhirbyMatkul = async (req, res, next) => {
     const result = await NilaiAkhirDAO.deleteNilaiAkhirbyMatkul(nilaiakhirId)
     if (result === 1) {
       res.status(200).json({
+        status: res.statusCode,
         message: 'Delete nilai berhasil',
         data: {
           mahasiswaId
@@ -233,6 +239,7 @@ export const getAllNilaiAkhir = async (req, res, next) => {
   try {
     const nilai = await NilaiAkhirDAO.getAllNilaiAkhir()
     res.status(200).json({
+      status: res.statusCode,
       message: 'get all nilai akhir success',
       data: {
         nilai
@@ -250,6 +257,7 @@ export const updateNilaiAkhirbyMatkul = async (req, res, next) => {
     if (updateNilaiAkhir === 1) {
       const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
       res.status(200).json({
+        status: res.statusCode,
         message: 'Update Nilai Akhir Mahasiswa berhasil',
         data: {
           nilai_akhir
@@ -271,6 +279,7 @@ export const getOneNilaiAkhirbyMatkul = async (req, res, next) => {
     const { id_studi } = req.params
     const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
     res.status(200).json({
+      status: res.statusCode,
       message: 'get one Nilai Akhir by Markul success',
       data: {
         id_studi
